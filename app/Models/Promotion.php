@@ -10,7 +10,7 @@ class Promotion extends Model
     use HasFactory;
 
     public function products() {
-        return $this->hasMany('App\Model\Product');
+        return $this->hasMany('App\Models\Product');
     }
 
 }

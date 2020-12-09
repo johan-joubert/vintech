@@ -10,7 +10,7 @@ class Order extends Model
     use HasFactory;
 
     public function users() {
-        return $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Models\User');
     }
 
 }

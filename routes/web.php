@@ -23,3 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //----------- Products -------------------------------------------------------------------------------
 Route::resource('products', App\Http\Controllers\ProductController::class);
+
+//----------- Ranges -------------------------------------------------------------------------------
+Route::resource('range', App\Http\Controllers\RangeController::class);

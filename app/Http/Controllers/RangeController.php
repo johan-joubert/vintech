@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Range;
 use App\Models\Product;
 
-class ProductController extends Controller
+class RangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all()->sortBy('name');
-        return view('products.products', ['products'=>$products]);
+        // 
     }
 
     /**
@@ -47,7 +48,14 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        // $range = Range::find($id)->with('products')->orderBy('name', 'asc');
+        $range = DB::table('ranges')
+        ->where('ranges.id', $id)
+        ->join('products', 'products.range_id', '=', 'ranges.id')
+        ->orderBy('products.name', 'asc')
+        ->get();
+
+        return view('products.range', ['range'=>$range]);
     }
 
     /**
