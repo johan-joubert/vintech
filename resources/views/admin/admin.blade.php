@@ -4,6 +4,8 @@
 
 <div class="container">
 
+<form action="{{ route('product.store') }}" method="POST">
+@csrf
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Nom</label>
         <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -12,10 +14,10 @@
     <div class="mb-3">
         <label for="selectRange" class="form-label">Gamme</label>
         <select class="form-control" name="range" aria-label="Default select example" id="selectRange">
-            <option selected>Informatique</option>
-            <option value="1">Hifi</option>
-            <option value="2">Video</option>
-            <option value="3">Gaming</option>
+            <option value="1">Informatique</option>
+            <option value="2">Hifi</option>
+            <option value="3">Video</option>
+            <option value="4">Gaming</option>
         </select>
     </div>
 

@@ -1,11 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Product;
+
 
 class AdminController extends Controller
 {
+
+    // protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'name' => ['required', 'string', 'max:255'],
+    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    //         'password' => ['required', 'string', 'min:8', 'confirmed'],
+    //     ]);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +37,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin');
+
     }
 
     /**
@@ -34,7 +49,30 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => '',
+            'range_id' => '',
+            'short_description' => '',
+            'description' => '',
+            'image' => '',
+            'price' => '',
+            'stock' => '',
+            'weight' => '',
+        ]);
+
+        $product = Product::All();
+        $product->name = $request->input('name');
+        $product->range_id = $request->input('range');
+        $product->short_description = $request->input('short_description');
+        $product->description = $request->input('description');
+        $product->image = $request->input('image');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+        $product->weight = $request->input('weight');
+        $product->save();
+
+        return redirect()->route('admin');
+
     }
 
     /**

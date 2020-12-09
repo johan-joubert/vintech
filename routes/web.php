@@ -24,5 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //route admin -by jo-
-Route::get('/admin/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+Route::resource('/admin/product', App\Http\Controllers\ProductController::class);
 
