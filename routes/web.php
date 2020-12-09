@@ -26,4 +26,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Profile / by Alexis
 Route::resource('profile', App\Http\Controllers\UserController::class);
 
+Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update_password');
+
+Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updateDeliveryAddress'])->name('update_delivery_address');
+
+Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updateBillingAddress'])->name('update_billing_address');
+
+
 Auth::routes();
