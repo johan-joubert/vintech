@@ -38,6 +38,7 @@ class ProductController extends Controller
             'price' => '',
             'stock' => '',
             'weight' => '',
+            
         ]);
 
         $product = new Product;

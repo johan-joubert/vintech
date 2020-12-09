@@ -26,3 +26,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //route admin -by jo-
 Route::resource('/admin/product', App\Http\Controllers\ProductController::class);
 
+//route promotion -by jo-
+Route::resource('/admin/promotion', App\Http\Controllers\PromotionController::class);
+
