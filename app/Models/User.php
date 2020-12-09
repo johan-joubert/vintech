@@ -50,31 +50,31 @@ class User extends Authenticatable
 
     public function orders()
     {
-        return $this->hasMany('App\Model\Order');
+        return $this->hasMany('App\Models\Order');
     }
 
     public function billingAddresses()
     {
-        return $this->hasOne('App\Model\BillingAddress');
+        return $this->hasOne('App\Models\BillingAddress');
     }
 
     public function deliveryAddresses()
     {
-        return $this->hasOne('App\Model\DeliveryAddress');
+        return $this->hasOne('App\Models\DeliveryAddress');
     }
 
     public function roles()
     {
-        return $this->belongsTo('App\Model\Role');
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function products()
     {
-        return $this->belongsToMany('App\Model\Product');
+        return $this->belongsToMany('App\Models\Product');
     }
 
     public function reviews()
     {
-        return $this->hasMany('App\Model\Review');
+        return $this->hasMany('App\Models\Review');
     }
 }

@@ -10,23 +10,23 @@ class Product extends Model
     use HasFactory;
 
     public function users() {
-       return $this->belongsToMany('App\Model\User');
+       return $this->belongsToMany('App\Models\User');
     }
 
     public function ranges() {
-        return $this->belongsTo('App\Model\Range');
+        return $this->belongsTo('App\Models\Range');
     }
 
     public function orders() {
-        return $this->belongsToMany('App\Model\Order');
+        return $this->belongsToMany('App\Models\Order');
     }
 
     public function promotions() {
-        return $this->belongsToMany('App\Model\Promotion');
+        return $this->belongsToMany('App\Models\Promotion');
     }
 
     public function reviews() {
-        return $this->hasMany('App\Model\Review');
+        return $this->hasMany('App\Models\Review');
     }
 
 
