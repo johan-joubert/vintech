@@ -12,12 +12,14 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable. / by Alexis
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'chickname',
         'email',
         'password',
     ];
@@ -32,6 +34,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // password protection / by Alexis
+    public function setPasswordAttributes($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -41,29 +49,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function orders() {
+    public function orders()
+    {
         return $this->hasMany('App\Model\Order');
     }
 
-    public function billingAddresses() {
+    public function billingAddresses()
+    {
         return $this->hasOne('App\Model\BillingAddress');
     }
 
-    public function deliveryAddresses() {
+    public function deliveryAddresses()
+    {
         return $this->hasOne('App\Model\DeliveryAddress');
     }
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsTo('App\Model\Role');
     }
 
-    public function products() {
+    public function products()
+    {
         return $this->belongsToMany('App\Model\Product');
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany('App\Model\Review');
     }
-
-
 }
