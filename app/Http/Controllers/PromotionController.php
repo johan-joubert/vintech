@@ -12,7 +12,9 @@ class PromotionController extends Controller
 {
     public function index()
     {
-        return view('admin/admin');
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('promotions', ['products' => $products, 'promotions' => $promotions]);
     }
 
     public function store(Request $request)
@@ -31,6 +33,32 @@ class PromotionController extends Controller
         $product->save();
 
         return redirect()->route('product.index');
+
+    }
+
+    public function show() {
+    }
+
+
+
+
+    public function addProductPromotion (Request $request) {
+
+        $request->validate([
+            'discount' => '',
+            'product_id' => '',
+            'promotion_id' => '',
+            
+        ]);
+
+        DB::table('promotion_products')->insert([
+            'discount' => $request->input('discount'),
+            'promotion_id' => $request->input('promotion_id'),
+            'product_id' => $request->input('product_id'),
+        ]);
+        
+
+        return redirect()->route('promotion.index');
 
     }
 

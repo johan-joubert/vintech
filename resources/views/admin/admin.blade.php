@@ -92,4 +92,7 @@
 
     </div>
 
+    <a href="{{route('promotion.index')}}">Ajouter une promotion</a>
+
+
 @endsection

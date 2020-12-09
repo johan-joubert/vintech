@@ -29,3 +29,6 @@ Route::resource('/admin/product', App\Http\Controllers\ProductController::class)
 //route promotion -by jo-
 Route::resource('/admin/promotion', App\Http\Controllers\PromotionController::class);
 
+
+Route::post('/admin/promotion_add_product', [App\Http\Controllers\PromotionController::class, 'addProductPromotion'])->name('addProductPromotion');
+
