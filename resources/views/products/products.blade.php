@@ -5,12 +5,14 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
+        <h1 class="text-center mb-5">Tous nos produits</h1>
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             @foreach($products as $product)
-            <div class="col">
+            <div class="col mb-3">
                 <div class="card shadow-sm">
-                    <img alt="image du produit" src="images/{{ $product->image }}">
+                    <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                     <div class="card-body">
                         <p class="card-text">{{$product->name}}</p>
@@ -28,6 +30,7 @@
             @endforeach
             
         </div>
+
     </div>
 </div>
 

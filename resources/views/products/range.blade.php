@@ -5,14 +5,14 @@
 <div class="album py-5 bg-light">
     <div class="container">
 
-        <div class="row">
+        <div class="row mb-5 justify-content-center">
             <h1>{{$range[0]->range}}</h1>
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
             @foreach($range as $product)
-            <div class="col">
+            <div class="col mb-3">
                 <div class="card shadow-sm">
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
