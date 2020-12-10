@@ -2,6 +2,23 @@
 
 @section('content')
 
+<div class="container">
+
+    <h2>Ajouter une gamme</h2>
+
+    <form action="{{ route('range.store') }}" method="POST">
+        @csrf
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Nom</label>
+                <input type="text" name="range" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+</div>
+
     <div class="container">
         <h2>Ajouter un produit</h2>
 
@@ -15,10 +32,9 @@
             <div class="mb-3">
                 <label for="selectRange" class="form-label">Gamme</label>
                 <select class="form-control" name="range" aria-label="Default select example" id="selectRange">
-                    <option value="1">Informatique</option>
-                    <option value="2">Hifi</option>
-                    <option value="3">Video</option>
-                    <option value="4">Gaming</option>
+                    @foreach($ranges as $range)
+                    <option value="{{$range->id}}">{{$range->range}}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -60,9 +76,10 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
 
-            </form>
+        </form>
 
     </div>
+
 
     <div class="container">
 
@@ -92,7 +109,39 @@
 
     </div>
 
-    <a href="{{route('promotion.index')}}">Ajouter une promotion</a>
+    <div class="container">
+    <form action="{{ route('addProductPromotion') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label for="selectRange" class="form-label">Produit</label>
+            <select class="form-control" name="product_id" aria-label="Default select example" id="selectRange">
+                @foreach($products as $product)
+                <option value="{{$product->id}}">{{$product->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="selectRange" class="form-label">Promotion</label>
+            <select class="form-control" name="promotion_id" aria-label="Default select example" id="selectRange">
+                @foreach($promotions as $promotion)
+                <option value="{{$promotion->id}}">{{$promotion->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Réduction</label>
+            <input type="number" name="discount" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+
 
 
 @endsection

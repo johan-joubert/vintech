@@ -32,12 +32,17 @@ class PromotionController extends Controller
         $product->end_date = $request->input('end_date');
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('message', 'La promotion a bien été ajouté');
 
     }
 
     public function show() {
     }
+
+    public function showUpdatePromotion(Promotion $promotion) {
+        return view('admin/updatePromotion', ['promotion' => $promotion]);
+    }
+
 
 
 
@@ -57,9 +62,31 @@ class PromotionController extends Controller
             'product_id' => $request->input('product_id'),
         ]);
         
-
-        return redirect()->route('promotion.index');
+        return redirect()->route('product.index')->with('message', 'La promotion a bien été ajouté');
 
     }
+
+    public function update(Request $request, Promotion $promotion)
+    {
+        $request->validate([
+            'range' => '',
+            'start_date' => '',
+            'end_date' => '',
+        ]);
+
+        $promotion->name = $request->input('name');
+        $promotion->start_date = $request->input('start_date');
+        $promotion->end_date = $request->input('end_date');
+        $promotion->save();
+
+        return redirect()->route('product.index');
+
+    }
+
+    public function destroy(Promotion $promotion) {
+        $promotion->delete();
+        return redirect('admin/edit');
+    }
+
 
 }

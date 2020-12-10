@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Range;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +15,10 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('admin/admin');
+        $ranges = Range::all();
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
 
     /**
@@ -24,7 +29,6 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin/admin');
-
     }
 
     public function store(Request $request)
@@ -54,6 +58,48 @@ class ProductController extends Controller
 
         return redirect()->route('product.index');
 
+    }
+
+
+    public function showUpdateProduct(Product $product) {
+        return view('admin/updateProduct', ['product' => $product]);
+    }
+
+    public function edit() {
+        $products = Product::all();
+        return view('edit', ['products' => $products]);
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $request->validate([
+            'name' => '',
+            'range_id' => '',
+            'short_description' => '',
+            'description' => '',
+            'image' => '',
+            'price' => '',
+            'stock' => '',
+            'weight' => '',
+        ]);
+
+        $product->name = $request->input('name');
+        $product->range_id = $request->input('range_id');
+        $product->short_description = $request->input('short_description');
+        $product->description = $request->input('description');
+        $product->image = $request->input('image');
+        $product->price = $request->input('price');
+        $product->stock = $request->input('stock');
+        $product->weight = $request->input('weight');
+        $product->save();
+
+        return redirect()->route('product.index')->with('message', 'Le produit a bien été ajouté');
+
+    }
+
+    public function destroy(Product $product) {
+        $product->delete();
+    return redirect('admin/edit');
     }
 
 }

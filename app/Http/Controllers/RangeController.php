@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Product;
-use App\Models\Range;
-use App\Models\Promotion;
-
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Range;
 
-class AdminController extends Controller
+
+class RangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home_admin');
+        //
     }
 
     /**
@@ -27,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.admin');
+        //
     }
 
     /**
@@ -38,8 +37,19 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'range' => '',   
+        ]);
+
+        $range = new Range;
+        $range->range = $request->input('range');
+        $range->save();
+
+        return redirect()->route('product.index')->with('message', 'La gamme a bien été ajouté');
+
     }
+
+
 
     /**
      * Display the specified resource.
@@ -49,8 +59,13 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
+
+    public function showUpdateRange(Range $range) {
+        return view('admin/updateRange', ['range' => $range]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -58,13 +73,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
-    {
-        $products = Product::all();
+    public function edit() {
         $ranges = Range::all();
-        $promotions = Promotion::all();
-        return view('admin.editProduct', ['products' => $products, 'ranges' => $ranges, 'promotions' => $promotions]);
-
+        return view('edit', ['ranges' => $ranges]);
     }
 
     /**
@@ -74,9 +85,17 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Range $range)
     {
-        //
+        $request->validate([
+            'range' => '',
+        ]);
+
+        $range->range = $request->input('range');
+        $range->save();
+
+        return redirect()->route('product.index');
+
     }
 
     /**
@@ -85,8 +104,8 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Range $range) {
+        $range->delete();
+    return redirect('admin/edit');
     }
 }
