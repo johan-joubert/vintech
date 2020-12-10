@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,6 @@ Route::resource('products', App\Http\Controllers\ProductController::class);
 
 //----------- Ranges -------------------------------------------------------------------------------
 Route::resource('range', App\Http\Controllers\RangeController::class);
+
+//----------- Promotions -------------------------------------------------------------------------------
+Route::resource('promotion', App\Http\Controllers\PromotionController::class);

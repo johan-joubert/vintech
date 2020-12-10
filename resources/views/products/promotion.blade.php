@@ -6,12 +6,12 @@
     <div class="container">
 
         <div class="row mb-5 justify-content-center">
-            <h1>{{$range[0]->range}}</h1>
+            <h1>{{$promo[0]->name}}</h1>
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            @foreach($range as $product)
+            @foreach($promo->products as $product)
             <div class="col mb-3">
                 <div class="card shadow-sm">
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
@@ -38,7 +38,9 @@
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article) }}">Détails</a>
 
                             </div>
-                            <small class="text-muted">{{$product->price}}</small>
+                            <p>nouveau prix</p>
+                            <p>-  %</p>
+                            <small class="text-muted text-decoration-line-through">{{$product->price}}</small>
                         </div>
                     </div>
                 </div>

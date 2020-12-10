@@ -48,7 +48,6 @@ class RangeController extends Controller
      */
     public function show($id)
     {
-        // $range = Range::find($id)->with('products')->orderBy('name', 'asc');
         $range = DB::table('ranges')
         ->where('ranges.id', $id)
         ->join('products', 'products.range_id', '=', 'ranges.id')
