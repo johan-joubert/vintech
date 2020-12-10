@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -61,7 +62,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                <a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()->first_name . Auth::user()->last_name) }}">
+                                <a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">
                                     Profil
                                 </a>
 
@@ -80,6 +81,21 @@
                 </div>
             </div>
         </nav>
+        
+        @if(session()->has('message'))
+        <p class="alert alert-success">{{ session()->get('message') }}</p>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+
+        </div>
 
         <main class="py-4">
             @yield('content')

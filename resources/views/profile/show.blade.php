@@ -18,8 +18,8 @@
 
 
             @if (auth()->user()->is($user))
-                @include('components.profile.edit_profile')
-                @include('components.profile.edit_password')
+            @include('components.profile.edit_profile')
+            @include('components.profile.edit_password')
             @endif
 
         </div>
@@ -35,31 +35,62 @@
             <div class="row mt-3">
 
                 <div class="col-md-6">
+
                     <h3>Facturation</h3>
 
+
+                    @if($user->billingAddress)
+
                     <p>
-                        {{ $user->billingAddresses->address }}<br>
-                        {{ $user->billingAddresses->zip_code }}<br>
-                        {{ $user->billingAddresses->city }}
+                        {{ $user->billingAddress->address }}<br>
+                        {{ $user->billingAddress->zip_code }}<br>
+                        {{ $user->billingAddress->city }}
                     </p>
 
+                    @endif
+
+
+                    @unless($user->billingAddress)
+
+                    <p>Vous n'avez aucune adresse de facturation d'enregistré</p>
+
+                    @include('components.profile.create_billing_address')
+
+                    @endif
+
+
                     @if (auth()->user()->is($user))
-                        @include('components.profile.edit_billing_address')
+                    @include('components.profile.edit_billing_address')
                     @endif
 
                 </div>
 
                 <div class="col-md-6">
+
                     <h3>Livraison</h3>
 
+
+                    @if($user->deliveryAddress)
+
                     <p>
-                        {{ $user->deliveryAddresses->address }}<br>
-                        {{ $user->deliveryAddresses->zip_code }}<br>
-                        {{ $user->deliveryAddresses->city }}
+                        {{ $user->deliveryAddress->address }}<br>
+                        {{ $user->deliveryAddress->zip_code }}<br>
+                        {{ $user->deliveryAddress->city }}
                     </p>
 
+                    @endif
+
+
+                    @unless($user->deliveryAddress)
+
+                    <p>Vous n'avez aucune adresse de livraison d'enregistré</p>
+
+                    @include('components.profile.create_delivery_address')
+                    @endif
+
+
                     @if (auth()->user()->is($user))
-                        @include('components.profile.edit_delivery_address')
+                    @include('components.profile.edit_delivery_address')
                     @endif
 
                 </div>

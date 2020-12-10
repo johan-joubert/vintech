@@ -53,17 +53,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order');
     }
 
-    public function billingAddresses()
+    public function billingAddress()
     {
         return $this->hasOne('App\Models\BillingAddress');
     }
 
-    public function deliveryAddresses()
+    public function deliveryAddress()
     {
         return $this->hasOne('App\Models\DeliveryAddress');
     }
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo('App\Models\Role');
     }

@@ -9,6 +9,14 @@ class BillingAddress extends Model
 {
     use HasFactory;
 
+    // added by Alexis
+    protected $fillable = [
+        'address', 
+        'zip_code', 
+        'city', 
+        'user_id'
+    ];
+
     public function user() {
         return $this->belongsTo('App\Models\User');
     }

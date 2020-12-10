@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\DeliveryAddress;
-use App\Models\BillingAddress;
+
 
 class UserController extends Controller
 {
@@ -51,7 +50,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = User::findOrFail(auth()->user()->id);
-        $user->load('deliveryAddresses', 'billingAddresses');
+        $user->load('deliveryAddress', 'billingAddress');
 
         return view('profile.show', compact('user'));
     }
@@ -74,22 +73,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user)
+    public function updateProfile(Request $request)
     {
-        $attributes = request()->validate([
+        $user = User::find(auth()->user()->id);
+
+        $request->validate([
             'email' => ['string', 'required', 'email', 'max:255', Rule::unique('users')->ignore($user)],
             'firstName' => ['string', 'required', 'max:255'],
             'lastName' => ['string', 'required', 'max:255'],
         ]);
 
-        $user->update($attributes);
+        $user->update([
+            'first_name' => $request->input('firstName'),
+            'last_name' => $request->input('lastName'),
+            'email' => $request->input('email'),
+        ]);
 
         return redirect()->back()->with('message', 'Profil mis à jour !');
     }
 
 
-    public function updatePassword(Request $request, User $user)
+    public function updatePassword(Request $request)
     {
+        $user = User::find(auth()->user()->id);
 
         $attributes = request()->validate([
             'oldPassword' => ['string', 'required', 'min:8', 'max:255', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/'],
@@ -102,7 +108,7 @@ class UserController extends Controller
 
             if (!Hash::check($request->password, $hashedPassword)) {
 
-                $user->password = $attributes['password'];
+                $user->password = Hash::make($attributes['password']);
 
                 $user->save();
                 
@@ -113,39 +119,11 @@ class UserController extends Controller
                 
             }
         } else {
-            session()->flash('message', 'Votre mot de passe actuel est erroné !');
             return redirect()->back()->withErrors('password_error', 'Votre mot de passe actuel est erroné !');
         }
     }
 
-    public function updateBillingAddress(BillingAddress $billingAddress)
-    {
-        $attributes = request()->validate([
-            'address' => ['string', 'required', 'max:255'],
-            'zip_code' => ['string', 'required', 'max:255'],
-            'city' => ['string', 'required', 'max:255'],
-        ]);
 
-        $billingAddress->update($attributes);
-
-        return redirect()->back()->with('message', 'Adresse de facturation mise à jour !');
-    }
-
-    public function updateDeliveryAddress(DeliveryAddress $deliveryAddress)
-    {
-        $attributes = request()->validate([
-            'address' => ['string', 'required', 'max:255'],
-            'zip_code' => ['string', 'required', 'max:255'],
-            'city' => ['string', 'required', 'max:255'],
-        ]);
-
-        $deliveryAddress->update($attributes);
-
-        return redirect()->back()->with('message', 'Adresse de livraison mise à jour !');
-    }
-
-
-    
     /**
      * Remove the specified resource from storage.
      *

@@ -14,16 +14,18 @@
             <div class="modal-body">
 
 
-                <form method="POST" action="{{ route('update_delivery_address' }}" name="editDeliveryAddress">
+                <form method="POST" action="{{ route('delivery-address.update', $user->deliveryAddress) }}" name="editDeliveryAddress">
                     @csrf
                     @method('PATCH')
 
                     <div class="form-group">
 
                         <label for="address">
-                            Email
+                            Rue, Voie, Allée, ...
                         </label>
-                        <input type="text" name="address" id="address" class="form-control" value="{{ $user->deliveryAdresses->address }}" required>
+                        <input type="text" name="address" id="address" class="form-control" 
+                        value="{{ $user->deliveryAddress->address }}" 
+                        required>
 
                         @error('address')
                         <p>{{ $message }}</p>
@@ -34,9 +36,9 @@
                     <div class="form-group">
 
                         <label for="zip_code">
-                            Prénom
+                            Code postal
                         </label>
-                        <input type="text" name="zip_code" id="zip_code" class="form-control" value="{{ $user->deliveryAddresses->zip_code }}" required>
+                        <input type="text" name="zip_code" id="zip_code" class="form-control" value="{{ $user->deliveryAddress->zip_code }}" required>
 
                         @error('zip_code')
                         <p>{{ $message }}</p>
@@ -47,9 +49,9 @@
                     <div class="form-group">
 
                         <label for="city">
-                            Prénom
+                            Ville
                         </label>
-                        <input type="text" name="city" id="city" class="form-control" value="{{ $user->deliveryAddresses->city }}" required>
+                        <input type="text" name="city" id="city" class="form-control" value="{{ $user->deliveryAddress->city }}" required>
 
                         @error('city')
                         <p>{{ $message }}</p>
@@ -60,8 +62,8 @@
 
                     <div class="form-group">
 
-                        <label for="password">
-                            Mot de passe
+                        <label for="password" class="mt-5">
+                            Tapez votre mot de passe pour valider
                         </label>
                         <input type="password" name="password" id="password" class="form-control" required>
 

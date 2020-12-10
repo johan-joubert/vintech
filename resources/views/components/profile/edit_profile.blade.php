@@ -14,9 +14,9 @@
             <div class="modal-body">
 
 
-                <form method="POST" action="{{ route('profile.update', $user->first_name . $user->last_name) }}" name="edit">
+                <form method="POST" action="{{ route('update.profile') }}" name="edit">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
 
                     <div class="form-group">
 

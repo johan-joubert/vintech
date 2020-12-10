@@ -24,13 +24,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Profile / by Alexis
-Route::resource('profile', App\Http\Controllers\UserController::class);
+// Route::resource('profile', App\Http\Controllers\UserController::class);
 
-Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update_password');
+Route::get('profile/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
 
-Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updateDeliveryAddress'])->name('update_delivery_address');
+Route::put('/profile/edit-profile', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update.profile');
 
-Route::patch('/profile', [App\Http\Controllers\UserController::class, 'updateBillingAddress'])->name('update_billing_address');
+Route::put('/profile/edit-password', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update.password');
+
+
+// Addresses / by Alexis
+Route::resource('/profile/billing-address', App\Http\Controllers\BillingAddressController::class);
+
+Route::resource('/profile/delivery-address', App\Http\Controllers\DeliveryAddressController::class);
 
 
 Auth::routes();

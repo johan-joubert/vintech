@@ -14,9 +14,9 @@
             <div class="modal-body">
 
 
-                <form method="POST" action="{{ route('update_password', $user) }}" name="editPassword">
+                <form method="POST" action="{{ route('update.password', $user) }}" name="editPassword">
                     @csrf
-                    @method('PATCH')
+                    @method('PUT')
 
                     <div class="form-group">
 
