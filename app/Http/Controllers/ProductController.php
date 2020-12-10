@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all()->sortBy('name');
+        $products = Product::with('promotions')->get();
+
         return view('products.products', ['products'=>$products]);
     }
 

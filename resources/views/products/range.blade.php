@@ -35,10 +35,14 @@
                                 $article->range_id = $product->range_id;
                                 ?>
 
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article) }}">Détails</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article->id) }}">Détails</a>
 
                             </div>
-                            <small class="text-muted">{{$product->price}}</small>
+                            
+                            <?php
+                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+                            ?>
+
                         </div>
                     </div>
                 </div>

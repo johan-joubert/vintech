@@ -14,6 +14,10 @@
                 <div class="card shadow-sm">
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
+                    @if(count($product->promotions)>0)
+                    <p>{{$product->promotions[0]->name}}</p>
+                    @endif
+
                     <div class="card-body">
                         <p class="card-text">{{$product->name}}</p>
                         <p class="card-text">{{$product->short_description}}</p>
@@ -21,7 +25,11 @@
                             <div class="btn-group">
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $product) }}">Détails</a>
                             </div>
-                            <small class="text-muted">{{$product->price}}</small>
+                            
+                            <?php
+                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+                            ?>
+
                         </div>
                     </div>
                 </div>

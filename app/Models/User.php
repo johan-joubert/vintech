@@ -45,15 +45,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order');
     }
 
-    public function billingAddresses() {
+    public function billingAddresse() {
         return $this->hasOne('App\Models\BillingAddress');
     }
 
-    public function deliveryAddresses() {
+    public function deliveryAddresse() {
         return $this->hasOne('App\Models\DeliveryAddress');
     }
 
-    public function roles() {
+    public function role() {
         return $this->belongsTo('App\Models\Role');
     }
 
@@ -64,6 +64,5 @@ class User extends Authenticatable
     public function reviews() {
         return $this->hasMany('App\Models\Review');
     }
-
 
 }

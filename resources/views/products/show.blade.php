@@ -19,7 +19,11 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
                             </div>
-                            <small class="text-muted">{{$product->price}}</small>
+
+                            <?php
+                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+                            ?>
+                            
                         </div>
                     </div>
                 </div>

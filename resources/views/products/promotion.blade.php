@@ -6,12 +6,18 @@
     <div class="container">
 
         <div class="row mb-5 justify-content-center">
-            <h1>{{$promo[0]->name}}</h1>
+            <h1>{{$promo[0]->promoName}}</h1>
+        </div>
+
+        <div class="row mb-5 justify-content-center">
+            <?php
+                echo "<p>Du " . date_format(new DateTime($promo[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($promo[0]->end_date), 'd/m/y') . ".</p>";
+            ?>
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-            @foreach($promo->products as $product)
+            @foreach($promo as $product)
             <div class="col mb-3">
                 <div class="card shadow-sm">
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
@@ -35,12 +41,19 @@
                                 $article->range_id = $product->range_id;
                                 ?>
 
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article) }}">Détails</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article->id) }}">Détails</a>
 
                             </div>
-                            <p>nouveau prix</p>
-                            <p>-  %</p>
-                            <small class="text-muted text-decoration-line-through">{{$product->price}}</small>
+
+                            <p class="font-weight-bold">- {{$product->discount}} %</p>
+
+                            <?php
+                            echo "<small class=\"text-muted text-decoration-line-through\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+
+                            $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+                            ?>
+
                         </div>
                     </div>
                 </div>
