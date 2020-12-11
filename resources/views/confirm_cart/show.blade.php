@@ -43,9 +43,10 @@
 
 <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-md-12 bg-dark text-white text-right">
+        <div class="col-md-12 bg-dark bg-gradient text-white text-right">
             <div class="col-md-10">
                 <h3>Montant de votre commande</h3>
+
                 <p>
                     Montant HT : 33.33 €<br>
                     <span class="text-muted">
@@ -54,6 +55,10 @@
                     </span>
                     <b>Montant TTC : 40 €</b>
                 </p>
+
+                <a href="">
+                    <button type="btn" class="btn btn-danger mb-3">Confirmer achat</button>
+                </a>
             </div>
         </div>
     </div>
