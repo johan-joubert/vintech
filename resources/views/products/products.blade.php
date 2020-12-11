@@ -25,9 +25,21 @@
                             <div class="btn-group">
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $product) }}">Détails</a>
                             </div>
-                            
+
                             <?php
-                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+
+                            $discount = 0;
+
+                            foreach ($product->promotions as $promotion) {
+                                $discount = $promotion->pivot->discount;
+                            }
+
+                            echo "<small class=\"text-muted text-decoration-line-through\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+
+                            $promoPrice = $product->price - ($product->price * ($discount / 100));
+                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+
+
                             ?>
 
                         </div>
@@ -35,7 +47,7 @@
                 </div>
             </div>
             @endforeach
-            
+
         </div>
 
     </div>

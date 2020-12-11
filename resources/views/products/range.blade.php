@@ -16,6 +16,10 @@
                 <div class="card shadow-sm">
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
+                    @if(($product->promotion_name) !== null)
+                    <p>{{$product->promotion_name}}</p>
+                    @endif
+
                     <div class="card-body">
                         <p class="card-text">{{$product->name}}</p>
                         <p class="card-text">{{$product->short_description}}</p>

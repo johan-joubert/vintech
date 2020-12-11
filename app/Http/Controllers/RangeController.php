@@ -48,13 +48,18 @@ class RangeController extends Controller
      */
     public function show($id)
     {
-        $range = DB::table('ranges')
+        // on rècupère : gamme, produits associés, promos associées aux produits (nom) + réduction (table intermédiaire)
+
+        $range = DB::table('ranges')  // gamme concernée
         ->where('ranges.id', $id)
-        ->join('products', 'products.range_id', '=', 'ranges.id')
+        ->join('products', 'products.range_id', '=', 'ranges.id')  // produits liés à la gamme 
+        ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
+        ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
+        ->select('ranges.*', 'products.*', 'pp.discount', 'promotions.name as promotion_name') // champs souhaités
         ->orderBy('products.name', 'asc')
         ->get();
-
-        return view('products.range', ['range'=>$range]);
+        
+        return view('products.range', ['range' => $range]);
     }
 
     /**
