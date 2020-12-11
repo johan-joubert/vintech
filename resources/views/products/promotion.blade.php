@@ -6,7 +6,7 @@
     <div class="container">
 
         <div class="row mb-5 justify-content-center">
-            <h1>{{$promo[0]->promoName}}</h1>
+            <h1 class="mt-2 font-weight-bold">{{$promo[0]->promoName}}</h1>
         </div>
 
         <div class="row mb-5 justify-content-center">
@@ -45,13 +45,20 @@
 
                             </div>
 
-                            <p class="font-weight-bold">- {{$product->discount}} %</p>
-
                             <?php
-                            echo "<small class=\"text-muted text-decoration-line-through\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
 
-                            $promoPrice = $product->price - ($product->price * ($product->discount / 100));
-                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+                            if($product->promoName !== null) {
+                                echo "<p class=\"font-weight-bold\">- $product->discount %</p>
+
+                                    <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', 0)  . "€</del></small>";
+
+                                $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+
+                            }else{
+                                echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
+                            }
+                            
                             ?>
 
                         </div>

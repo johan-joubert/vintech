@@ -12,7 +12,7 @@
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                     @if(count($product->promotions)>0)
-                    <p>{{$product->promotions[0]->name}}</p>
+                    <p class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</p>
                     @endif
 
                     <div class="card-body">
@@ -25,14 +25,32 @@
                             </div>
 
                             <?php
-                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+
+                            $discount = 0;
+
+                            foreach ($product->promotions as $promotion) {
+                                $discount = $promotion->pivot->discount;
+                            }
+
+                            if (count($product->promotions) > 0) {
+                                echo "<p class=\"font-weight-bold\">- $discount %</p>
+
+                                <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', 0)  . "€</del></small>";
+
+                                $promoPrice = $product->price - ($product->price * ($discount / 100));
+                                echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+                                
+                            } else {
+                                echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
+                            }
+
                             ?>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     </div>

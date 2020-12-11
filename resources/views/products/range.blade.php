@@ -17,7 +17,7 @@
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                     @if(($product->promotion_name) !== null)
-                    <p>{{$product->promotion_name}}</p>
+                    <p class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</p>
                     @endif
 
                     <div class="card-body">
@@ -42,9 +42,21 @@
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article->id) }}">Détails</a>
 
                             </div>
-                            
+
                             <?php
-                                echo "<small class=\"text-muted\">" .  number_format($product->price, 2, ',', 0)  . "€</small>";
+
+                            if ($product->promotion_name !== null) {
+                                echo "<p class=\"font-weight-bold\">- $product->discount %</p>
+
+                                <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', 0)  . "€</del></small>";
+
+                                $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+                                
+                            } else {
+                                echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
+                            }
+
                             ?>
 
                         </div>
