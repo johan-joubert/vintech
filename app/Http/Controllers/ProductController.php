@@ -15,10 +15,6 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $ranges = Range::all();
-        $products = Product::all();
-        $promotions = Promotion::all();
-        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
 
     /**
@@ -28,7 +24,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin/admin');
+        $ranges = Range::all();
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
 
     public function store(Request $request)
