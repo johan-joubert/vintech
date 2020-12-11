@@ -50,6 +50,10 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('products.show', ['product' => $product]);
+        $ranges = Range::all();
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
 
 
