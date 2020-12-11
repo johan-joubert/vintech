@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container mb-2">
+
+    <a href="{{route('admin.index')}}">Accueil admin</a>
+
+</div>
 
 
 <div class="container">
