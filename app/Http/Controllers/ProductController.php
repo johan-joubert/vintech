@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Range;
 use App\Models\Promotion;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -18,10 +19,17 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('promotions')
-            ->orderBy('products.name', 'asc')
-            ->get();
+        $date=date('Y-m-d');
 
+        $products = DB::table('products')  // gamme concernée
+        ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
+        ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
+        ->where('promotions.start_date', '<=', $date)
+        ->where('promotions.end_date',  '>=', $date)
+        ->select('products.*', 'pp.discount', 'promotions.name as promotion_name') // champs souhaités
+        ->orderBy('products.name', 'asc')
+        ->get();
+        
         return view('products.products', ['products' => $products]);
     }
 

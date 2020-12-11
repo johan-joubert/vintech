@@ -15,7 +15,7 @@
                     <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                     @if(count($product->promotions)>0)
-                    <p class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</p>
+                    <p class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</p>
                     @endif
 
                     <div class="card-body">
