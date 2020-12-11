@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -54,3 +54,23 @@ Route::get('/admin/promotion_show_product', [App\Http\Controllers\ProductControl
 Route::get('/admin/promotion_edit_product', [App\Http\Controllers\ProductController::class, 'edit'])->name('sendEditProduct');
 
 
+// Profile / by Alexis
+// Route::resource('profile', App\Http\Controllers\UserController::class);
+
+Route::get('profile/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+
+Route::put('/profile/edit-profile', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('update.profile');
+
+Route::put('/profile/edit-password', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update.password');
+
+
+// Addresses / by Alexis
+Route::resource('/profile/billing-address', App\Http\Controllers\BillingAddressController::class);
+
+Route::resource('/profile/delivery-address', App\Http\Controllers\DeliveryAddressController::class);
+
+
+// Orders / by Alexis
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+
+Auth::routes();
