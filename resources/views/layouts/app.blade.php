@@ -41,6 +41,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+                    <!-- ROUTES TEST (a gérer plus tard, a insérer dans la 2eme navbar) -->
+                        <li>
+                            <a href="{{ route('range.show', $id=1) }}">{{ __('Gamme n°1') }}</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ route('promotion.show', $id=1) }}">{{ __('Black Friday') }}</a>
+                        </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -22,6 +22,14 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//----------- Products -------------------------------------------------------------------------------
+Route::resource('products', App\Http\Controllers\ProductController::class);
+
+//----------- Ranges -------------------------------------------------------------------------------
+Route::resource('range', App\Http\Controllers\RangeController::class);
+
+//----------- Promotions -------------------------------------------------------------------------------
+Route::resource('promotion', App\Http\Controllers\PromotionController::class);
 
 //admin's route ressource range,product,promotion -by jo-
 Route::resource('/admin/range', App\Http\Controllers\RangeController::class);

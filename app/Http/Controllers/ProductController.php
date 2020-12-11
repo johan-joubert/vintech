@@ -6,20 +6,25 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Range;
 use App\Models\Promotion;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-
 
 
 class ProductController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     public function index()
     {
-        $ranges = Range::all();
-        $products = Product::all();
-        $promotions = Promotion::all();
-        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
+        $products = Product::with('promotions')
+            ->orderBy('products.name', 'asc')
+            ->get();
+
+        return view('products.products', ['products' => $products]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,8 +33,25 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin/admin');
+        $ranges = Range::all();
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function show(Product $product)
+    {
+        return view('products.show', ['product' => $product]);
+    }
+
 
     public function store(Request $request)
     {
@@ -42,7 +64,7 @@ class ProductController extends Controller
             'price' => '',
             'stock' => '',
             'weight' => '',
-            
+
         ]);
 
         $product = new Product;
@@ -57,18 +79,21 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('product.index');
-
     }
 
 
-    public function showUpdateProduct(Product $product) {
+    public function showUpdateProduct(Product $product)
+    {
         return view('admin/updateProduct', ['product' => $product]);
     }
 
-    public function edit() {
+
+    public function edit()
+    {
         $products = Product::all();
         return view('edit', ['products' => $products]);
     }
+
 
     public function update(Request $request, Product $product)
     {
@@ -94,12 +119,12 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('product.index')->with('message', 'Le produit a bien été ajouté');
-
     }
 
-    public function destroy(Product $product) {
+
+    public function destroy(Product $product)
+    {
         $product->delete();
-    return redirect('admin/edit');
+        return redirect('admin/edit');
     }
-
 }
