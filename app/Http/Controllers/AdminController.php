@@ -17,7 +17,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home_admin');
+        $products = Product::all();
+        $ranges = Range::all();
+        $promotions = Promotion::all();
+        return view('admin.home_admin', ['products' => $products, 'ranges' => $ranges, 'promotions' => $promotions]);
     }
 
     /**
