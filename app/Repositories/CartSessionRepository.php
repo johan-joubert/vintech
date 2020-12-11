@@ -7,7 +7,7 @@ use App\Models\Product;
 class CartSessionRepository implements CartInterfaceRepository {
     //afficher le panier
     public function show () {
-        return view("admin.showCart");
+        return view("cart.showCart");
     }
     
     //Ajouter/Mettre à jour un produit du panier

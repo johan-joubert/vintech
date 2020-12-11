@@ -20,7 +20,7 @@ class CartController extends Controller
 
     //Affichage du panier
     public function show() {
-        return view("cart.cartShow");
+        return view("cart.showCart");
     }
 
     //Ajout d'un produit au panier
