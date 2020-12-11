@@ -18,7 +18,7 @@ class Product extends Model
     }
 
     public function orders() {
-        return $this->belongsToMany('App\Models\Order');
+        return $this->belongsToMany('App\Models\Order', 'order_products')->withPivot('quantity');
     }
 
     public function promotions() {
@@ -28,6 +28,5 @@ class Product extends Model
     public function reviews() {
         return $this->hasMany('App\Models\Review');
     }
-
 
 }

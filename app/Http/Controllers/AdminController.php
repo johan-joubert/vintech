@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Product;
+use App\Models\Range;
+use App\Models\Promotion;
+
 
 use Illuminate\Http\Request;
 
-use App\Models\Order;
-use App\Models\User;
-
-class OrderController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +17,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('user_id', auth()->user()->id)
-            ->latest()
-            ->get();
-
-        return view('orders.index', [
-            'orders' => $orders
-        ]);
+        return view('admin.home_admin');
     }
 
     /**
@@ -32,7 +27,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.admin');
     }
 
     /**
@@ -52,9 +47,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
-    {   
-        return view('orders.show', compact('order'));
+    public function show($id)
+    {
+
     }
 
     /**
@@ -63,9 +58,13 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $products = Product::all();
+        $ranges = Range::all();
+        $promotions = Promotion::all();
+        return view('admin.editProduct', ['products' => $products, 'ranges' => $ranges, 'promotions' => $promotions]);
+
     }
 
     /**

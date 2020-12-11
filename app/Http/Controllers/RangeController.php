@@ -37,8 +37,19 @@ class RangeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'range' => '',   
+        ]);
+
+        $range = new Range;
+        $range->range = $request->input('range');
+        $range->save();
+
+        return redirect()->route('product.index')->with('message', 'La gamme a bien été ajouté');
+
     }
+
+
 
     /**
      * Display the specified resource.
@@ -62,15 +73,22 @@ class RangeController extends Controller
         return view('products.range', ['range' => $range]);
     }
 
+    
+
+    public function showUpdateRange(Range $range) {
+        return view('admin/updateRange', ['range' => $range]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit() {
+        $ranges = Range::all();
+        return view('edit', ['ranges' => $ranges]);
     }
 
     /**
@@ -80,9 +98,17 @@ class RangeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Range $range)
     {
-        //
+        $request->validate([
+            'range' => '',
+        ]);
+
+        $range->range = $request->input('range');
+        $range->save();
+
+        return redirect()->route('product.index');
+
     }
 
     /**
@@ -91,8 +117,8 @@ class RangeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Range $range) {
+        $range->delete();
+    return redirect('admin/edit');
     }
 }

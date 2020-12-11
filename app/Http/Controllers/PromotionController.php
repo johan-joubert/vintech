@@ -2,41 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Promotion;
+use Illuminate\Support\Facades\DB;
+
 
 class PromotionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        // 
+        $products = Product::all();
+        $promotions = Promotion::all();
+        return view('promotions', ['products' => $products, 'promotions' => $promotions]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => '',
+            'start_date' => '',
+            'end_date' => '',
+
+        ]);
+
+        $product = new Promotion;
+        $product->name = $request->input('name');
+        $product->start_date = $request->input('start_date');
+        $product->end_date = $request->input('end_date');
+        $product->save();
+
+        return redirect()->route('product.index')->with('message', 'La promotion a bien été ajouté');
     }
+
+
+    public function showUpdatePromotion(Promotion $promotion)
+    {
+        return view('admin/updatePromotion', ['promotion' => $promotion]);
+    }
+
 
     /**
      * Display the specified resource.
@@ -44,6 +50,7 @@ class PromotionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $promo = DB::table('promotions')
@@ -57,40 +64,47 @@ class PromotionController extends Controller
         return view('products.promotion', ['promo' => $promo]);
     }
 
-    /**
-     * 
-     * 
-     * 
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function addProductPromotion(Request $request)
     {
-        //
+
+        $request->validate([
+            'discount' => '',
+            'product_id' => '',
+            'promotion_id' => '',
+
+        ]);
+
+        DB::table('promotion_products')->insert([
+            'discount' => $request->input('discount'),
+            'promotion_id' => $request->input('promotion_id'),
+            'product_id' => $request->input('product_id'),
+        ]);
+
+        return redirect()->route('product.index')->with('message', 'La promotion a bien été ajouté');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, Promotion $promotion)
     {
-        //
+        $request->validate([
+            'range' => '',
+            'start_date' => '',
+            'end_date' => '',
+        ]);
+
+        $promotion->name = $request->input('name');
+        $promotion->start_date = $request->input('start_date');
+        $promotion->end_date = $request->input('end_date');
+        $promotion->save();
+
+        return redirect()->route('product.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function destroy(Promotion $promotion)
     {
-        //
+        $promotion->delete();
+        return redirect('admin/edit');
     }
 }
