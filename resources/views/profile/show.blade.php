@@ -24,8 +24,9 @@
 
         </div>
     </div>
+</div>
 
-
+<div class="container">
     <div class="row mt-5">
 
         <div class="col-md-12">
@@ -36,7 +37,7 @@
 
                 <div class="col-md-6">
 
-                    <h3>Facturation</h3>
+                    <h4>Facturation</h4>
 
 
                     @if($user->billingAddress)
@@ -46,6 +47,10 @@
                         {{ $user->billingAddress->zip_code }}<br>
                         {{ $user->billingAddress->city }}
                     </p>
+
+                    @if (auth()->user()->is($user))
+                    @include('components.profile.edit_billing_address')
+                    @endif
 
                     @endif
 
@@ -58,16 +63,11 @@
 
                     @endif
 
-
-                    @if (auth()->user()->is($user))
-                    @include('components.profile.edit_billing_address')
-                    @endif
-
                 </div>
 
                 <div class="col-md-6">
 
-                    <h3>Livraison</h3>
+                    <h4>Livraison</h4>
 
 
                     @if($user->deliveryAddress)
@@ -77,6 +77,10 @@
                         {{ $user->deliveryAddress->zip_code }}<br>
                         {{ $user->deliveryAddress->city }}
                     </p>
+
+                    @if (auth()->user()->is($user))
+                    @include('components.profile.edit_delivery_address')
+                    @endif
 
                     @endif
 
@@ -88,17 +92,34 @@
                     @include('components.profile.create_delivery_address')
                     @endif
 
-
-                    @if (auth()->user()->is($user))
-                    @include('components.profile.edit_delivery_address')
-                    @endif
-
                 </div>
 
             </div>
 
         </div>
     </div>
+</div>
+
+<div class="container">
+    <div class="row mt-5">
+
+        <div class="col-md-12">
+            <h2>Vos commandes</h2>
+        </div>
+
+    </div>
+
+    @if (count($user->orders)>0)
+    <a href="{{ route('orders.index') }}">
+        <button type="button" class="btn btn-primary">
+            Afficher les commandes
+        </button>
+    </a>
+
+    @else
+    <p>Vous n'avez pas encore passé de commande</p>
+    @endif
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

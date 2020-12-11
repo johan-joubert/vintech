@@ -39,4 +39,7 @@ Route::resource('/profile/billing-address', App\Http\Controllers\BillingAddressC
 Route::resource('/profile/delivery-address', App\Http\Controllers\DeliveryAddressController::class);
 
 
+// Orders / by Alexis
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+
 Auth::routes();

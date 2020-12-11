@@ -50,7 +50,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user = User::findOrFail(auth()->user()->id);
-        $user->load('deliveryAddress', 'billingAddress');
+        $user->load('deliveryAddress', 'billingAddress', 'orders');
 
         return view('profile.show', compact('user'));
     }
