@@ -22,7 +22,6 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-<<<<<<< HEAD
 //----------- Products -------------------------------------------------------------------------------
 Route::resource('products', App\Http\Controllers\ProductController::class);
 
@@ -31,7 +30,6 @@ Route::resource('range', App\Http\Controllers\RangeController::class);
 
 //----------- Promotions -------------------------------------------------------------------------------
 Route::resource('promotion', App\Http\Controllers\PromotionController::class);
-=======
 
 //route admin -by jo-
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
@@ -84,4 +82,3 @@ Route::resource('/profile/delivery-address', App\Http\Controllers\DeliveryAddres
 Route::resource('orders', App\Http\Controllers\OrderController::class);
 
 Auth::routes();
->>>>>>> fe610af564302cbe6c403ad2500cbc84d91a2609
