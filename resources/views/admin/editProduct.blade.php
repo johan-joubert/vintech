@@ -2,11 +2,18 @@
 
 @section('content')
 
+<div class="container mb-2">
+
+    <a href="{{route('admin.index')}}">Accueil admin</a>
+
+</div>
+
+
 
 <div class="container">
     <h2>Choisir un produit à modifier</h2>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
                 <th scope="col">Nom</th>
@@ -43,7 +50,7 @@
 <div class="container">
     <h2>Choisir une gamme à modifier</h2>
 
-    <table class="table">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
                 <th>Nom</th>
@@ -76,7 +83,7 @@
 <div class="container">
     <h2>Choisir une promotion à modifier</h2>
 
-    <table class="table darkTable">
+    <table class="table table-dark table-striped">
         <thead>
             <tr>
                 <th scope="col">Nom</th>
