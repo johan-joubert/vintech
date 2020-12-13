@@ -35,7 +35,7 @@ class CartController extends Controller
         $this->cartRepository->add($product, $request->quantity);
 
         //redirection vers le panier avec un message
-        return redirect()->route("cart.cartShow")->withMessage("Produit ajouter au panier");
+        return redirect()->route("cart.show")->withMessage("Produit ajouter au panier");
 
     }
 

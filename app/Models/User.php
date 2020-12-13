@@ -48,32 +48,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
-    public function orders() {
-        return $this->hasMany('App\Models\Order');
-    }
-
-    public function billingAddresse() {
-        return $this->hasOne('App\Models\BillingAddress');
-    }
-
-    public function deliveryAddresse() {
-        return $this->hasOne('App\Models\DeliveryAddress');
-    }
-
-    public function role() {
-        return $this->belongsTo('App\Models\Role');
-    }
-
-    public function products() {
-        return $this->belongsToMany('App\Models\Product');
-    }
-
-    public function reviews() {
-        return $this->hasMany('App\Models\Review');
-    }
-
-=======
     public function orders()
     {
         return $this->hasMany('App\Models\Order');
@@ -103,5 +77,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Review');
     }
->>>>>>> fe610af564302cbe6c403ad2500cbc84d91a2609
+
+    public function getAdminAttribute()
+    {
+        return $this->roles_id === 2;
+    }
 }

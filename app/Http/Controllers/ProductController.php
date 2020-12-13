@@ -50,10 +50,6 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('products.show', ['product' => $product]);
-        $ranges = Range::all();
-        $products = Product::all();
-        $promotions = Promotion::all();
-        return view('admin.admin', ['ranges' => $ranges, 'products' => $products, 'promotions' => $promotions]);
     }
 
 
@@ -82,7 +78,7 @@ class ProductController extends Controller
         $product->weight = $request->input('weight');
         $product->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.create');
     }
 
 
@@ -122,7 +118,7 @@ class ProductController extends Controller
         $product->weight = $request->input('weight');
         $product->save();
 
-        return redirect()->route('product.index')->with('message', 'Le produit a bien été ajouté');
+        return redirect()->route('admin.edit')->with('message', 'Le produit a bien été ajouté');
     }
 
 

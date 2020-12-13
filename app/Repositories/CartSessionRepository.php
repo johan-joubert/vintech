@@ -28,7 +28,7 @@ class CartSessionRepository implements CartInterfaceRepository {
     //Retirer un produit du panier
     public function remove (Product $product) {
         $cart = session()->get("cart"); // On récupère le panier en session
-        unset($cart[$product->id]); // On supprimer le produit du tableau $basket
+        unset($cart[$product->id]); // On supprimer le produit du tableau $cart
         session()->put("cart", $cart); // On enregistre le panier
     }
 

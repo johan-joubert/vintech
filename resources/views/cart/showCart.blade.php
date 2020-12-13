@@ -25,7 +25,7 @@
 				<!-- Initialisation du total général à 0 -->
 				@php $total = 0 @endphp
 
-				<!-- On parcourt les produits du panier en session : session('basket') -->
+				<!-- On parcourt les produits du panier en session : session('cart') -->
 				@foreach (session("cart") as $key => $item)
 
 					<!-- On incrémente le total général par le total de chaque produit du panier -->
@@ -38,7 +38,7 @@
 						<td>{{ $item['price'] }} $</td>
 						<td>
 							<!-- Le formulaire de mise à jour de la quantité -->
-							<form method="POST" action="{{ route('basket.add', $key) }}" class="form-inline d-inline-block" >
+							<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block" >
 							{{ csrf_field() }}
 								<input type="number" name="quantity" placeholder="Quantité ?" value="{{ $item['quantity'] }}" class="form-control mr-2" style="width: 80px" >
 								<input type="submit" class="btn btn-primary" value="Actualiser" />
@@ -50,7 +50,7 @@
 						</td>
 						<td>
 							<!-- Le Lien pour retirer un produit du panier -->
-							<a href="{{ route('basket.remove', $key) }}" class="btn btn-outline-danger" title="Retirer le produit du panier" >Retirer</a>
+							<a href="{{ route('cart.remove', $key) }}" class="btn btn-outline-danger" title="Retirer le produit du panier" >Retirer</a>
 						</td>
 					</tr>
 				@endforeach
@@ -67,7 +67,7 @@
 	</div>
 
 	<!-- Lien pour vider le panier -->
-	<a class="btn btn-danger" href="{{ route('basket.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
+	<a class="btn btn-danger" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
 
 	@else
 	<div class="alert alert-info">Aucun produit au panier</div>

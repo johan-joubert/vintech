@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use App\Models\Promotion;
+use App\Models\Range;
+use App\Models\User;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,21 +20,17 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::all();
+    $promotions = Promotion::all();
+    $ranges = Range::all();
+    $users = User::all();
+    return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'users' => $users]);
 });
 
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//----------- Products -------------------------------------------------------------------------------
-Route::resource('products', App\Http\Controllers\ProductController::class);
-
-//----------- Ranges -------------------------------------------------------------------------------
-Route::resource('range', App\Http\Controllers\RangeController::class);
-
-//----------- Promotions -------------------------------------------------------------------------------
-Route::resource('promotion', App\Http\Controllers\PromotionController::class);
 
 //admin's route ressource range,product,promotion -by jo-
 Route::resource('/admin/range', App\Http\Controllers\RangeController::class);
@@ -45,6 +46,8 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 Route::get('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('admin.edit');
 
 Route::get('/admin/update/range/{range}', [App\Http\Controllers\RangeController::class, 'showUpdateRange'])->name('admin.update.range');
+
+Route::get('/range/{range}', [App\Http\Controllers\RangeController::class, 'show'])->name('show.range');
 
 Route::get('/admin/update/product/{product}', [App\Http\Controllers\ProductController::class, 'showUpdateProduct'])->name('admin.update.product');
 
@@ -66,7 +69,7 @@ Route::get('cart', [App\Http\Controllers\CartController::class, 'show'])->name('
 
 Route::post('cart/add/{product}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
 
-Route::get('cart/remove/{product}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.show');
+Route::get('cart/remove/{product}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 
 Route::get('cart/empty', [App\Http\Controllers\CartController::class, 'empty'])->name('cart.empty');
 

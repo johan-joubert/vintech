@@ -41,7 +41,7 @@
                                 $article->range_id = $product->range_id;
                                 ?>
 
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('products.show', $article->id) }}">Détails</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ route('product.show', $article->id) }}">Détails</a>
 
                             </div>
 

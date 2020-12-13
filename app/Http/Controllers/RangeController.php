@@ -45,7 +45,7 @@ class RangeController extends Controller
         $range->range = $request->input('range');
         $range->save();
 
-        return redirect()->route('product.index')->with('message', 'La gamme a bien été ajouté');
+        return redirect()->route('product.create')->with('message', 'La gamme a bien été ajouté');
 
     }
 
@@ -107,7 +107,7 @@ class RangeController extends Controller
         $range->range = $request->input('range');
         $range->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('admin.edit');
 
     }
 

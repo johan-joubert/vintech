@@ -20,10 +20,11 @@
                         <p class="card-text">{{$product->short_description}}</p>
                         <p class="card-text">{{$product->description}}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                            </div>
-
+                            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
+                                {{ csrf_field() }}
+                                <input type="number" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}" >                                
+                                <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
+                            </form>
                             <?php
 
                             $discount = 0;
@@ -39,7 +40,6 @@
 
                                 $promoPrice = $product->price - ($product->price * ($discount / 100));
                                 echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
-                                
                             } else {
                                 echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
                             }
