@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
+
 class ConfirmCartController extends Controller
 {
     /**
@@ -45,7 +48,10 @@ class ConfirmCartController extends Controller
      */
     public function show($id)
     {
-        return view('confirm_cart.show');
+        $user = User::findOrFail(auth()->user()->id);
+        $user->load('deliveryAddress', 'billingAddress');
+
+        return view('confirm_cart.show', compact('user'));
     }
 
     /**
@@ -80,5 +86,17 @@ class ConfirmCartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deliveryChoice(Request $request) {
+        $value = $request->input('inlineRadioOptions');
+
+        if ($value == 'expressDelivery') {
+            $shippingCost = 9.99;
+            return view('confirm_cart.show', ['shippingCost' => $shippingCost]);
+        }else {
+            $shippingCost = 0;
+            return view('confirm_cart.show', ['shippingCost' => $shippingCost]);
+        }
     }
 }
