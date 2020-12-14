@@ -41,6 +41,7 @@ Route::resource('/admin/promotion', App\Http\Controllers\PromotionController::cl
 
 
 //admin's custome route admin -by jo-
+//ADMIN -by jo-
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
 Route::get('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit'])->name('admin.edit');
@@ -57,6 +58,9 @@ Route::get('/admin/update/promotion/{promotion}', [App\Http\Controllers\Promotio
 //admin's route add article to promotion -by jo-
 Route::post('/admin/promotion_add_product', [App\Http\Controllers\PromotionController::class, 'addProductPromotion'])->name('addProductPromotion');
 
+Route::resource('/admin/range', App\Http\Controllers\RangeController::class);
+
+Route::resource('/admin/product', App\Http\Controllers\ProductController::class);
 
 //admin's route edit article
 Route::get('/admin/promotion_show_product', [App\Http\Controllers\ProductController::class, 'showEditProduct'])->name('editProduct');
@@ -70,11 +74,17 @@ Route::get('cart', [App\Http\Controllers\CartController::class, 'show'])->name('
 Route::post('cart/add/{product}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
 
 Route::get('cart/remove/{product}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+// route add article to promotion -by jo-
+Route::post('/admin/promotion_add_product', [App\Http\Controllers\PromotionController::class, 'addProductPromotion'])->name('addProductPromotion');
+
+// route edit article
+Route::get('/admin/promotion_show_product', [App\Http\Controllers\ProductController::class, 'showEditProduct'])->name('editProduct');
 
 Route::get('cart/empty', [App\Http\Controllers\CartController::class, 'empty'])->name('cart.empty');
 
 
-// Profile / by Alexis
+
+// PROFILE / by Alexis
 // Route::resource('profile', App\Http\Controllers\UserController::class);
 
 Route::get('profile/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
@@ -83,14 +93,16 @@ Route::put('/profile/edit-profile', [App\Http\Controllers\UserController::class,
 
 Route::put('/profile/edit-password', [App\Http\Controllers\UserController::class, 'updatePassword'])->name('update.password');
 
-
 // Addresses / by Alexis
 Route::resource('/profile/billing-address', App\Http\Controllers\BillingAddressController::class);
 
 Route::resource('/profile/delivery-address', App\Http\Controllers\DeliveryAddressController::class);
 
-
 // Orders / by Alexis
 Route::resource('orders', App\Http\Controllers\OrderController::class);
+
+
+// CONFIRM_CART / by Alexis
+Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::class);
 
 Auth::routes();

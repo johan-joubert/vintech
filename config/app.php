@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         App\Providers\CartServiceProvider::class,
 
-
         /*
          * Package Service Providers...
          */
