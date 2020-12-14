@@ -82,9 +82,8 @@
                                 }
                             }
 
-                            echo " Panier " .$qteTotal;
                         @endphp
-
+                        <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

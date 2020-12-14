@@ -1,4 +1,8 @@
 @extends("layouts.app")
+
+<?php
+include('../functions.php');
+?>
 @section("content")
 
 <div class="container">
@@ -28,14 +32,15 @@
 				<!-- On parcourt les produits du panier en session : session('cart') -->
 				@foreach (session("cart") as $key => $item)
 
+
 					<!-- On incrémente le total général par le total de chaque produit du panier -->
-					@php $total += $item['price'] * $item['quantity'] @endphp
+					@php $total += promoPrice($item['id']) * $item['quantity'] @endphp
 					<tr>
 						<td>{{ $loop->iteration }}</td>
 						<td>
 							<strong><a href="{{ route('product.show', $key) }}" title="Afficher le produit" >{{ $item['name'] }}</a></strong>
 						</td>
-						<td>{{ $item['price'] }} €</td>
+						<td>{{ promoPrice($item['id']) }} €</td>
 						<td>
 							<!-- Le formulaire de mise à jour de la quantité -->
 							<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block" >
@@ -46,7 +51,7 @@
 						</td>
 						<td>
 							<!-- Le total du produit = prix * quantité -->
-							{{ $item['price'] * $item['quantity'] }} €
+							{{ promoPrice($item['id']) * $item['quantity'] }} €
 						</td>
 						<td>
 							<!-- Le Lien pour retirer un produit du panier -->
@@ -67,11 +72,14 @@
 	</div>
 
 	<!-- Lien pour vider le panier -->
-	<a class="btn btn-danger" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
+	<a class="btn btn-secondary" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier" >Vider le panier</a>
 
 	@else
 	<div class="alert alert-info">Aucun produit au panier</div>
 	@endif
+
+
+	<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
 
 </div>
 

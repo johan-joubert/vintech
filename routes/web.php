@@ -105,4 +105,6 @@ Route::resource('orders', App\Http\Controllers\OrderController::class);
 // CONFIRM_CART / by Alexis
 Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::class);
 
+Route::post('confirm_cart', [App\Http\Controllers\ConfirmCartController::class, 'deliveryChoice'])->name('delivery.choice');
+
 Auth::routes();
