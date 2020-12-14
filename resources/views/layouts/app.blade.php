@@ -72,10 +72,13 @@
 
                         @php
                             $qteTotal = 0;
-                            foreach (session("cart") as $key => $item) {
 
-                            $qteTotal += $item['quantity']; 
-                            
+                            if(session("cart")) {
+                                foreach (session("cart") as $key => $item) {
+
+                                $qteTotal += $item['quantity']; 
+                                
+                                }
                             }
 
                             echo " Panier " .$qteTotal;

@@ -35,7 +35,7 @@
 						<td>
 							<strong><a href="{{ route('product.show', $key) }}" title="Afficher le produit" >{{ $item['name'] }}</a></strong>
 						</td>
-						<td>{{ $item['price'] }} $</td>
+						<td>{{ $item['price'] }} €</td>
 						<td>
 							<!-- Le formulaire de mise à jour de la quantité -->
 							<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block" >
@@ -46,7 +46,7 @@
 						</td>
 						<td>
 							<!-- Le total du produit = prix * quantité -->
-							{{ $item['price'] * $item['quantity'] }} $
+							{{ $item['price'] * $item['quantity'] }} €
 						</td>
 						<td>
 							<!-- Le Lien pour retirer un produit du panier -->
@@ -58,7 +58,7 @@
 					<td colspan="4" >Total général</td>
 					<td colspan="2">
 						<!-- On affiche total général -->
-						<strong>{{ $total }} $</strong>
+						<strong>{{ $total }} €</strong>
 					</td>
 				</tr>
 			</tbody>
