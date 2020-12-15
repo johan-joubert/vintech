@@ -54,14 +54,14 @@
                         @if(isset($ranges))
                             @foreach($ranges as $range)
                             <li>
-                                <a href="{{ route('range.show', $range->id) }}">{{ $range->range }}</a>
+                                <a href="{{ route('show.range', $range->id) }}">{{ $range->range }}</a>
                             </li>
                             @endforeach
                         @endif
                         @if(isset($promotions))
                             @foreach($promotions as $promotion)
                             <li>
-                                <a href="{{ route('promotion.show', $promotion->id) }}">{{ $promotion->name }}</a>
+                                <a href="{{ route('show.promotion', $promotion->id) }}">{{ $promotion->name }}</a>
                             </li>
                             @endforeach
                         @endif

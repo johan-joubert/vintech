@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Range;
+use App\Models\Promotion;
 use App\Models\Product;
 use DateTime;
 
@@ -60,6 +61,9 @@ class RangeController extends Controller
      */
     public function show($id)
     {
+        $promotions = Promotion::all();
+        $ranges = Range::all();
+
         // on rècupère : gamme, produits associés, promos associées aux produits (nom) + réduction (table intermédiaire)
        
         $range = DB::table('ranges')  // gamme concernée
@@ -71,7 +75,7 @@ class RangeController extends Controller
         ->orderBy('products.name', 'asc')
         ->get();
         
-        return view('products.range', ['range' => $range]);
+        return view('products.range', ['range' => $range, 'ranges' => $ranges, 'promotions' => $promotions]);
     }
 
     

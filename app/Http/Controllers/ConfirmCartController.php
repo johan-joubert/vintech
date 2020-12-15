@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\Promotion;
+use App\Models\Product;
+use App\Models\Range;
 
 
 class ConfirmCartController extends Controller
@@ -48,10 +51,14 @@ class ConfirmCartController extends Controller
      */
     public function show($id)
     {
+        $products = Product::all();
+        $promotions = Promotion::all();
+        $ranges = Range::all();
+
         $user = User::findOrFail(auth()->user()->id);
         $user->load('deliveryAddress', 'billingAddress');
 
-        return view('confirm_cart.show', compact('user'));
+        return view('confirm_cart.show', compact('user'), ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges]);
     }
 
     /**

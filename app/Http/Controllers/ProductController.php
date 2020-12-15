@@ -53,6 +53,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+
         $product->load('promotions');
         return view('products.show', ['product' => $product]);
     }
@@ -89,7 +90,8 @@ class ProductController extends Controller
 
     public function showUpdateProduct(Product $product)
     {
-        return view('admin/updateProduct', ['product' => $product]);
+        $ranges = Range::all();
+        return view('admin/updateProduct', ['product' => $product, 'ranges' => $ranges]);
     }
 
 

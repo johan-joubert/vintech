@@ -49,6 +49,7 @@ Route::get('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit'])
 Route::get('/admin/update/range/{range}', [App\Http\Controllers\RangeController::class, 'showUpdateRange'])->name('admin.update.range');
 
 Route::get('/range/{range}', [App\Http\Controllers\RangeController::class, 'show'])->name('show.range');
+Route::get('/promotion/{promotion}', [App\Http\Controllers\PromotionController::class, 'show'])->name('show.promotion');
 
 Route::get('/admin/update/product/{product}', [App\Http\Controllers\ProductController::class, 'showUpdateProduct'])->name('admin.update.product');
 
@@ -108,3 +109,6 @@ Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::clas
 Route::post('confirm_cart', [App\Http\Controllers\ConfirmCartController::class, 'deliveryChoice'])->name('delivery.choice');
 
 Auth::routes();
+
+//review -by jo-
+Route::resource('product/show', App\Http\Controllers\ReviewController::class);
