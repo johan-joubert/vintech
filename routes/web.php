@@ -108,3 +108,6 @@ Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::clas
 Route::post('confirm_cart', [App\Http\Controllers\ConfirmCartController::class, 'deliveryChoice'])->name('delivery.choice');
 
 Auth::routes();
+
+// FAVORITES / by Flo
+Route::resource('/favorites', App\Http\Controllers\FavoriteController::class);

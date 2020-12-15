@@ -9,8 +9,8 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function users() {
-       return $this->belongsToMany('App\Models\User');
+    public function likes() {
+       return $this->belongsToMany('App\Models\User', 'favorites');
     }
 
     public function ranges() {
@@ -29,4 +29,13 @@ class Product extends Model
         return $this->hasMany('App\Models\Review');
     }
 
+    // public function addLike() {
+    //     auth()->user()->favorites()->toggle($this->product->id);
+    // }
+
+    public function isLiked() {
+        if (auth()->check()) {
+            return auth()->user()->likes->contains('id', $this->id);
+        }
+    }
 }
