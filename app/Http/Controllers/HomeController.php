@@ -32,6 +32,7 @@ class HomeController extends Controller
         $promotions = Promotion::all();
         $ranges = Range::all();
         $users = User::all();
+        
         return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'users' => $users]);
     }
 }

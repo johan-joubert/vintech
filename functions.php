@@ -2,13 +2,11 @@
 
 use App\Models\Product;
 
-function tvaCost()
+function tvaCost($amount)
 {
-    $cost = 0;
-    foreach ($_SESSION as $product) {
-        $cost += $product->price * (20 / 100);
-    }
-    return sprintf('%.2f', $cost);
+    $tvaCost = $amount * (20 / 100);
+
+    return $tvaCost;
 }
 
 

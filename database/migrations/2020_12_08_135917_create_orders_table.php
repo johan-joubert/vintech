@@ -17,7 +17,6 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('order_number');
             $table->integer('order_amount');
-            $table->date('order_date');
             $table->foreignId('user_id');
             $table->timestamps();
         });
