@@ -26,10 +26,8 @@
                     <div class="card-body">
                         <p class="card-text">{{$product->name}}</p>
                         <p class="card-text">{{$product->short_description}}</p>
+                        
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-
-                            </div>
 
                             <?php
 
