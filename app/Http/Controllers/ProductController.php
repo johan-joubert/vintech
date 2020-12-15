@@ -134,4 +134,15 @@ class ProductController extends Controller
         $product->delete();
         return redirect('admin/edit');
     }
+    
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $products = DB::table('products')
+            ->where('products.name', 'like', "%$search%")
+            ->select('products.*', 'products.name')
+            ->get();
+        
+        return view('search.searchPage', ['products' => $products]);
+    }
+
 }

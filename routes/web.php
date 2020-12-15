@@ -112,3 +112,7 @@ Auth::routes();
 
 //review -by jo-
 Route::resource('product/show', App\Http\Controllers\ReviewController::class);
+
+
+//route searchBar
+Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('product.search');
