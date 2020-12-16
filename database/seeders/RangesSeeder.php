@@ -14,8 +14,10 @@ class RangesSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i<=2; $i++){
-            DB::table('ranges')->insert(['range' => 'Gamme n° ' . ($i+1)]);
-        }
+            DB::table('ranges')->insert(['range' => 'Gaming']);
+
+            DB::table('ranges')->insert(['range' => 'Audio']);
+
+            DB::table('ranges')->insert(['range' => 'Vidéo']);
     }
 }
