@@ -17,58 +17,75 @@
                 <a href="{{ route('product.show', $product->id) }}">
 
                     <div class="card shadow-sm">
-                        <img alt="image du produit" src="{{ asset("images/$product->image") }}">
-
-                        @if(($product->promotion_name) && ($product->promotion_name!== null))
-                        <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
-                        <?php
-                        echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
-                        ?>
-                        @endif
-
-                        <div class="card-body">
-                            <h3 class="card-text">{{$product->name}}</h3>
                             @php
-                            if(count($product->reviews) > 0) {
-
-                            $moyenneRate = 0;
-
-                            foreach($product->reviews as $review) {
-
-
-                            $moyenneRate += $review->rate;
-
-                            }
-                            echo "Moyenne produit : " .$moyenneRate / count($product->reviews);
-                            }
+                            $stock = $product->stock
                             @endphp
-                            <p class="card-text">{{$product->short_description}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
+                            @if($stock > 5)
 
-                                <?php
+                                <p><i class="fas fa-circle green"></i> en stock</p>
 
-                                $date = date('Y-m-d');
+                            @elseif($stock <= 5 && $stock > 0) 
 
-                                if (isset($product->promotion_name) && ($date <= $product->end_date)) {
+                                <p><i class="fas fa-circle orange"></i> en stock</p>
 
-                                    if ($date >= $product->start_date && $date <= $product->end_date) {
+                            @elseif($stock == 0)
 
-                                        echo "<p class=\"font-weight-bold\">- $product->discount %</p>
+                                <p><i class="fas fa-circle red"></i> rupture</p>
+
+                            @endif
+
+                            <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+
+                            @if(($product->promotion_name) && ($product->promotion_name!== null))
+                            <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
+                            <?php
+                            echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
+                            ?>
+                            @endif
+
+                            <div class="card-body">
+                                <h3 class="card-text">{{$product->name}}</h3>
+                                @php
+                                if(count($product->reviews) > 0) {
+
+                                $moyenneRate = 0;
+
+                                foreach($product->reviews as $review) {
+
+
+                                $moyenneRate += $review->rate;
+
+                                }
+                                echo "Moyenne produit : " .$moyenneRate / count($product->reviews);
+                                }
+                                @endphp
+                                <p class="card-text">{{$product->short_description}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <?php
+
+                                    $date = date('Y-m-d');
+
+                                    if (isset($product->promotion_name) && ($date <= $product->end_date)) {
+
+                                        if ($date >= $product->start_date && $date <= $product->end_date) {
+
+                                            echo "<p class=\"font-weight-bold\">- $product->discount %</p>
                                     <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', '')  . "€</del></small>";
 
-                                        $promoPrice = $product->price - ($product->price * ($product->discount / 100));
-                                        echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
-                                    } else {
-                                        echo "<p class=\"font-weight-bold\">- $product->discount %</p>
+                                            $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
+                                        } else {
+                                            echo "<p class=\"font-weight-bold\">- $product->discount %</p>
                                         <p>" .  number_format($product->price, 2, ',', '')  . "€</p>";
+                                        }
+                                    } else {
+                                        echo "<p>" .  number_format($product->price, 2, ',', '')  . "€</p>";
                                     }
-                                } else {
-                                    echo "<p>" .  number_format($product->price, 2, ',', '')  . "€</p>";
-                                }
-                                ?>
+                                    ?>
 
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </a>
 
