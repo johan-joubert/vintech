@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Promotion;
+use App\Models\Range;
 use Illuminate\Support\Facades\DB;
 
 
@@ -53,6 +54,9 @@ class PromotionController extends Controller
 
     public function show($id)
     {
+        $promotions = Promotion::all();
+        $ranges = Range::all();
+
         $promo = DB::table('promotions')
             ->where('promotions.id', $id)
             ->join('promotion_products', 'promotion_products.promotion_id', '=', 'promotions.id')
@@ -61,7 +65,7 @@ class PromotionController extends Controller
             ->select('products.*', 'promotion_products.discount', 'promotions.name as promoName', 'promotions.start_date', 'promotions.end_date')
             ->get();
 
-        return view('products.promotion', ['promo' => $promo]);
+        return view('products.promotion', ['promo' => $promo, 'promotions' => $promotions, 'ranges' => $ranges]);
     }
 
 

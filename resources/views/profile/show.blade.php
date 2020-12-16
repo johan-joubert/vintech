@@ -7,15 +7,6 @@
 
     <div class="row mt-5">
         <div class="col-md-12">
-
-
-
-        <a href="{{ route('confirm_cart.show', $user) }}">
-            ConfirmCart
-        </a>
-
-
-
         
             <h1>
                 {{ $user->first_name }} {{ $user->last_name }}

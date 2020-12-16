@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<?php
+include('../functions.php');
+?>
+
 @section('content')
 
 <div class="container">
@@ -55,10 +59,11 @@
 </div>
 
 
-<!-- inclure show addresses -->
+@include('components.profile.show_addresses')
 
 @include('components.confirm_cart.delivery_choice')
 
+@php $tvaCost = tvaCost($total) @endphp
 
 <div class="container-fluid mt-5">
     <div class="row">
@@ -69,7 +74,7 @@
                 <p>
                     Montant HT : {{ $total }} €<br>
                     <span class="text-muted">
-                        TVA (20%): 6.67 €<br>
+                        TVA (20%): @php echo $tvaCost @endphp €<br>
 
                         @if(isset($shippingCost))
     
@@ -80,13 +85,17 @@
                     </span>
                     <b>
                         @if(isset($shippingCost))
-                        Montant TTC : {{ $total + $shippingCost }} €</b>
+                        @php $finalTotal = $total + $shippingCost + $tvaCost; @endphp
+                        Montant TTC : {{ $finalTotal }} €</b>
 
                 </p>
 
-                <a href="">
-                    <button type="btn" class="btn btn-danger mb-3">Confirmer achat</button>
-                </a>
+                <form method="GET" action="{{ route('confirm_cart.create') }}">
+                    @csrf
+                    <input type="hidden" value="{{ $finalTotal }}" name="order_amount">
+                    <input type="hidden" value="{{ $user->id }}" name="user_id">
+                    <button type="submit" class="btn btn-danger mb-3">Confirmer achat</button>
+                </form>
 
                 @endif
 

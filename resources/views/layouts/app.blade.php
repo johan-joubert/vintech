@@ -52,35 +52,35 @@
 
                         <!-- ROUTES TEST (a gérer plus tard, a insérer dans la 2eme navbar) -->
                         @if(isset($ranges))
-                            @foreach($ranges as $range)
-                            <li>
-                                <a href="{{ route('range.show', $range->id) }}">{{ $range->range }}</a>
-                            </li>
-                            @endforeach
+                        @foreach($ranges as $range)
+                        <li>
+                            <a href="{{ route('show.range', $range->id) }}">{{ $range->range }}</a>
+                        </li>
+                        @endforeach
                         @endif
                         @if(isset($promotions))
-                            @foreach($promotions as $promotion)
-                            <li>
-                                <a href="{{ route('promotion.show', $promotion->id) }}">{{ $promotion->name }}</a>
-                            </li>
-                            @endforeach
+                        @foreach($promotions as $promotion)
+                        <li>
+                            <a href="{{ route('show.promotion', $promotion->id) }}">{{ $promotion->name }}</a>
+                        </li>
+                        @endforeach
                         @endif
                         @admin
-                            <a href="{{route('admin.index')}}">administration</a>
+                        <a href="{{route('admin.index')}}">administration</a>
                         @endadmin
 
                         <!--affichage nombre d'article dans le panier -->
 
                         @php
-                            $qteTotal = 0;
+                        $qteTotal = 0;
 
-                            if(session("cart")) {
-                                foreach (session("cart") as $key => $item) {
+                        if(session("cart")) {
+                        foreach (session("cart") as $key => $item) {
 
-                                $qteTotal += $item['quantity']; 
-                                
-                                }
-                            }
+                        $qteTotal += $item['quantity'];
+
+                        }
+                        }
 
                         @endphp
                         <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
@@ -123,21 +123,6 @@
                 </div>
             </div>
         </nav>
-
-        @if(session()->has('message'))
-        <p class="alert alert-success">{{ session()->get('message') }}</p>
-        @endif
-
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            @endif
-
-        </div>
 
         <main class="py-4">
 

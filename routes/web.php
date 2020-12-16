@@ -50,6 +50,8 @@ Route::get('/admin/update/range/{range}', [App\Http\Controllers\RangeController:
 
 Route::get('/range/{range}', [App\Http\Controllers\RangeController::class, 'show'])->name('show.range');
 
+Route::get('/promotion/{promotion}', [App\Http\Controllers\PromotionController::class, 'show'])->name('show.promotion');
+
 Route::get('/admin/update/product/{product}', [App\Http\Controllers\ProductController::class, 'showUpdateProduct'])->name('admin.update.product');
 
 Route::get('/admin/update/promotion/{promotion}', [App\Http\Controllers\PromotionController::class, 'showUpdatePromotion'])->name('admin.update.promotion');
