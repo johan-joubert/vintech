@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //admin's route ressource range,product,promotion -by jo-

@@ -57,7 +57,7 @@ class ConfirmCartController extends Controller
             session()->forget('cart');
         }
 
-        return view('home', ['ranges' => $ranges, 'promotions' => $promotions]);
+        return redirect()->route('home');
     }
 
     /**
