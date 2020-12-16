@@ -23,10 +23,9 @@
             <div class="mb-3">
                 <label for="selectRange" class="form-label">Gamme</label>
                 <select class="form-control" name="range_id" aria-label="Default select example" id="selectRange">
-                    <option value="1">Informatique</option>
-                    <option value="2">Hifi</option>
-                    <option value="3">Video</option>
-                    <option value="4">Gaming</option>
+                @foreach($ranges as $range)
+                    <option value="{{$range->id}}">{{$range->range}}</option>
+                    @endforeach
                 </select>
             </div>
 

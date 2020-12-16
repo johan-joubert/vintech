@@ -53,6 +53,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+
         $product->load('promotions');
         return view('products.show', ['product' => $product]);
     }
@@ -89,7 +90,8 @@ class ProductController extends Controller
 
     public function showUpdateProduct(Product $product)
     {
-        return view('admin/updateProduct', ['product' => $product]);
+        $ranges = Range::all();
+        return view('admin/updateProduct', ['product' => $product, 'ranges' => $ranges]);
     }
 
 
@@ -132,4 +134,15 @@ class ProductController extends Controller
         $product->delete();
         return redirect('admin/edit');
     }
+    
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $products = DB::table('products')
+            ->where('products.name', 'like', "%$search%")
+            ->select('products.*', 'products.name')
+            ->get();
+        
+        return view('search.searchPage', ['products' => $products]);
+    }
+
 }

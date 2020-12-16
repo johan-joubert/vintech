@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Reque;
 
 use App\Repositories\CartInterfaceRepository;
 
 use App\Models\Product;
-use App\Models\Range;
 use App\Models\Promotion;
+use App\Models\Range;
 
 
 class CartController extends Controller
@@ -22,11 +23,11 @@ class CartController extends Controller
 
     //Affichage du panier
     public function show() {
-        
-        $ranges = Range::all();
+        $products = Product::all();
         $promotions = Promotion::all();
+        $ranges = Range::all();
 
-        return view("cart.showCart", ['ranges' => $ranges, 'promotions' => $promotions]);
+        return view("cart.showCart", ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges]);
     }
 
     //Ajout d'un produit au panier
