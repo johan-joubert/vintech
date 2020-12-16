@@ -63,11 +63,25 @@
             }
             ?>
 
-            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
-                {{ csrf_field() }}
-                <input type="number" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
-                <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
-            </form>
+            @php
+            $stock = $product->stock
+            @endphp
+
+            @if($stock > 0)
+
+                <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
+                    {{ csrf_field() }}
+                    <input type="number" min=1 max="{{$product->stock}}" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
+                    <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
+                </form>
+
+            @elseif($stock == 0)
+
+                <p>oups rupture</p>
+
+            @endif
+
+
 
 
         </div>

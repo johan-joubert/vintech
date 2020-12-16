@@ -19,13 +19,6 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    $products = Product::all();
-    $promotions = Promotion::all();
-    $ranges = Range::all();
-    $users = User::all();
-    return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'users' => $users]);
-});
 
 
 

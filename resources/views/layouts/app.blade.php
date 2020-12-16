@@ -32,18 +32,70 @@
 
 <body>
     <div id="app">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Vintech') }}
-        </a>
-        @include('search.search')
+        <div class="row">
+            <div class="col-md-2 text-right">
+                <a class="navbar-brand " href="{{ url('/') }}">
+                    {{ config('app.name', 'Vintech') }}
+                </a>
+            </div>
+            <div class="col-md-4">
+                @include('search.search')
+            </div>
+            <div class="col-md-4">
+                @guest
+                @if (Route::has('login'))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user"></i></a>
+                </li>
+                @endif
+
+                @else
+                <div class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                        <a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">
+                            Profil
+                        </a>
+
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            Déconnexion
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+                @endguest
+
+            </div>
+            <div class="col-md-2">
+            @php
+                        $qteTotal = 0;
+
+                        if(session("cart")) {
+                        foreach (session("cart") as $key => $item) {
+
+                        $qteTotal += $item['quantity'];
+
+                        }
+                        }
+
+                        @endphp
+                        <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
+
+            </div>
+        </div>
 
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Vintech') }}
-                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -85,42 +137,11 @@
                         }
 
                         @endphp
-                        <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                        @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user"></i></a>
-                        </li>
-                        @endif
-
-                        @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">
-                                    Profil
-                                </a>
-
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    Déconnexion
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        @endguest
                     </ul>
                 </div>
             </div>

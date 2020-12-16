@@ -21,6 +21,24 @@
             <a href="{{ route('product.show', $product->id) }}">
                 <div class="col mb-3">
                     <div class="card shadow-sm">
+                            @php
+                            $stock = $product->stock
+                            @endphp
+                            @if($stock > 5)
+
+                                <p><i class="fas fa-circle green"></i> en stock</p>
+
+                            @elseif($stock <= 5 && $stock > 0) 
+
+                                <p><i class="fas fa-circle orange"></i> en stock</p>
+
+                            @elseif($stock == 0)
+
+                                <p><i class="fas fa-circle red"></i> rupture</p>
+
+                            @endif
+
+
                         <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                         <div class="card-body">
