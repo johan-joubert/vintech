@@ -19,14 +19,26 @@
                     @endif
 
                     <div class="card-body">
+
                         <h3 class="card-text">{{$product->name}}</h3>
+
                         <p class="card-text">{{$product->short_description}}</p>
+
                         <p class="card-text">{{$product->description}}</p>
+
                         <div class="d-flex justify-content-between align-items-center">
+
                             <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
                                 {{ csrf_field() }}
-                                <input type="number" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
+
+                                @if($product->stock > 0)
+                                <input type="number" min="0" max="{{ $product->stock }}" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
+
                                 <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
+
+                                @else
+                                <p>Ce produit est actuellement en rupture de stock !</p>
+                                @endif
                             </form>
 
                             <?php
