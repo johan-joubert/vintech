@@ -35,6 +35,8 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Vintech') }}
         </a>
+        @include('search.search')
+
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
 

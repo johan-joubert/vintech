@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //admin's route ressource range,product,promotion -by jo-
@@ -49,6 +49,7 @@ Route::get('/admin/edit', [App\Http\Controllers\AdminController::class, 'edit'])
 Route::get('/admin/update/range/{range}', [App\Http\Controllers\RangeController::class, 'showUpdateRange'])->name('admin.update.range');
 
 Route::get('/range/{range}', [App\Http\Controllers\RangeController::class, 'show'])->name('show.range');
+Route::get('/promotion/{promotion}', [App\Http\Controllers\PromotionController::class, 'show'])->name('show.promotion');
 
 Route::get('/promotion/{promotion}', [App\Http\Controllers\PromotionController::class, 'show'])->name('show.promotion');
 
@@ -68,6 +69,7 @@ Route::resource('/admin/product', App\Http\Controllers\ProductController::class)
 Route::get('/admin/promotion_show_product', [App\Http\Controllers\ProductController::class, 'showEditProduct'])->name('editProduct');
 
 Route::get('/admin/promotion_edit_product', [App\Http\Controllers\ProductController::class, 'edit'])->name('sendEditProduct');
+
 
 
 // route cart -by jo-
@@ -110,3 +112,10 @@ Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::clas
 Route::post('confirm_cart', [App\Http\Controllers\ConfirmCartController::class, 'deliveryChoice'])->name('delivery.choice');
 
 Auth::routes();
+
+//review -by jo-
+Route::resource('product/show', App\Http\Controllers\ReviewController::class);
+
+
+//route searchBar
+Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('product.search');

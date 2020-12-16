@@ -79,13 +79,14 @@ class ConfirmCartController extends Controller
      */
     public function show($id)
     {
-        $ranges = Range::all();
+        $products = Product::all();
         $promotions = Promotion::all();
-    
+        $ranges = Range::all();
+
         $user = User::findOrFail(auth()->user()->id);
         $user->load('deliveryAddress', 'billingAddress');
 
-        return view('confirm_cart.show', compact('user'), ['ranges' => $ranges, 'promotions' => $promotions]);
+        return view('confirm_cart.show', compact('user'), ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges]);
     }
 
     /**

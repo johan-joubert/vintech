@@ -23,6 +23,7 @@
 
                         <div class="card-body">
                             <h3 class="card-text">{{$product->name}}</h3>
+                            
                             <p class="card-text">{{$product->short_description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
 

@@ -58,4 +58,5 @@ class HomeController extends Controller
         return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'users' => $users, 'currentPromo' => $currentPromo, 'date' => $date, 'topRatedProducts' => $topRatedProducts]);
     }
 
+    
 }
