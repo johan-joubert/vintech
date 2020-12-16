@@ -9,33 +9,29 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function likes() {
-       return $this->belongsToMany('App\Models\User', 'favorites');
+    public function likes()
+    {
+        return $this->belongsToMany('App\Models\User', 'favorites');
     }
 
-    public function ranges() {
+    public function ranges()
+    {
         return $this->belongsTo('App\Models\Range');
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->belongsToMany('App\Models\Order', 'order_products')->withPivot('quantity');
     }
 
-    public function promotions() {
+    public function promotions()
+    {
         return $this->belongsToMany('App\Models\Promotion', 'promotion_products')->withPivot('discount');
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 
-    // public function addLike() {
-    //     auth()->user()->favorites()->toggle($this->product->id);
-    // }
-
-    public function isLiked() {
-        if (auth()->check()) {
-            return auth()->user()->likes->contains('id', $this->id);
-        }
-    }
 }

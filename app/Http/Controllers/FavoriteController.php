@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\User;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class FavoriteController extends Controller
 {
@@ -15,7 +19,21 @@ class FavoriteController extends Controller
 
     public function index()
     {
-        //
+        // $likes = DB::table('products')
+        // ->leftjoin('favorites', 'favorites.product_id', '=', 'product.id')
+        // ->leftjoin('favorites as f', 'f.user_id', '=', 'user.id')
+        // ->leftjoin('users', 'user.id', '=', 'favorites.user_id')
+        // ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
+        // ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
+        // ->select('products.*', 'favorites.*', 'user.id', 'pp.discount', 'promotions.start_date', 'promotions.end_date', 'promotions.name as promotion_name') // champs souhaités
+        // ->orderBy('products.name', 'asc')
+        // ->get();
+
+        $user = User::find(auth()->user()->id);
+        $user->load('likes.promotions');
+
+        
+        return view('favorites', ['user' => $user]);
     }
 
     /**
@@ -36,7 +54,13 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productId = $request->input('productId');
+        $user = User::find(auth()->user()->id);
+        $product = Product::find($productId);
+
+        $user->toggleLike($product);
+        
+        return back();
     }
 
     /**
@@ -83,4 +107,8 @@ class FavoriteController extends Controller
     {
         //
     }
+
+        // public function addLike() {
+    //     auth()->user()->favorites()->toggle($this->product->id);
+    // }
 }

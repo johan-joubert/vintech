@@ -25,21 +25,19 @@
                         <p class="card-text">{{$product->description}}</p>
 
                         <div class="d-flex justify-content-between align-items-center">
-
-                            <!-- @unless (auth()->user()->is($user))
-
-                            <form method="POST" action="/profile/{{ $user->chickname }}/follow">
+                           
+                            <form method="POST" action="{{route('favorites.store')}}">
                                 @csrf
-                                    <button type="submit" class="btn btn-warning shadow ml-3">
-                                        {{ auth()->user()->isFollowing($user) ? 'Se désabonner' : 'S'abonner' }}
-                                    </button>
+                                <input type="hidden" value="{{ $product->id }}" name="productId">
+                                <button type="submit">
+                                    <?php
+                                        use App\Models\User; 
+                                        $user = User::find(auth()->user()->id);
+                                        echo (auth()->user()->isLiked($product)) ? 'Retirer des favoris' : 'Ajouter aux favoris';
+                                    ?>    
+                                </button>
+
                             </form>
-
-                            @endif
-
-                            <button type="submint" class="btn">
-                                <i class="far fa-heart"></i>
-                            </button> -->
 
                             <?php
 
