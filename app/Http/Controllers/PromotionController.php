@@ -54,18 +54,19 @@ class PromotionController extends Controller
 
     public function show($id)
     {
-        $promotions = Promotion::all();
-        $ranges = Range::all();
 
-        $promo = DB::table('promotions')
-            ->where('promotions.id', $id)
-            ->join('promotion_products', 'promotion_products.promotion_id', '=', 'promotions.id')
-            ->join('products', 'products.id', '=', 'promotion_products.product_id')
-            ->orderBy('products.name', 'asc')
-            ->select('products.*', 'promotion_products.discount', 'promotions.name as promoName', 'promotions.start_date', 'promotions.end_date')
-            ->get();
+        $promo = Promotion::where('id', $id)
+        ->with(['products.reviews', 'products' => function ($query) {
+                                                    $query->orderBy('name', 'asc');
+                                                }])
+        ->get();
+        $ranges = Range::all();
+        $promotions = Promotion::all();
+
+
 
         return view('products.promotion', ['promo' => $promo, 'ranges' => $ranges, 'promotions' => $promotions]);
+
     }
 
 

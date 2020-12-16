@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Range;
 use App\Models\Promotion;
 use App\Models\Product;
+use App\Models\Review;
 use DateTime;
 
 class RangeController extends Controller
@@ -62,20 +63,13 @@ class RangeController extends Controller
     public function show($id)
     {
         $promotions = Promotion::all();
-        $ranges = Range::all();
+        $range = Range::where('id', $id)->get();
+        $products = Product::where('range_id', $id)->with('reviews')->get();
 
         // on rècupère : gamme, produits associés, promos associées aux produits (nom) + réduction (table intermédiaire)
        
-        $range = DB::table('ranges')  // gamme concernée
-        ->where('ranges.id', $id)
-        ->join('products', 'products.range_id', '=', 'ranges.id')  // produits liés à la gamme 
-        ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
-        ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
-        ->select('ranges.*', 'products.*', 'pp.discount', 'promotions.start_date', 'promotions.end_date', 'promotions.name as promotion_name') // champs souhaités
-        ->orderBy('products.name', 'asc')
-        ->get();
         
-        return view('products.range', ['range' => $range, 'ranges' => $ranges, 'promotions' => $promotions]);
+        return view('products.range', ['range' => $range, 'promotions' => $promotions, 'products' => $products]);
     }
 
     

@@ -69,6 +69,7 @@ Route::get('/admin/promotion_show_product', [App\Http\Controllers\ProductControl
 Route::get('/admin/promotion_edit_product', [App\Http\Controllers\ProductController::class, 'edit'])->name('sendEditProduct');
 
 
+
 // route cart -by jo-
 Route::get('cart', [App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
 
