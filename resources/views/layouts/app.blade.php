@@ -1,3 +1,15 @@
+@php
+include('../functions.php');
+
+$variables = getVariables();
+
+$products_navBar = $variables[0];
+$ranges_navBar = $variables[1];
+$promotions_navBar = $variables[2];
+
+
+
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -109,13 +121,11 @@
                     <ul class="navbar-nav mr-auto">
 
                         <!-- ROUTES TEST (a gérer plus tard, a insérer dans la 2eme navbar) -->
-                        @if(isset($ranges))
-                        @foreach($ranges as $range)
+                        @foreach($ranges_navBar as $range)
                         <li>
                             <a href="{{ route('show.range', $range->id) }}">{{ $range->range }}</a>
                         </li>
                         @endforeach
-                        @endif
 
                         @if(isset($promotions))
                         @foreach($promotions as $promotion)

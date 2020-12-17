@@ -1,7 +1,4 @@
 @extends("layouts.app")
-<?php
-include('../functions.php');
-?>
 
 @section("content")
 

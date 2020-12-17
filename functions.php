@@ -1,6 +1,10 @@
 <?php
 
 use App\Models\Product;
+use App\Models\Review;
+use App\Models\Promotion;
+use App\Models\Range;
+use App\Models\User;
 
 function tvaCost($amount)
 {
@@ -26,6 +30,14 @@ function promoPrice($productId)
     else {
         return $product->price;
     }
+}
+
+function getVariables () {
+    $products_navBar = Product::all();
+    $ranges_navBar = Range::all();
+    $promotions_navBar = Promotion::all();
+
+    return [$products_navBar, $ranges_navBar, $promotions_navBar];
 }
 
 ?>
