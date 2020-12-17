@@ -8,14 +8,12 @@
     </div>
 
     <!----------------- CURRENT PROMO ---------------------------------------------------------------------------------------->
-    <div class="album py-5 bg-light">
+    <div class="album py-5 bg-danger promo-album">
         <div class="container">
 
             <div class="row mb-5 text-center">
                 <h1 class="mt-2 font-weight-bold">{{$currentPromo[0]->promoName}}</h1>
-            </div>
 
-            <div class="row mb-5 text-center">
                 <?php
                 echo "<p>Du " . date_format(new DateTime($currentPromo[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($currentPromo[0]->end_date), 'd/m/y') . ".</p>";
                 ?>
@@ -26,7 +24,7 @@
                 @foreach($currentPromo as $product)
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="col mb-3">
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm bg-light">
                             @php
                             $stock = $product->stock
                             @endphp
@@ -73,7 +71,7 @@
     </div>
 
     <!----------------- TOP RATED PRODUCTS ---------------------------------------------------------------------------------------->
-    <div class="album py-5 bg-light">
+    <div class="album py-5">
         <div class="container">
 
             <div class="row mb-5 text-center">
@@ -85,7 +83,7 @@
                 @foreach($topRatedProducts as $product)
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="col mb-3">
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm bg-light">
                             @php
                             $stock = $product->stock
                             @endphp
