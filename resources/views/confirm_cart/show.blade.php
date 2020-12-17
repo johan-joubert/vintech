@@ -1,4 +1,13 @@
 @extends('layouts.app')
+@php
+include('../functions.php');
+$variables = getVariables();
+
+$products_navBar = $variables[0];
+$ranges_navBar = $variables[1];
+$promotions_navBar = $variables[2];
+
+@endphp
 
 
 @section('content')
@@ -34,12 +43,15 @@
             @foreach (session("cart") as $key => $item)
 
             @php $total = 0 @endphp
-            @php $total += $item['price'] * $item['quantity'] @endphp
+            @php 
+            $total += $item['price'] * $item['quantity'];
+            $image = $item['image'];
+             @endphp
 
             <div class="card ml-3" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $item['name'] }}</h5>
-                    <img src="" alt="{{ $item['image'] }}">
+                    <img src="{{ asset("images/$image")}}" alt="{{ $item['image'] }}">
                     <p class="text-right">Prix unitaire : {{ $item['price'] }} €</p>
                 </div>
                 <div class="card-footer text-right text-muted">

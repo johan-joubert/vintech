@@ -1,7 +1,10 @@
 @extends("layouts.app")
 
 @section("content")
+@php
+include('../functions.php');
 
+@endphp
 
 <div class="container">
 

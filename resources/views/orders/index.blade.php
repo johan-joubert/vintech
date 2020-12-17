@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+include('../functions.php');
+$variables = getVariables();
+
+$products_navBar = $variables[0];
+$ranges_navBar = $variables[1];
+$promotions_navBar = $variables[2];
+
+@endphp
 
 
 <div class="container">
