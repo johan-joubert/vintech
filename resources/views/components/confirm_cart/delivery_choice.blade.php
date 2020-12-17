@@ -1,8 +1,7 @@
-
 <div class="container mt-5">
     <div class="row">
         <div class="col-12 text-center">
-            <h4>Choisissez votre type de livraison</h4>
+            <h4>Livraison souhaitée</h4>
         </div>
     </div>
 
@@ -13,13 +12,13 @@
 
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="standardDelivery">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="standardDelivery" @if(isset($shippingCost) && $shippingCost == '0' ) checked @endif>
                     <label class="form-check-label" for="inlineRadio1">
                         Livraison standard : Gratuit
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="expressDelivery">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="expressDelivery" @if(isset($shippingCost) && $shippingCost == '9.99' ) checked @endif>
                     <label class="form-check-label" for="inlineRadio2">
                         Livraison express (sous 48h) : 9.99 €
                     </label>

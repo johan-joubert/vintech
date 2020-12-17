@@ -41,7 +41,7 @@ include('../functions.php');
 						<!-- Le formulaire de mise à jour de la quantité -->
 						<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block">
 							{{ csrf_field() }}
-							<input type="number" name="quantity" placeholder="Quantité ?" value="{{ $item['quantity'] }}" class="form-control mr-2" style="width: 80px">
+							<input type="number" min=1 max="{{ $item['stock'] }}" name="quantity" placeholder="Quantité ?" value="{{ $item['quantity'] }}" class="form-control mr-2" style="width: 80px">
 							<input type="submit" class="btn btn-primary" value="Actualiser" />
 						</form>
 					</td>
@@ -71,21 +71,27 @@ include('../functions.php');
 	<a class="btn btn-secondary" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier">Vider le
 		panier</a>
 
-	@else
-	<div class="alert alert-info">Aucun produit au panier</div>
-	@endif
-
 
 	<!-- connexion si non authentifié / validation -->
 	@php $user = auth()->user() @endphp
 
 	@if(isset($user->id))
-	<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
 
+	@unless($total == 0)
+	<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
+	@endif
+	
 	@else
 	<a class="btn btn-danger" href="{{ route('login') }}">Se connecter</a>
 
 	@endif
+
+
+
+	@else
+	<div class="alert alert-info">Aucun produit au panier</div>
+	@endif
+
 
 </div>
 
