@@ -89,6 +89,10 @@
                         @endphp
                         <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
 
+                        @auth
+                            <a href="{{ route('favorites.index') }}">Mes favoris</a>
+                        @endauth
+
             </div>
         </div>
 
@@ -112,6 +116,7 @@
                         </li>
                         @endforeach
                         @endif
+
                         @if(isset($promotions))
                         @foreach($promotions as $promotion)
                         <li>
@@ -119,6 +124,11 @@
                         </li>
                         @endforeach
                         @endif
+
+                        <li>
+                            <a href="{{ route('product.index') }}">Tous les produits</a>
+                        </li>
+
                         @admin
                         <a href="{{route('admin.index')}}">administration</a>
                         @endadmin
