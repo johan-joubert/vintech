@@ -21,6 +21,7 @@ class CartSessionRepository implements CartInterfaceRepository {
             'price' => $product->price, 
             'image' => $product->image,
             'stock' => $product->stock,
+            'weight' => $product->weight,
             'quantity' => $quantity, 
         ];
 

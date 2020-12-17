@@ -131,12 +131,17 @@ class ProductController extends Controller
     
     public function search(Request $request) {
         $search = $request->input('search');
-        $products = DB::table('products')
+
+            $products = DB::table('products')  // gamme concernée
             ->where('products.name', 'like', "%$search%")
-            ->select('products.*', 'products.name')
+            ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
+            ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
+            ->select('products.*', 'pp.discount', 'promotions.start_date', 'promotions.end_date', 'promotions.name as promotion_name') // champs souhaités
+            ->orderBy('products.name', 'asc')
             ->get();
+    
         
-        return view('search.searchPage', ['products' => $products]);
+        return view('search.searchPage', ['products' => $products, 'search' => $search]);
     }
 
 }

@@ -40,4 +40,8 @@ function getVariables () {
     return [$products_navBar, $ranges_navBar, $promotions_navBar];
 }
 
+function calculmagiqueoulala () {
+    
+}
+
 ?>

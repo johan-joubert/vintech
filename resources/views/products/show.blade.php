@@ -36,9 +36,10 @@
                     <?php
 
                     use App\Models\User;
-
+                    if(auth()->user()) {
                     $user = User::find(auth()->user()->id);
                     echo (auth()->user()->isLiked($product)) ? 'Retirer des favoris' : 'Ajouter aux favoris';
+                    }
                     ?>
                 </button>
 

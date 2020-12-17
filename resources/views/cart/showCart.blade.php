@@ -2,6 +2,7 @@
 
 @section("content")
 
+
 <div class="container">
 
 	@if (session()->has("cart"))
