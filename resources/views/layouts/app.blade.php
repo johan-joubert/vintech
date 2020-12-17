@@ -1,14 +1,3 @@
-@php
-
-$variables = getVariables();
-
-$products_navBar = $variables[0];
-$ranges_navBar = $variables[1];
-$promotions_navBar = $variables[2];
-
-
-
-@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 

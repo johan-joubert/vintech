@@ -19,5 +19,7 @@ class RangesSeeder extends Seeder
             DB::table('ranges')->insert(['range' => 'Audio']);
 
             DB::table('ranges')->insert(['range' => 'Vidéo']);
+
+            DB::table('ranges')->insert(['range' => 'Informatique']);
     }
 }

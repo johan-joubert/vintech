@@ -19,7 +19,7 @@ use App\Models\User;
 |
 */
 
-
+Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -104,8 +104,6 @@ Route::resource('orders', App\Http\Controllers\OrderController::class);
 Route::resource('confirm_cart', App\Http\Controllers\ConfirmCartController::class);
 
 Route::post('confirm_cart', [App\Http\Controllers\ConfirmCartController::class, 'deliveryChoice'])->name('delivery.choice');
-
-Auth::routes();
 
 //review -by jo-
 Route::resource('product/show', App\Http\Controllers\ReviewController::class);

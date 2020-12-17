@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @php
 include('../functions.php');
 $variables = getVariables();

@@ -9,7 +9,6 @@ $promotions_navBar = $variables[2];
 
 @endphp
 
-
 @section('content')
 
 <div class="container">
