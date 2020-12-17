@@ -43,5 +43,9 @@ class HomeController extends Controller
     
     }
 
+    public function showHistory(){
+        
+       return view('history'); 
+    }
     
 }
