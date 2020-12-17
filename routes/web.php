@@ -24,6 +24,8 @@ use App\Models\User;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 //admin's route ressource range,product,promotion -by jo-
 Route::resource('/admin/range', App\Http\Controllers\RangeController::class);
@@ -112,5 +114,9 @@ Route::resource('product/show', App\Http\Controllers\ReviewController::class);
 
 //route searchBar
 Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('product.search');
+
 // FAVORITES / by Flo
 Route::resource('/favorites', App\Http\Controllers\FavoriteController::class);
+
+// History / by Flo
+Route::get('/history', [App\Http\Controllers\HomeController::class, 'showHistory'])->name('history');

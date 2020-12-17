@@ -129,6 +129,10 @@
                             <a href="{{ route('product.index') }}">Tous les produits</a>
                         </li>
 
+                        <li>
+                            <a href="{{ route('history') }}">Qui sommes nous?</a>
+                        </li>
+
                         @admin
                         <a href="{{route('admin.index')}}">administration</a>
                         @endadmin
