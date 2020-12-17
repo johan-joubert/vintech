@@ -52,7 +52,6 @@
 
                                 foreach($product->reviews as $review) {
 
-
                                 $moyenneRate += $review->rate;
 
                                 }

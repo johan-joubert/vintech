@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->string('stock');
             $table->float('weight');
+            $table->float('average_rates');
             $table->timestamps();
         });
     }

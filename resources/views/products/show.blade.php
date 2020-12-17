@@ -117,8 +117,8 @@
 
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Avis</label>
-            <input type="text" name="comment" class="form-control" id="exampleInputPassword1">
+            <label for="comment" class="form-label">Avis</label>
+            <input type="text" name="comment" class="form-control" id="comment">
         </div>
         <input type="hidden" value="{{$product->id}}" name="productId">
         <button type="submit" class="btn btn-primary">Submit</button>

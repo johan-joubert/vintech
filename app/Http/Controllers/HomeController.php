@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\Promotion;
 use App\Models\Range;
 use App\Models\User;
+use App\Models\Review;
 use Illuminate\Support\Facades\DB;
 
 
@@ -17,7 +18,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    
 
     /**
      * Show the application dashboard.
@@ -29,29 +29,24 @@ class HomeController extends Controller
         $products = Product::all();
         $promotions = Promotion::all();
         $ranges = Range::all();
-        $users = User::all();
         $date = date('Y-m-d');
 
-        $currentPromo = DB::table('promotions')
-            
-            ->where('promotions.start_date', '<=', $date)
-            ->where('promotions.end_date', '>=', $date)
-            ->join('promotion_products', 'promotion_products.promotion_id', '=', 'promotions.id')
-            ->join('products', 'products.id', '=', 'promotion_products.product_id')
-            ->orderBy('products.name', 'asc')
-            ->select('products.*', 'promotion_products.discount', 'promotions.name as promoName', 'promotions.start_date', 'promotions.end_date')
-            ->limit(3)
-            ->get();
+        //promo du moment
+        $currentPromo = Promotion::where('promotions.start_date', '<=', $date)->where('promotions.end_date', '>=', $date)->get();
+        $currentPromo->load('products.reviews');
+
+
 
         $topRatedProducts = DB::table('products')
         ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
         ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
         ->select('products.*', 'pp.discount', 'promotions.start_date', 'promotions.end_date', 'promotions.name as promotion_name') // champs souhaités
-        ->orderBy('products.name', 'asc')
-        ->limit(9)
+        ->orderBy('products.average_rates', 'desc')
+        ->limit(3)
         ->get();
 
-        return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'users' => $users, 'currentPromo' => $currentPromo, 'date' => $date, 'topRatedProducts' => $topRatedProducts]);
+        return view('home', ['products' => $products, 'promotions' => $promotions, 'ranges' => $ranges, 'currentPromo' => $currentPromo, 'date' => $date, 'topRatedProducts' => $topRatedProducts]);
+    
     }
 
     

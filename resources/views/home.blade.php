@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-
     <div class="row justify-content-center">
         <h1>ACCUEIL</h1>
     </div>
@@ -23,18 +22,18 @@
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                @foreach($currentPromo as $product)
+                @foreach($currentPromo[0]->products as $product)
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="col mb-3">
                         <div class="card shadow-sm">
-                            @php
-                            $stock = $product->stock
-                            @endphp
-                            @if($product->stock > 5)
+                                @php
+                                $stock = $product->stock
+                                @endphp
+                                @if($stock > 5)
 
-                            <p><i class="fas fa-circle green"></i> en stock</p>
+                                <p><i class="fas fa-circle green"></i> en stock</p>
 
-                            @elseif($stock <= 5 && $stock> 0)
+                                @elseif($stock <= 5 && $stock> 0)
 
                                 <p><i class="fas fa-circle orange"></i> plus que {{ $stock }} disponible !</p>
 
@@ -43,6 +42,10 @@
                                 <p><i class="fas fa-circle red"></i> rupture</p>
 
                                 @endif
+
+                                @php
+                                echo $product->average_rates;
+                                @endphp
 
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
@@ -53,10 +56,10 @@
                                     <div class="d-flex justify-content-between align-items-center">
 
                                         <?php
-                                        echo "<p class=\"font-weight-bold\">- $product->discount %</p>
+                                        echo "<p class=\"font-weight-bold\">-". $product->pivot->discount." %</p>
                                             <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', '')  . "€</del></small>";
 
-                                        $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
                                         echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
                                         ?>
 
@@ -104,6 +107,11 @@
 
                                 @endif
 
+                                @php
+                                echo $product->average_rates;
+                                @endphp
+
+
 
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
@@ -116,6 +124,7 @@
 
                                 <div class="card-body">
                                     <p class="card-text">{{$product->name}}</p>
+
                                     <p class="card-text">{{$product->short_description}}</p>
 
                                     <div class="d-flex justify-content-between align-items-center">

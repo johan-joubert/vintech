@@ -49,18 +49,40 @@ class ReviewController extends Controller
     {
         $request->validate([
             'range' => '',
-            'comment' => 'required|min:5',
-            
+            'comment' => 'required|min:5',          
         ]);
 
-        
         Review::create([
             'user_id' => auth()->user()->id,
             'product_id' => $request->input('productId'),
             'comment' => $request->input('comment'),
             'rate' => $request->input('rate'),
-
         ]);
+
+        // récupération du produit noté
+        $productId = $request->input('productId');
+        $product = Product::find($productId);
+
+        //si le produit est déjà noté
+        if(isset($product->average_rates)) {
+
+            $currentRate = $product->average_rates;
+            $newRate = $request->input('rate');
+
+            $totalRate = count(Review::where('product_id', $productId)->get());
+
+            $newAverage = ($currentRate * ($totalRate-1) + $newRate) / ($totalRate);
+
+            $product->average_rates = $newAverage;
+
+            $product->update();
+
+        } 
+        //si le produit n'a pas de note
+        else {
+            $product->average_rates = $request->input('rate');
+            $product->update();
+        }
 
         return back();
 
