@@ -9,23 +9,28 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function users() {
-       return $this->belongsToMany('App\Models\User');
+    public function likes()
+    {
+        return $this->belongsToMany('App\Models\User', 'favorites');
     }
 
-    public function ranges() {
+    public function ranges()
+    {
         return $this->belongsTo('App\Models\Range');
     }
 
-    public function orders() {
+    public function orders()
+    {
         return $this->belongsToMany('App\Models\Order', 'order_products')->withPivot('quantity');
     }
 
-    public function promotions() {
+    public function promotions()
+    {
         return $this->belongsToMany('App\Models\Promotion', 'promotion_products')->withPivot('discount');
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 

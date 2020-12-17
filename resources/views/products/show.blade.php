@@ -40,6 +40,21 @@
             ?>
             @endif
 
+            <form method="POST" action="{{route('favorites.store')}}">
+                @csrf
+                <input type="hidden" value="{{ $product->id }}" name="productId">
+                <button type="submit">
+                    <?php
+
+                    use App\Models\User;
+
+                    $user = User::find(auth()->user()->id);
+                    echo (auth()->user()->isLiked($product)) ? 'Retirer des favoris' : 'Ajouter aux favoris';
+                    ?>
+                </button>
+
+            </form>
+
             <?php
 
             $date = date('Y-m-d');
@@ -69,15 +84,15 @@
 
             @if($stock > 0)
 
-                <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
-                    {{ csrf_field() }}
-                    <input type="number" min=1 max="{{$product->stock}}" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
-                    <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
-                </form>
+            <form method="POST" action="{{ route('cart.add', $product->id) }}" class="form-inline d-inline-block">
+                {{ csrf_field() }}
+                <input type="number" min=1 max="{{$product->stock}}" name="quantity" placeholder="Quantité ?" class="form-control mr-2" value="{{ isset(session('cart')[$product->id]) ? session('cart')[$product->id]['quantity'] : null }}">
+                <button type="submit" class="btn btn-warning">+ Ajouter au panier</button>
+            </form>
 
             @elseif($stock == 0)
 
-                <p>oups rupture</p>
+            <p>oups rupture</p>
 
             @endif
 

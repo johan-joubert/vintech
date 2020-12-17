@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Product;
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -68,11 +70,6 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Role');
     }
 
-    public function products()
-    {
-        return $this->belongsToMany('App\Models\Product');
-    }
-
     public function reviews()
     {
         return $this->hasMany('App\Models\Review');
@@ -81,5 +78,37 @@ class User extends Authenticatable
     public function getAdminAttribute()
     {
         return $this->roles_id === 2;
+    }
+
+    // -------- FAVORITES -------------------------------------------------------------------
+    public function likes()
+    {
+        return $this->belongsToMany('App\Models\Product', 'favorites');
+    }
+
+    public function like(Product $product)
+    {
+        return $this->likes()->attach($product->id);
+    }
+
+    public function dislike(Product $product)
+    {
+        return $this->likes()->detach($product); 
+    }
+
+    public function isLiked(Product $product)
+    {
+        return $this->likes()->where('product_id', $product->id)->exists();
+    }
+
+    public function toggleLike(Product $product)
+    {
+        if ($this->isLiked($product))
+        {
+            return $this->dislike($product);
+
+        } else {
+            return $this->like($product);
+        }
     }
 }

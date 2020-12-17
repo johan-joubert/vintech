@@ -112,3 +112,5 @@ Route::resource('product/show', App\Http\Controllers\ReviewController::class);
 
 //route searchBar
 Route::get('/search', [App\Http\Controllers\ProductController::class, 'search'])->name('product.search');
+// FAVORITES / by Flo
+Route::resource('/favorites', App\Http\Controllers\FavoriteController::class);
