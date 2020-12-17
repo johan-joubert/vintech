@@ -9,6 +9,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
                 @foreach($products as $product)
+
                 <a href="{{ route('product.show', $product->id) }}">
                 <div class="col mb-3">
                     <div class="card shadow-sm">

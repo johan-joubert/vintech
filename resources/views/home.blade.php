@@ -30,15 +30,15 @@
                             @php
                             $stock = $product->stock
                             @endphp
-                            @if($stock > 5)
+                            @if($product->stock > 5)
 
                             <p><i class="fas fa-circle green"></i> en stock</p>
 
                             @elseif($stock <= 5 && $stock> 0)
 
-                                <p><i class="fas fa-circle orange"></i> en stock</p>
+                                <p><i class="fas fa-circle orange"></i> plus que {{ $stock }} disponible !</p>
 
-                                @elseif($stock == 0)
+                                @elseif($stock <= 0)
 
                                 <p><i class="fas fa-circle red"></i> rupture</p>
 

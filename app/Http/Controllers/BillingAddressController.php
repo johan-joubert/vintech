@@ -48,9 +48,9 @@ class BillingAddressController extends Controller
                 'user_id' => $request->input('user_id')
             ]);
 
-            return redirect()->back()->with('message', 'Adresse de facturation mise à jour !');
+            return redirect()->route('confirm_cart.show', auth()->user()->id)->with('message', 'Adresse de facturation mise à jour !');
         } else {
-            return redirect()->back()->withErrors('password_error', 'Mot de passe incorrect !');
+            return redirect()->route('confirm_cart.show', auth()->user()->id)->withErrors('password_error', 'Mot de passe incorrect !');
         }
     }
 
@@ -103,9 +103,9 @@ class BillingAddressController extends Controller
                 'city' => $request->input('city')
             ]);
 
-            return redirect()->back()->with('message', 'Adresse de facturation mise à jour !');
+            return redirect()->route('confirm_cart.show', auth()->user()->id)->with('message', 'Adresse de facturation mise à jour !');
         } else {
-            return redirect()->back()->withErrors('password_error', 'Mot de passe incorrect !');
+            return redirect()->route('confirm_cart.show', auth()->user()->id)->withErrors('password_error', 'Mot de passe incorrect !');
         }
     }
 

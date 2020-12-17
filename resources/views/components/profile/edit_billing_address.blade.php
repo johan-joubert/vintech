@@ -17,7 +17,7 @@
                 <form method="POST" action="{{ route('billing-address.update', $user->billingAddress) }}" name="editBillingAddress">
                     @csrf
                     @method('PATCH')
-
+    
                     <div class="form-group">
 
                         <label for="address">

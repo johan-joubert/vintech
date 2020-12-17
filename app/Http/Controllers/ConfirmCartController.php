@@ -51,7 +51,7 @@ class ConfirmCartController extends Controller
             $newStock->stock -= $product['quantity'];
 
             $newStock->save();
-        }
+            }
 
         if(isset($request->order_amount)) {
             session()->forget('cart');
