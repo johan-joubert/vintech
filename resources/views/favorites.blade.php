@@ -12,51 +12,51 @@
             @foreach($user->likes as $product)
 
             <div class="col mb-3">
-            <a href="{{ route('product.show', $product->id) }}">
+                <a href="{{ route('product.show', $product->id) }}">
 
-                <div class="card shadow-sm">
-                    <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                    <div class="card shadow-sm">
+                        <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                    @if(($product->promotions[0]->name) && ($product->promotions[0]->name!== null))
-                    <h2 class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</h2>
-                    <?php
-                        echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->promotions[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->promotions[0]->end_date), 'd/m/y') . ".</p>";
-                    ?>
-                    @endif
+                        @if(isset($product->promotions[0]->name) && ($product->promotions[0]->name!== null))
+                        <h2 class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</h2>
+                        <?php
+                            echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->promotions[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->promotions[0]->end_date), 'd/m/y') . ".</p>";
+                        ?>
+                        @endif
 
-                    <div class="card-body">
-                        <h3 class="card-text">{{$product->name}}</h3>
-                        <p class="card-text">{{$product->short_description}}</p>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="card-body">
+                        
+                            <h3 class="card-text">{{$product->name}}</h3>
+                            <p class="card-text">{{$product->short_description}}</p>
 
-                            <?php
-                            dd($product->promotions[0]->name);
-                            $date=date('Y-m-d');
+                            <div class="d-flex justify-content-between align-items-center">
+                                <?php
+                                    $date=date('Y-m-d');
 
-                            if (isset($product->promotions[0]->name) && ($date <= $product->promotions[0]->end_date)) {
+                                    if (isset($product->promotions[0]->name) && ($date <= $product->promotions[0]->end_date)) {
 
-                                if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
+                                        if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
 
-                                    echo "<p class=\"font-weight-bold\">-". $product->promotions[0]->pivot->discount ."%</p>
-                                    <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', 0)  . "€</del></small>";
+                                            echo "<p class=\"font-weight-bold\">-". $product->promotions[0]->pivot->discount ."%</p>
+                                            <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
-                                    $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
-                                    echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
-                                
-                                }else {
-                                    echo "<p class=\"font-weight-bold\">- ".$product->promotions[0]->pivot->discount." %</p>
-                                        <p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
-                                }
-                            } else {
-                                echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
-                            }
-                            ?>
-
+                                            $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
+                                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
+                                        
+                                        }else {
+                                            echo "<p class=\"font-weight-bold\">- ".$product->promotions[0]->pivot->discount." %</p>
+                                                <p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                                        }
+                                    } else {
+                                        echo "<p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                                    }
+                                ?>
+                            </div>
+                            
                         </div>
                     </div>
-                </div>
-                </a>
 
+                </a>
             </div>
 
             @endforeach

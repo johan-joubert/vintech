@@ -48,17 +48,17 @@
                                 if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
 
                                     echo "<p class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</p>
-                                            <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', 0)  . "€</del></small>";
+                                            <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
                                     $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
-                                    echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', 0)  . "€</p>";
+                                    echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
                                 } else {
 
                                     echo "<p class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</p>
-                                            <p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
+                                            <p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
                                 }
                             } else {
-                                echo "<p>" .  number_format($product->price, 2, ',', 0)  . "€</p>";
+                                echo "<p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
                             }
                             ?>
                         </div>
