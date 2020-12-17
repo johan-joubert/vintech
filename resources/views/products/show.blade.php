@@ -14,18 +14,7 @@
         <div class="col-md-4">
             <h3 class="card-text">{{$product->name}}</h3>
             @php
-            if(count($product->reviews) > 0) {
-
-            $moyenneRate = 0;
-
-            foreach($product->reviews as $review) {
-
-
-            $moyenneRate += $review->rate;
-
-            }
-            echo "Moyenne produit : " .$moyenneRate / count($product->reviews);
-            }
+            echo $product->average_rates
             @endphp
             <p class="card-text">{{$product->short_description}}</p>
             <p class="card-text">{{$product->description}}</p>

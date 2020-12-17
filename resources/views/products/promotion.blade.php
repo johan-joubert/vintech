@@ -21,69 +21,55 @@
             <a href="{{ route('product.show', $product->id) }}">
                 <div class="col mb-3">
                     <div class="card shadow-sm">
-                            @php
-                            $stock = $product->stock
-                            @endphp
-                            @if($stock > 5)
+                        @php
+                        $stock = $product->stock
+                        @endphp
+                        @if($stock > 5)
 
-                                <p><i class="fas fa-circle green"></i> en stock</p>
+                        <p><i class="fas fa-circle green"></i> en stock</p>
 
-                            @elseif($stock <= 5 && $stock > 0) 
+                        @elseif($stock <= 5 && $stock> 0)
 
-                                <p><i class="fas fa-circle orange"></i> plus que {{ $stock }} disponible !</p>
+                            <p><i class="fas fa-circle orange"></i> plus que {{ $stock }} disponible !</p>
 
-                            @elseif($stock <= 0)
+                            @elseif($stock <= 0) <p><i class="fas fa-circle red"></i> rupture</p>
 
-                                <p><i class="fas fa-circle red"></i> rupture</p>
-
-                            @endif
+                                @endif
 
 
-                        <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                        <div class="card-body">
-                            <p class="card-text">{{$product->name}}</p>
-                            @php
-                            if(count($product->reviews) > 0) {
+                                <div class="card-body">
+                                    <p class="card-text">{{$product->name}}</p>
+                                    @php
+                                    echo $product->average_rates
+                                    @endphp
+                                    <p class="card-text">{{$product->short_description}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
 
-                            $moyenneRate = 0;
+                                        </div>
 
-                            foreach($product->reviews as $review) {
+                                        <?php
 
-
-                            $moyenneRate += $review->rate;
-
-                            }
-                            echo "Moyenne produit : " .$moyenneRate / count($product->reviews);
-                            }
-                            @endphp
-
-                            <p class="card-text">{{$product->short_description}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-
-                                </div>
-
-                                <?php
-
-                                $date = date('Y-m-d');
+                                        $date = date('Y-m-d');
 
 
-                                    if ($date >= $promo[0]->start_date && $date <= $promo[0]->end_date) {
+                                        if ($date >= $promo[0]->start_date && $date <= $promo[0]->end_date) {
 
-                                        echo "<p class=\"font-weight-bold\">-". $product->pivot->discount ." %</p>
+                                            echo "<p class=\"font-weight-bold\">-" . $product->pivot->discount . " %</p>
                                         <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
-                                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
-                                        echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
-                                    } else {
-                                        echo "<p class=\"font-weight-bold\">-". $product->pivot->discount ." %</p>
+                                            $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
+                                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
+                                        } else {
+                                            echo "<p class=\"font-weight-bold\">-" . $product->pivot->discount . " %</p>
                                         <p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
-                                    }
-                                ?>
+                                        }
+                                        ?>
 
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </a>
