@@ -29,8 +29,6 @@ class HomeController extends Controller
         $currentPromo = Promotion::where('promotions.start_date', '<=', $date)->where('promotions.end_date', '>=', $date)->get();
         $currentPromo->load('products.reviews');
 
-
-
         $topRatedProducts = DB::table('products')
         ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
         ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
