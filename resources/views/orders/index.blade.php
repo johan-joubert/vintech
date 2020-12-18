@@ -13,27 +13,29 @@ $promotions_navBar = $variables[2];
 @section('content')
 
 
-<div class="container">
+<div class="container mt-3">
 
     <div class="row">
 
         @foreach ($orders as $order)
 
-        <div class="col-md-4">
+        <div class="card col-md-4">
 
-            <h5>Commande n°{{ $order->order_number }}</h5>
+            <h5 class="mb-4">Commande n°{{ $order->order_number }}</h5>
 
-            <p>
+            <p class="text-blue">
                 <b>Date de commande :</b> {{ $order->created_at }}
             </p>
 
-            <p>
+            <p class="text-blue">
                 <b>Montant :</b> {{ $order->order_amount }} €
             </p>
 
-            <a href="{{ route('orders.show', $order) }}">
-                <button type="button" class="btn btn-primary">Voir détails</button>
-            </a>
+            <div class="row text-right"> 
+                <a href="{{ route('orders.show', $order) }}">
+                <button type="button" class="btn btn-red mb-2 margin-15">Voir détails</button>
+                </a>
+            </div>
 
         </div>
 

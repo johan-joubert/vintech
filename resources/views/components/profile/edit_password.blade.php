@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPassword">
-    Modifier le mot de passe
+<button type="button" class="btn text-blue margin-15" data-bs-toggle="modal" data-bs-target="#editPassword">
+    <i class="fas fa-key fa-2x"></i>
 </button>
 
 <!-- Modal -->

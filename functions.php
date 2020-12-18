@@ -40,8 +40,14 @@ function getVariables () {
     return [$products_navBar, $ranges_navBar, $promotions_navBar];
 }
 
-function calculmagiqueoulala () {
-    
-}
 
+function shippingFees ($total, $shippingFees) {
+    if ($total >= 150) {
+        $oldShippingFees = $shippingFees;
+        $shippingFees = 0;
+        echo '<del>' . $oldShippingFees . ' €</del> -> ' . $shippingFees . ' €';
+    } else {
+        echo $shippingFees;
+    }
+}
 ?>

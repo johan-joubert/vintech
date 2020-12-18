@@ -17,32 +17,43 @@ $promotions_navBar = $variables[2];
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
 
-            <h5>Commande n°{{ $order->order_number }}</h5>
+            <h3 class="mb-4 text-red">
+                <b>Commande n°{{ $order->order_number }}</b>
+            </h3>
 
-            <p>
-                <b>Date de commande :</b> {{ $order->created_at }}
-            </p>
+            <div class="card">
 
-            <p>
-                <b>Montant :</b> {{ $order->order_amount }} €
-            </p>
+                <div class="card-header d-flex text-blue">
+                    <p class="mr-5">
+                        <b>Date de commande :</b>
+                        {{ $order->created_at }}
+                    </p>
 
+                    <p>
+                        <b>Montant :</b>
+                        {{ $order->order_amount }} €
+                    </p>
+                </div>
 
-            <h5 class="mt-5">Détails</h5>
+                <div class="card-body">
 
-            @foreach($order->products as $product)
+                    @foreach($order->products as $product)
 
-            <p>
-                {{ $product->name}}<br>
-                <a href="">
-                    {{ $product->image}}<br>
-                </a>
-                Quantité commandée : {{ $product->pivot->quantity }}
-            </p>
+                    <div class="col-md-4">
+                        <p>
+                            {{ $product->name}}<br>
+                            <a href="{{ route('product.show', $product->id) }}">
+                                <img alt="image du produit" src="{{ asset("images/$product->image") }}" width="200"><br>
+                            </a>
+                            Quantité commandée : {{ $product->pivot->quantity }}
+                        </p>
+                    </div>
 
-            @endforeach
+                    @endforeach
+                </div>
+            </div>
 
         </div>
 

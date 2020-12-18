@@ -15,21 +15,33 @@ $promotions_navBar = $variables[2];
 <div class="container">
 
     <div class="row mt-5">
-        <div class="col-md-12">
-        
-            <h1>
-                {{ $user->first_name }} {{ $user->last_name }}
-            </h1>
 
-            <p class="text-muted">
-                {{ $user->email }}
+        <div class="col-md-3 text-right text-red">
+            <i class="fas fa-user-astronaut fa-7x"></i>
+        </div>
+
+        <div class="col-md-9">
+
+            <div class="row">
+                <div class="col-md-12 d-flex">
+                    <h1>
+                        {{ $user->first_name }} {{ $user->last_name }}
+                    </h1>
+                    @if (auth()->user()->is($user))
+                    @include('components.profile.edit_profile')
+                    @include('components.profile.edit_password')
+                    @endif
+                </div>
+            </div>
+
+            <p>
+                <span class="text-muted">
+                    {{ $user->email }}<br>
+                </span>
+                Vous êtes parmi nous depuis {{ $user->created_at->diffForHumans()}}
             </p>
 
 
-            @if (auth()->user()->is($user))
-            @include('components.profile.edit_profile')
-            @include('components.profile.edit_password')
-            @endif
 
         </div>
     </div>
@@ -40,7 +52,7 @@ $promotions_navBar = $variables[2];
 <div class="container">
     <div class="row mt-5">
 
-        <div class="col-md-12">
+        <div class="col-md-12 mt-5">
             <h2>Vos commandes</h2>
         </div>
 
@@ -48,14 +60,16 @@ $promotions_navBar = $variables[2];
 
     @if (count($user->orders)>0)
     <a href="{{ route('orders.index') }}">
-        <button type="button" class="btn btn-primary">
-            Afficher les commandes
+        <button type="button" class="btn btn-red mt-2">
+            Afficher mes commandes
         </button>
     </a>
 
     @else
     <p>Vous n'avez pas encore passé de commande</p>
     @endif
+
+
 
 </div>
 

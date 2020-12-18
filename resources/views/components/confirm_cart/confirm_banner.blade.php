@@ -18,6 +18,8 @@
                     <span class="text-muted">
                         TVA (20%): @php echo $tvaCost @endphp €<br>
 
+                        Frais de port : {{ shippingFees($total, $shippingFees) }}<br>
+
                         @if(isset($shippingCost))
     
                         Livraison : {{ $shippingCost }} €<br>
@@ -25,11 +27,11 @@
                         @endif
 
                     </span>
+                    
                     <b>
                         @if(isset($shippingCost))
-                        @php $finalTotal = $total + $shippingCost + $tvaCost; @endphp
+                        @php $finalTotal = $total + $tvaCost + $shippingFees + $shippingCost; @endphp
                         Montant TTC : {{ $finalTotal }} €</b>
-
                 </p>
 
                 <form method="GET" action="{{ route('confirm_cart.create') }}">
