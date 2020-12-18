@@ -10920,3 +10920,69 @@ a {
   color: black !important;
 }
 
+#searchBar {
+  border-radius: 20px;
+}
+
+.firstStep {
+  padding: 20px;
+}
+
+.infosFooter {
+  background-color: #f05454;
+  color: #fff;
+  padding: 8px;
+}
+
+.bottomFooter {
+  padding: 20px;
+}
+
+span {
+  color: #f05454;
+  font-weight: bold;
+}
+
+.navbar {
+  background-color: #161616 !important;
+  margin: 0;
+  padding: 0;
+}
+
+.allProducts {
+  color: #fff !important;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown {
+  background-color: red;
+  padding: 10px;
+  margin: 30px 20px;
+  margin: 0;
+}
+
+.dropdown-toggle {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-collapse {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 10px 30px;
+  padding: 2px;
+}
+
+.navbar-expand-md {
+  padding: 0px !important;
+}
+

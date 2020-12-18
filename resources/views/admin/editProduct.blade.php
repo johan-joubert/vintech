@@ -33,7 +33,7 @@ $promotions_navBar = $variables[2];
         <tbody>
             @foreach($products as $product)
             <tr>
-                <th >{{$product->name}}</th>
+                <th>{{$product->name}}</th>
                 <td>{{$product->short_description}}</td>
                 <td>{{$product->price}}</td>
                 <td>
@@ -127,6 +127,9 @@ $promotions_navBar = $variables[2];
 </div>
 
 
+@section('footer')
+@include('layouts.footer')
+@endsection
 
 
 

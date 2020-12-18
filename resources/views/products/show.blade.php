@@ -147,6 +147,9 @@ $promotions_navBar = $variables[2];
 
 @endforeach
 
+@section('footer')
+    @include('layouts.footer')
+    @endsection
 
 
 @endsection

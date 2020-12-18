@@ -81,7 +81,7 @@ include('../functions.php');
 	@unless($total == 0)
 	<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
 	@endif
-	
+
 	@else
 	<a class="btn btn-danger" href="{{ route('login') }}">Se connecter</a>
 
@@ -96,5 +96,8 @@ include('../functions.php');
 
 </div>
 
+@section('footer')
+@include('layouts.footer')
+@endsection
 
 @endsection

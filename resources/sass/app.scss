@@ -8,3 +8,51 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'home.scss';
+
+@import 'search.scss';
+
+@import 'footer.scss';
+
+
+.navbar {
+    background-color: rgb(22, 22, 22) !important;
+    margin: 0;
+    padding: 0;
+}
+
+.allProducts {
+    color: #fff !important;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown {
+    background-color: red;
+    padding: 10px;
+    margin: 30px 20px;
+    margin: 0;
+}
+
+.dropdown-toggle {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-collapse {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 10px 30px;
+    padding: 2px;
+}
+
+.navbar-expand-md {
+    padding: 0px !important;
+}

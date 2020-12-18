@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Range;
 use App\Models\Promotion;
+use App\Models\User;
 
 
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class AdminController extends Controller
         $products = Product::all();
         $ranges = Range::all();
         $promotions = Promotion::all();
+        $users = User::all();
         
-        return view('admin.home_admin', ['products' => $products, 'ranges' => $ranges, 'promotions' => $promotions]);
+        return view('admin.home_admin', ['products' => $products, 'ranges' => $ranges, 'promotions' => $promotions, 'users' => $users]);
     }
 
     /**
