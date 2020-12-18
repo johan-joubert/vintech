@@ -52,15 +52,39 @@ $promotions_navBar = $variables[2];
             <div class="col-md-4">
                 @include('search.search')
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2 text-right">
+                @php
+                $qteTotal = 0;
+
+                if(session("cart")) {
+                foreach (session("cart") as $key => $item) {
+
+                $qteTotal += $item['quantity'];
+
+                }
+                }
+
+                @endphp
+                <a class="text-right" href="{{ route('cart.show') }}"><i class="fas fa-shopping-basket"></i><span id="totalCart">@php echo $qteTotal @endphp</span></a>
+
+
+            </div>
+
+            <div class="col-md-2 text-center">
+                @auth
+                <a class="align-bottom" href="{{ route('favorites.index') }}"><i class="far fa-heart"></i></a>
+                @endauth
+            </div>
+
+            <div class="col-md-2 nameUser">
                 @guest
                 @if (Route::has('login'))
                 <a class="nav-link" href="{{ route('login') }}"><i class="far fa-user"></i></a>
                 @endif
 
                 @else
-                <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <div class="nav-item dropdown nameUser ">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle nameUser" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                     </a>
 
@@ -83,26 +107,6 @@ $promotions_navBar = $variables[2];
                 @endguest
 
             </div>
-            <div class="col-md-2">
-                @php
-                $qteTotal = 0;
-
-                if(session("cart")) {
-                foreach (session("cart") as $key => $item) {
-
-                $qteTotal += $item['quantity'];
-
-                }
-                }
-
-                @endphp
-                <a href="{{ route('cart.show') }}">Panier @php echo $qteTotal @endphp</a>
-
-                @auth
-                <a href="{{ route('favorites.index') }}">Mes favoris</a>
-                @endauth
-
-            </div>
         </div>
 
 
@@ -113,9 +117,9 @@ $promotions_navBar = $variables[2];
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto align-middle">
+                    <ul class="navbar-nav mr-auto align-middle justify-content-between">
                         <li class="nav-item dropdown align-bottom">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Catégories
@@ -129,25 +133,20 @@ $promotions_navBar = $variables[2];
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown align-bottom">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Promotion
-                            </a>
-                            <ul class="dropdown-menu align-bottom" aria-labelledby="navbarDropdown">
-                                @foreach($promotions_navBar as $promotion)
-                                <li class="align-bottom">
-                                    <a class="promotions align-bottom" href="{{ route('show.promotion', $promotion->id) }}">{{ $promotion->name }}</a>
-                                </li>
-                                @endforeach
-                            </ul>
+                        @foreach($promotions_navBar as $promotion)
+                        <li class="align-center">
+                            <a class="promotions align-middle" href="{{ route('show.promotion', $promotion->id) }}">{{ $promotion->name }}</a>
                         </li>
+                        @endforeach
 
                         <li class="align-center">
                             <a class="allProducts align-middle" href="{{ route('product.index') }}">Tous les produits</a>
                         </li>
 
                         @admin
-                        <a href="{{route('admin.index')}}">administration</a>
+                        <div class="align-center">
+                            <a class="allProducts align-middle" href="{{route('admin.index')}}">administration</a>
+                        </div>
                         @endadmin
 
                         <!--affichage nombre d'article dans le panier -->
@@ -197,7 +196,7 @@ $promotions_navBar = $variables[2];
 
         </main>
     </div>
-        @yield('footer')
+    @yield('footer')
 </body>
 
 </html>
