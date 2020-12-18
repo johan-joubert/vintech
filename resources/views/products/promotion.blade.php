@@ -14,11 +14,11 @@ $promotions_navBar = $variables[2];
 <div class="album py-5 bg-light">
     <div class="container">
 
-        <div class="row mb-5 text-center">
-            <h1 class="mt-2 font-weight-bold">{{$promo[0]->promoName}}</h1>
+        <div class="row text-center promo-name">
+            <h1 class="font-weight-bold">{{$promo[0]->name}}</h1>
         </div>
 
-        <div class="row mb-5 text-center">
+        <div class="row mb-2 text-center promo-name">
             <?php
             echo "<p>Du " . date_format(new DateTime($promo[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($promo[0]->end_date), 'd/m/y') . ".</p>";
             ?>
@@ -46,47 +46,43 @@ $promotions_navBar = $variables[2];
                                 @endif
 
 
-                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                                <img alt="image du produit" class="w-50" src="{{ asset("images/$product->image") }}">
 
                                 <div class="card-body">
-                                    <p class="card-text">{{$product->name}}</p>
-                                    @php
-                                    echo $product->average_rates
-                                    @endphp
+                                    <p class="card-text product-name">{{$product->name}}</p>
                                     <p class="card-text">{{$product->short_description}}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
+                                </div>
 
-                                        </div>
+                                <div class="d-flex justify-content-between align-items-center">
 
-                                        <?php
+                                    <?php
 
-                                        $date = date('Y-m-d');
+                                    $date = date('Y-m-d');
 
 
-                                        if ($date >= $promo[0]->start_date && $date <= $promo[0]->end_date) {
+                                    if ($date >= $promo[0]->start_date && $date <= $promo[0]->end_date) {
 
-                                            echo "<p class=\"font-weight-bold\">-" . $product->pivot->discount . " %</p>
-                                        <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
+                                        echo "<p class=\"font-weight-bold discount\">-" . $product->pivot->discount . " %</p>
+                                    <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
-                                            $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
-                                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
-                                        } else {
-                                            echo "<p class=\"font-weight-bold\">-" . $product->pivot->discount . " %</p>
-                                        <p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
-                                        }
-                                        ?>
+                                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
+                                        echo "<p class=\"font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
+                                    } else {
+                                        echo "<p class=\"font-weight-bold discount\">-" . $product->pivot->discount . " %</p>
+                                    <p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                                    }
+                                    ?>
 
-                                    </div>
                                 </div>
                     </div>
                 </div>
-            </a>
-            @endforeach
-
         </div>
+        </a>
+        @endforeach
 
     </div>
+
+</div>
 </div>
 
 @endsection
