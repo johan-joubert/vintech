@@ -35,6 +35,9 @@ $promotions_navBar = $variables[2];
     <link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Plaster&display=swap" rel="stylesheet"> 
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -45,8 +48,8 @@ $promotions_navBar = $variables[2];
     <div id="app">
         <div class="row firstStep">
             <div class="col-md-2 text-left">
-                <a class="navbar-brand " href="{{ url('/') }}">
-                    {{ config('app.name', 'Vintech') }}
+                <a class="navbar-brand vintechLogo" href="{{ url('/') }}">
+                    VINTECH
                 </a>
             </div>
             <div class="col-md-4">
