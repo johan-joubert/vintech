@@ -10903,8 +10903,37 @@ a.text-dark:focus {
   }
 }
 
-.promo-album h1 {
-  color: #fff;
+.promo .product-infos {
+  background-color: #fff;
+  padding: 2px;
+}
+
+.name-section {
+  color: #30475e;
+}
+
+.promo-name {
+  color: #f05454;
+}
+
+.product-name {
+  color: #30475e;
+  font-size: 20px;
+}
+
+.discount {
+  color: #f05454;
+  font-size: 30px;
+}
+
+.price {
+  color: #30475e;
+  font-size: 20px;
+}
+
+.promo-price {
+  color: #30475e;
+  font-size: 20px;
 }
 
 .green {

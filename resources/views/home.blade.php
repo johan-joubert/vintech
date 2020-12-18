@@ -1,153 +1,149 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container promo">
 
-    <div class="row justify-content-center">
-        <h1>ACCUEIL</h1>
+    <div class="row text-center promo-name">
+        <h1 class="font-weight-bold">{{$currentPromo[0]->promoName}}</h1>
+
+        <?php
+        echo "<p>Du " . date_format(new DateTime($currentPromo[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($currentPromo[0]->end_date), 'd/m/y') . ".</p>";
+        ?>
     </div>
 
     <!----------------- CURRENT PROMO ---------------------------------------------------------------------------------------->
-    <div class="album py-5 bg-danger promo-album">
-        <div class="container">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></li>
+        </ol>
 
-            <div class="row mb-5 text-center">
-                <h1 class="mt-2 font-weight-bold">{{$currentPromo[0]->promoName}}</h1>
+        <div class="carousel-inner">
 
-                <?php
-                echo "<p>Du " . date_format(new DateTime($currentPromo[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($currentPromo[0]->end_date), 'd/m/y') . ".</p>";
-                ?>
-            </div>
+            @foreach($currentPromo as $product)
+            <div
+            @php 
+            $loop = $loop->iteration;
+            @endphp
+            @if($loop == 1)
+            class="carousel-item active"
+            @else
+            class="carousel-item"
+            @endif
+            data-bs-interval="10000">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-                @foreach($currentPromo as $product)
                 <a href="{{ route('product.show', $product->id) }}">
-                    <div class="col mb-3">
-                        <div class="card shadow-sm bg-light">
-                            @php
-                            $stock = $product->stock
-                            @endphp
-                            @if($stock > 5)
-
-                            <p><i class="fas fa-circle green"></i> en stock</p>
-
-                            @elseif($stock <= 5 && $stock> 0)
-
-                                <p><i class="fas fa-circle orange"></i> en stock</p>
-
-                                @elseif($stock == 0)
-
-                                <p><i class="fas fa-circle red"></i> rupture</p>
-
-                                @endif
-
-                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
-
-                                <div class="card-body">
-                                    <p class="card-text">{{$product->name}}</p>
-                                    <p class="card-text">{{$product->short_description}}</p>
-
-                                    <div class="d-flex justify-content-between align-items-center">
-
-                                        <?php
-                                        echo "<p class=\"font-weight-bold\">- $product->discount %</p>
-                                            <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', '')  . "€</del></small>";
-
-                                        $promoPrice = $product->price - ($product->price * ($product->discount / 100));
-                                        echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
-                                        ?>
-
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
+                    <img alt="image du produit" class="d-block m-auto w-50" src="{{ asset("images/$product->image") }}">
                 </a>
-                @endforeach
+                <div class="carousel-caption d-none d-md-block product-infos">
+                    <h2 class="font-weight-bold card-text product-name">{{$product->name}}</h2>
+                    <div class="row">
+                        <?php
 
+                        echo "<div class=\"col font-weight-bold discount\">- $product->discount %</div>
+                            <div class=\"col\"><small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small></div>";
+
+                        $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                        echo "<div class=\"col font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</div>";
+                        ?>
+                    </div>
+                </div>
             </div>
+            @endforeach
 
         </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleDark" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
     </div>
 
-    <!----------------- TOP RATED PRODUCTS ---------------------------------------------------------------------------------------->
-    <div class="album py-5">
-        <div class="container">
+</div>
 
-            <div class="row mb-5 text-center">
-                <h1 class="mt-2 font-weight-bold">Produits les mieux notés</h1>
-            </div>
+<!----------------- TOP RATED PRODUCTS ---------------------------------------------------------------------------------------->
+<div class="album py-5">
+    <div class="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row text-center">
+            <h1 class="mt-5 font-weight-bold name-section">Produits les mieux notés</h1>
+        </div>
 
-                @foreach($topRatedProducts as $product)
-                <a href="{{ route('product.show', $product->id) }}">
-                    <div class="col mb-3">
-                        <div class="card shadow-sm bg-light">
-                            @php
-                            $stock = $product->stock
-                            @endphp
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                            @if($stock > 5)
+            @foreach($topRatedProducts as $product)
+            <a href="{{ route('product.show', $product->id) }}">
+                <div class="col mb-3">
+                    <div class="card shadow-sm bg-light">
+                        @php
+                        $stock = $product->stock
+                        @endphp
 
-                            <p><i class="fas fa-circle green"></i> en stock</p>
+                        @if($stock > 5)
 
-                            @elseif($stock <= 5 && $stock> 0)
+                        <p><i class="fas fa-circle green"></i> en stock</p>
 
-                                <p><i class="fas fa-circle orange"></i> en stock</p>
+                        @elseif($stock <= 5 && $stock> 0)
 
-                                @elseif($stock == 0)
+                            <p><i class="fas fa-circle orange"></i> en stock</p>
 
-                                <p><i class="fas fa-circle red"></i> rupture</p>
+                            @elseif($stock == 0)
 
-                                @endif
+                            <p><i class="fas fa-circle red"></i> rupture</p>
+
+                            @endif
 
 
-                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                            <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                                @if(($product->promotion_name) && ($product->promotion_name!== null))
-                                <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
-                                <?php
-                                echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
-                                ?>
-                                @endif
+                            @if(($product->promotion_name) && ($product->promotion_name!== null))
+                            <h2 class="mt-2 text-center font-weight-bold promo-name">{{$product->promotion_name}}</h2>
+                            <?php
+                            echo "<p class=\"text-center promo-name\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
+                            ?>
+                            @endif
 
-                                <div class="card-body">
-                                    <p class="card-text">{{$product->name}}</p>
-                                    <p class="card-text">{{$product->short_description}}</p>
+                            <div class="card-body">
+                                <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
+                                <p class="card-text">{{$product->short_description}}</p>
 
-                                    <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex justify-content-between align-items-center">
 
-                                        <?php
-                                        if (isset($product->promotion_name) && ($date <= $product->end_date)) {
+                                    <?php
+                                    if (isset($product->promotion_name) && ($date <= $product->end_date)) {
 
-                                            if ($date >= $product->start_date && $date <= $product->end_date) {
+                                        if ($date >= $product->start_date && $date <= $product->end_date) {
 
-                                                echo "<p class=\"font-weight-bold\">- $product->discount %</p>
-                                                    <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', '')  . "€</del></small>";
+                                            echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
+                                                    <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
-                                                $promoPrice = $product->price - ($product->price * ($product->discount / 100));
-                                                echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
-                                            } else {
-                                                echo "<p class=\"font-weight-bold\">- $product->discount %</p>
-                                                    <p>" .  number_format($product->price, 2, ',', '')  . "€</p>";
-                                            }
+                                            $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                            echo "<p class=\"font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
                                         } else {
-                                            echo "<p>" .  number_format($product->price, 2, ',', '')  . "€</p>";
+                                            echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
+                                                    <p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
                                         }
-                                        ?>
+                                    } else {
+                                        echo "<p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                                    }
+                                    ?>
 
-                                    </div>
                                 </div>
-                        </div>
+                            </div>
                     </div>
-                </a>
-                @endforeach
-
-            </div>
+                </div>
+            </a>
+            @endforeach
 
         </div>
+
     </div>
+</div>
 
 
 
