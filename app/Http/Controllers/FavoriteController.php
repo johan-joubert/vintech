@@ -93,10 +93,6 @@ class FavoriteController extends Controller
      * @param  \App\Models\Modele  $modele
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
-    {
-        //
-    }
 
         // public function addLike() {
     //     auth()->user()->favorites()->toggle($this->product->id);

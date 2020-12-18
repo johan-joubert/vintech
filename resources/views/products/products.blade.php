@@ -17,11 +17,11 @@ $promotions_navBar = $variables[2];
             <h1 class="font-weight-bold">Tous nos produits</h1>
         </div>
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                @foreach($products as $product)
+            @foreach($products as $product)
 
-                <a href="{{ route('product.show', $product->id) }}">
+            <a href="{{ route('product.show', $product->id) }}">
                 <div class="col mb-3">
                     <div class="card shadow-sm">
                         <img alt="image du produit" src="{{ asset("images/$product->image") }}">
@@ -35,13 +35,16 @@ $promotions_navBar = $variables[2];
 
                         <div class="card-body">
                             <h3 class="card-text product-name">{{$product->name}}</h3>
-                            
+                            @php
+                            echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
+                            @endphp
+
                             <p class="card-text">{{$product->short_description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
 
                                 <?php
 
-                                $date=date('Y-m-d');
+                                $date = date('Y-m-d');
 
                                 if (isset($product->promotion_name) && ($date <= $product->end_date)) {
 
@@ -67,12 +70,14 @@ $promotions_navBar = $variables[2];
                         </div>
                     </div>
                 </div>
-                </a>
-                @endforeach
+            </a>
+            @endforeach
 
-            </div>
-        
+        </div>
+
     </div>
 </div>
-
+@section('footer')
+@include('layouts.footer')
+@endsection
 @endsection

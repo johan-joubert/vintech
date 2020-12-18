@@ -49,7 +49,7 @@ class ReviewController extends Controller
     {
         $request->validate([
             'range' => '',
-            'comment' => 'required|min:5',          
+            'comment' => '',          
         ]);
 
         Review::create([

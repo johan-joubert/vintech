@@ -8,3 +8,96 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'home.scss';
+
+@import 'search.scss';
+
+@import 'footer.scss';
+
+@import 'show.scss';
+
+
+.navbar {
+    background-color: #222831 !important;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.allProducts, .promotions {
+    color: #fff !important;
+    margin: 0;
+    padding: 8px 40px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.dropdown {
+    background-color: red;
+    padding: 8px 40px;
+    margin: 30px 20px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.dropdown-toggle {
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-collapse {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin: 10px 30px;
+    padding: 2px;
+}
+
+.navbar-expand-md {
+    padding: 0px !important;
+}
+
+.nameUser {
+    background-color: transparent !important;
+    color: #222831 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+i {
+    font-size: 2em;
+    color: #30475e;
+}
+
+
+#totalCart {
+    background-color: #fff;
+    padding: 0px 5px;
+    border-radius: 40px;
+    margin-left: -5px;
+    margin-bottom: 10px;
+}
+
+.whiteLign {
+    width: 20px;
+    height: 2px;
+    margin: 5px;
+    background-color: #fff;
+}
+
+.vintechLogo {
+    font-family: 'Plaster', cursive;
+    font-size: 2.5em !important;
+    color: #f05454 !important;
+}

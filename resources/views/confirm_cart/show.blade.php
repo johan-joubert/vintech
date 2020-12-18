@@ -42,10 +42,10 @@ $promotions_navBar = $variables[2];
             @foreach (session("cart") as $key => $item)
 
             @php $total = 0 @endphp
-            @php 
+            @php
             $total += $item['price'] * $item['quantity'];
             $image = $item['image'];
-             @endphp
+            @endphp
 
             <div class="card ml-3" style="width: 18rem;">
                 <div class="card-body">
@@ -92,6 +92,10 @@ $promotions_navBar = $variables[2];
     <p>Enregistrez une adresse de facturation pour confirmer votre commande</p>
 </div>
 @endif
+
+@section('footer')
+@include('layouts.footer')
+@endsection
 
 
 @endsection

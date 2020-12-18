@@ -11,7 +11,7 @@ $promotions_navBar = $variables[2];
 
 @section('content')
 
-
+    @admin
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -32,5 +32,10 @@ $promotions_navBar = $variables[2];
             </div>
         </div>
     </div>
+    @endadmin
+
+    @section('footer')
+    @include('layouts.footer')
+    @endsection
 
 @endsection

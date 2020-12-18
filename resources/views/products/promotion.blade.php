@@ -52,8 +52,10 @@ $promotions_navBar = $variables[2];
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                                 <div class="card-body">
-
                                     <p class="card-text product-name">{{$product->name}}</p>
+                                    @php
+                                    echo "Moyenne évaluation " .$product->average_rates;
+                                    @endphp
                                     <p class="card-text">{{$product->short_description}}</p>
 
                                     <div class="d-flex justify-content-between align-items-center">
@@ -86,5 +88,8 @@ $promotions_navBar = $variables[2];
         </div>
     </div>
 </div>
+@section('footer')
+    @include('layouts.footer')
+    @endsection
 
 @endsection

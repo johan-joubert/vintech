@@ -46,5 +46,9 @@ $promotions_navBar = $variables[2];
 
     </div>
 
+    @section('footer')
+    @include('layouts.footer')
+    @endsection
+
 
 @endsection

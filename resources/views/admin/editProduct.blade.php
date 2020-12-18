@@ -28,12 +28,14 @@ $promotions_navBar = $variables[2];
                 <th scope="col">Nom</th>
                 <th scope="col">Courte Description</th>
                 <th scope="col">prix</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             @foreach($products as $product)
             <tr>
-                <th >{{$product->name}}</th>
+                <th>{{$product->name}}</th>
                 <td>{{$product->short_description}}</td>
                 <td>{{$product->price}}</td>
                 <td>
@@ -63,6 +65,9 @@ $promotions_navBar = $variables[2];
         <thead>
             <tr>
                 <th>Nom</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
@@ -98,6 +103,9 @@ $promotions_navBar = $variables[2];
                 <th scope="col">Nom</th>
                 <th scope="col">Début de la campagne</th>
                 <th scope="col">Fin de la promotion</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
@@ -127,6 +135,9 @@ $promotions_navBar = $variables[2];
 </div>
 
 
+@section('footer')
+@include('layouts.footer')
+@endsection
 
 
 
