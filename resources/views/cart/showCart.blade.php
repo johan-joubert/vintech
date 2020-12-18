@@ -90,7 +90,7 @@ include('../functions.php');
 
 
 	@else
-	<div class="alert alert-info">Aucun produit au panier</div>
+	<div class="alert ">Aucun produit au panier</div>
 	@endif
 
 

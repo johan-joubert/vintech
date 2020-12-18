@@ -57,11 +57,11 @@ $promotions_navBar = $variables[2];
                 $qteTotal = 0;
 
                 if(session("cart")) {
-                foreach (session("cart") as $key => $item) {
+                    foreach (session("cart") as $key => $item) {
 
-                $qteTotal += $item['quantity'];
+                    $qteTotal += $item['quantity'];
 
-                }
+                    }
                 }
 
                 @endphp
@@ -114,7 +114,11 @@ $promotions_navBar = $variables[2];
 
             <div class="container-fluide">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon align-middle">
+                        <div class="whiteLign"></div>
+                        <div class="whiteLign"></div>
+                        <div class="whiteLign"></div>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
@@ -144,9 +148,9 @@ $promotions_navBar = $variables[2];
                         </li>
 
                         @admin
-                        <div class="align-center">
-                            <a class="allProducts align-middle" href="{{route('admin.index')}}">administration</a>
-                        </div>
+                        <li class="align-center">
+                            <a class="promotions align-middle" href="{{route('admin.index')}}">administration</a>
+                        </li>
                         @endadmin
 
                         <!--affichage nombre d'article dans le panier -->

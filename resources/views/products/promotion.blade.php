@@ -51,7 +51,7 @@ $promotions_navBar = $variables[2];
                                 <div class="card-body">
                                     <p class="card-text">{{$product->name}}</p>
                                     @php
-                                    echo $product->average_rates
+                                    echo "Moyenne évaluation " .$product->average_rates;
                                     @endphp
                                     <p class="card-text">{{$product->short_description}}</p>
                                     <div class="d-flex justify-content-between align-items-center">

@@ -63,7 +63,7 @@ $promotions_navBar = $variables[2];
 
                 if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
 
-                    echo "<p class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</p>
+                    echo "<p class=\"font-weight-bold discountPrice\">-" . $product->promotions[0]->pivot->discount . "%</p>
                         <p class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del>";
 
                     $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
@@ -92,7 +92,7 @@ $promotions_navBar = $variables[2];
 
             @elseif($stock == 0)
 
-            <p>oups rupture</p>
+            <p>En cours de réaprovisionnement</p>
 
             @endif
 

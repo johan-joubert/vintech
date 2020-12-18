@@ -35,45 +35,47 @@ $promotions_navBar = $variables[2];
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="col mb-3">
                         <div class="card shadow-sm">
-                                @php
-                                $stock = $product->stock
-                                @endphp
-                                @if($stock > 5)
+                            @php
+                            $stock = $product->stock
+                            @endphp
+                            @if($stock > 5)
 
-                                <p><i class="fas fa-circle green"></i> en stock</p>
+                            <p><i class="fas fa-circle green"></i> en stock</p>
 
-                                @elseif($stock <= 5 && $stock> 0)
+                            @elseif($stock <= 5 && $stock> 0)
 
                                 <p><i class="fas fa-circle orange"></i> plus que {{ $stock }} disponible !</p>
 
-                                @elseif($stock <= 0)
+                                @elseif($stock <= 0) <p><i class="fas fa-circle red"></i> rupture</p>
 
-                                <p><i class="fas fa-circle red"></i> rupture</p>
+                                    @endif
 
-                                @endif
+                                    @php
+                                    echo $product->average_rates;
+                                    @endphp
 
-                                @php
-                                echo $product->average_rates;
-                                @endphp
+                                    <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                                    <div class="card-body">
+                                        <p class="card-text">{{$product->name}}</p>
+                                        @php
+                                        echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
+                                        @endphp
 
-                                <div class="card-body">
-                                    <p class="card-text">{{$product->name}}</p>
-                                    <p class="card-text">{{$product->short_description}}</p>
+                                        <p class="card-text">{{$product->short_description}}</p>
 
-                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex justify-content-between align-items-center">
 
-                                        <?php
-                                        echo "<p class=\"font-weight-bold\">-". $product->pivot->discount." %</p>
+                                            <?php
+                                            echo "<p class=\"font-weight-bold\">-" . $product->pivot->discount . " %</p>
                                             <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', '')  . "€</del></small>";
 
-                                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
-                                        echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
-                                        ?>
+                                            $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
+                                            echo "<p class=\"font-weight-bold\">" .  number_format($promoPrice, 2, ',', '')  . "€</p>";
+                                            ?>
 
+                                        </div>
                                     </div>
-                                </div>
                         </div>
                     </div>
                 </a>
@@ -116,12 +118,6 @@ $promotions_navBar = $variables[2];
 
                                 @endif
 
-                                @php
-                                echo $product->average_rates;
-                                @endphp
-
-
-
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
                                 @if(($product->promotion_name) && ($product->promotion_name!== null))
@@ -133,6 +129,9 @@ $promotions_navBar = $variables[2];
 
                                 <div class="card-body">
                                     <p class="card-text">{{$product->name}}</p>
+                                    @php
+                                    echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
+                                    @endphp
 
                                     <p class="card-text">{{$product->short_description}}</p>
 
@@ -173,7 +172,7 @@ $promotions_navBar = $variables[2];
 
 </div>
 @section('footer')
-    @include('layouts.footer')
-    @endsection
+@include('layouts.footer')
+@endsection
 
 @endsection

@@ -10905,14 +10905,20 @@ a.text-dark:focus {
 
 .green {
   color: green;
+  font-size: 1em !important;
+  padding: 5px;
 }
 
 .orange {
   color: orange;
+  font-size: 1em !important;
+  padding: 5px;
 }
 
 .red {
   color: red;
+  font-size: 1em !important;
+  padding: 5px;
 }
 
 a {
@@ -10950,8 +10956,12 @@ span {
 
 #priceProduct {
   font-size: 2em;
-  margin-left: 5px;
-  color: #222831;
+  margin-left: 50px;
+  color: #f05454;
+}
+
+.discountPrice {
+  font-size: 2em;
 }
 
 .navbar {
@@ -11025,5 +11035,12 @@ i {
   border-radius: 40px;
   margin-left: -5px;
   margin-bottom: 10px;
+}
+
+.whiteLign {
+  width: 20px;
+  height: 2px;
+  margin: 5px;
+  background-color: #fff;
 }
 

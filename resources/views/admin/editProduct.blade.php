@@ -28,6 +28,8 @@ $promotions_navBar = $variables[2];
                 <th scope="col">Nom</th>
                 <th scope="col">Courte Description</th>
                 <th scope="col">prix</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -63,6 +65,9 @@ $promotions_navBar = $variables[2];
         <thead>
             <tr>
                 <th>Nom</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
@@ -98,6 +103,9 @@ $promotions_navBar = $variables[2];
                 <th scope="col">Nom</th>
                 <th scope="col">Début de la campagne</th>
                 <th scope="col">Fin de la promotion</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+
             </tr>
         </thead>
         <tbody>
