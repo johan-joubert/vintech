@@ -52,7 +52,7 @@ $promotions_navBar = $variables[2];
 
                                 <div class="card-body">
 
-                                    <h3 class="card-text product-name">{{$product->name}}</h3>
+                                    <h3 class="card-text font-weight-bold product-name">{{$product->name}}</h3>
 
                                     @if(($product->promotion_name) && ($product->promotion_name!== null))
                                     <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>

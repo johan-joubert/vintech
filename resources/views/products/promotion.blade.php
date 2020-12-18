@@ -53,7 +53,7 @@ $promotions_navBar = $variables[2];
 
                                 <div class="card-body">
 
-                                    <p class="card-text product-name">{{$product->name}}</p>
+                                    <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
                                     <p class="card-text">{{$product->short_description}}</p>
 
                                     <div class="d-flex justify-content-between align-items-center">
