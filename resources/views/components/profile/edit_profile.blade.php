@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfile">
-    Modifier le profil
+<button type="button" class="btn text-blue margin-15 ml-3" data-bs-toggle="modal" data-bs-target="#editProfile">
+<i class="fas fa-cog fa-2x"></i>
 </button>
 
 <!-- Modal -->

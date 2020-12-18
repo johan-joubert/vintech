@@ -14,7 +14,7 @@ $promotions_navBar = $variables[2];
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Connexion</div>
+                <div class="card-header card-header-red"><b>Vous êtes déjà client ?</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -62,12 +62,12 @@ $promotions_navBar = $variables[2];
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-red">
                                     Connexion
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link btn-red-outline" href="{{ route('password.request') }}">
                                         Mot de passe oublié ?
                                     </a>
                                 @endif
@@ -79,7 +79,7 @@ $promotions_navBar = $variables[2];
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">S'inscrire</div>
+                <div class="card-header card-header-red"><b>Vous êtes nouveau client Vintech ?</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -152,7 +152,7 @@ $promotions_navBar = $variables[2];
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-red">
                                     S'inscrire
                                 </button>
                             </div>

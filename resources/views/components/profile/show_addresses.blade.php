@@ -1,13 +1,13 @@
 <div class="container">
     <div class="row mt-5">
 
-        <div class="col-md-12">
+        <div class="col-md-12 mt-5">
 
             <h2>Vos adresses</h2>
 
             <div class="row mt-3">
 
-                <div class="col-md-6">
+                <div class="card col-md-5">
 
                     <h4>Facturation</h4>
 
@@ -37,7 +37,7 @@
 
                 </div>
 
-                <div class="col-md-6">
+                <div class="card col-md-5 offset-md-1">
 
                     <h4>Livraison</h4>
 

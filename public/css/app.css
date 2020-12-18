@@ -10920,3 +10920,52 @@ a {
   color: black !important;
 }
 
+.btn-red {
+  color: white !important;
+  background-color: #f05454 !important;
+}
+
+.btn-red:hover {
+  background-color: #222831 !important;
+}
+
+.btn-red-outline {
+  color: #f05454 !important;
+  border: solid #f05454 1px !important;
+}
+
+.btn-red-outline:hover {
+  color: #222831 !important;
+  border: solid #222831 1px !important;
+}
+
+.btn-blue {
+  color: white !important;
+  background-color: #30475e !important;
+}
+
+.btn-blue:hover {
+  background-color: #f05454 !important;
+}
+
+.btn-invisible {
+  color: #f05454 !important;
+  border: none !important;
+}
+
+.card-header-red {
+  background-color: #30475e2c !important;
+}
+
+.text-red {
+  color: #f05454 !important;
+}
+
+.text-blue {
+  color: #30475e !important;
+}
+
+.margin-15 {
+  margin-top: -15px;
+}
+
