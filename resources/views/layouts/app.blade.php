@@ -130,9 +130,11 @@
                         </li>
 
                         @foreach($promotions_navBar as $promotion)
+                        @if($promotion->start_date <= date('Y-m-d') && $promotion->end_date >= date('Y-m-d'))
                         <li class="align-center">
                             <a class="promotions align-middle" href="{{ route('show.promotion', $promotion->id) }}">{{ $promotion->name }}</a>
                         </li>
+                        @endif
                         @endforeach
 
                         <li class="align-center">

@@ -20,7 +20,7 @@ class RangeController extends Controller
      */
     public function index()
     {
-        // 
+        
     }
 
     /**
@@ -59,7 +59,11 @@ class RangeController extends Controller
     {
         $promotions = Promotion::all();
         $range = Range::where('id', $id)->get();
-        $products = Product::where('range_id', $id)->with('reviews')->get();
+        $products = Product::where('range_id', $id)->with('reviews')        
+        ->leftJoin('promotion_products as pp', 'pp.product_id', '=', 'products.id')  // table intermédiaire
+        ->leftJoin('promotions', 'promotions.id', '=', 'pp.promotion_id')  // promotions liées aux produits
+        ->select('products.*', 'pp.discount', 'promotions.start_date', 'promotions.end_date', 'promotions.name as promotion_name') // champs souhaités
+        ->get();
         // on rècupère : gamme, produits associés, promos associées aux produits (nom) + réduction (table intermédiaire)
        
         
