@@ -82,8 +82,8 @@ $promotions_navBar = $variables[2];
                     $shippingFees = $totalWeight * 0.2;
                     @endphp
 
-            <p class="text-muted"><i>Calcul : 0.20 €/Kg<br>
-                Gratuit à partir de 150 € d'achat</i></p>
+            <p class="text-muted font-italic">Calcul : 0.20 €/Kg<br>
+                Gratuit à partir de 150 € d'achat</p>
 
             <p>Poids total de la commande : {{ $totalWeight }} Kg<br>
             <b>Frais de port : {{ shippingFees($total, $shippingFees) }} €</b></p>
