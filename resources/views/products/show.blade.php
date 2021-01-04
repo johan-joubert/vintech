@@ -55,7 +55,7 @@ $promotions_navBar = $variables[2];
 
         <div class="col-md-2 offset-md-1">
 
-            @if(isset($product->promotions[0]) && ($product->promotions[0] !== null))
+            @if($product->start_date <= date('Y-m-d') && $product->end_date >= date('Y-m-d'))
             <h2 class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</h2>
             <?php
             echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->promotions[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->promotions[0]->end_date), 'd/m/y') . ".</p>";
