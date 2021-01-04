@@ -124,6 +124,7 @@ $promotions_navBar = $variables[2];
     </form>
 </div>
 
+
 @foreach($product->reviews as $review)
 
 <div class="row">

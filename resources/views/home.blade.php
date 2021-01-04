@@ -11,6 +11,8 @@ $promotions_navBar = $variables[2];
 @endphp
 
 @section('content')
+
+@if(isset($currentPromo[0]))
 <div class="container promo">
 
     <div class="row text-center promo-name">
@@ -78,13 +80,14 @@ $promotions_navBar = $variables[2];
     </div>
 
 </div>
+@endif
 
 <!----------------- TOP RATED PRODUCTS ---------------------------------------------------------------------------------------->
 <div class="album py-5">
     <div class="container">
 
         <div class="row text-center">
-            <h1 class="mt-5 font-weight-bold name-section">Produits les mieux notés</h1>
+            <h1 class="mt-5 mb-5 font-weight-bold name-section">Produits les mieux notés</h1>
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -125,6 +128,7 @@ $promotions_navBar = $variables[2];
                             echo "<p class=\"text-center promo-name\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
                             ?>
                             @endif
+
 
                             <div class="card-body">
                                 <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
