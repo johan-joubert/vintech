@@ -49,7 +49,7 @@ $promotions_navBar = $variables[2];
 
 @include('components.profile.show_addresses')
 
-<div class="container">
+<div class="container mb-5">
     <div class="row mt-5">
 
         <div class="col-md-12 mt-5">

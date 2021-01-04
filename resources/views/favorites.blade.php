@@ -30,8 +30,7 @@ $promotions_navBar = $variables[2];
                         <button type="submit" id="btnFavorites">
                             <?php
 
-
-                                echo (auth()->user()->isLiked($product)) ? '<i class="far fa-heart"></i> Retirer des favoris' : '<i class="fas fa-heart"></i> Ajouter aux favoris';
+                                echo (auth()->user()->isLiked($product)) ? '<i class="far fa-heart text-red"></i> Retirer des favoris' : '<i class="fas fa-heart"></i> Ajouter aux favoris';
                             ?>
                         </button>
 

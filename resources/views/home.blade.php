@@ -35,16 +35,14 @@ $promotions_navBar = $variables[2];
         <div class="carousel-inner">
 
             @foreach($currentPromo[0]->products as $product)
-            <div
-            @php 
-            $loop = $loop->iteration;
-            @endphp
-            @if($loop == 1)
-            class="carousel-item active"
-            @else
-            class="carousel-item"
-            @endif
-            data-bs-interval="10000">
+            <div @php $loop=$loop->iteration;
+                @endphp
+                @if($loop == 1)
+                class="carousel-item active"
+                @else
+                class="carousel-item"
+                @endif
+                data-bs-interval="10000">
 
                 <a href="{{ route('product.show', $product->id) }}">
                     <div class="col mb-3">
@@ -98,13 +96,13 @@ $promotions_navBar = $variables[2];
                     <div class="row">
 
                         <?php
-                        echo "<div class=\"col font-weight-bold discount\">-". $product->pivot->discount ." %</div>
+                        echo "<div class=\"col font-weight-bold discount\">-" . $product->pivot->discount . " %</div>
                             <div class=\"col\"><small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small></div>";
-                            
+
                         $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
                         echo "<div class=\"col font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</div>";
                         ?>
-                        
+
                     </div>
                 </div>
             </div>
@@ -157,51 +155,51 @@ $promotions_navBar = $variables[2];
 
                             @endif
 
-                                <img alt="image du produit" src="{{ asset("images/$product->image") }}">
+                            <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                                @if(($product->promotion_name) && ($product->promotion_name!== null))
-                                <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
-                                <?php
-                                echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
-                                ?>
-                                @endif
-
-                                <div class="card-body">
-                                    <p class="card-text">{{$product->name}}</p>
-                                    @php
-                                    echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
-                                    @endphp
-
+                            @if(($product->promotion_name) && ($product->promotion_name!== null))
+                            <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
+                            <?php
+                            echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
+                            ?>
+                            @endif
 
                             <div class="card-body">
-                                <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
-                                <p class="card-text">{{$product->short_description}}</p>
+                                <p class="card-text">{{$product->name}}</p>
+                                @php
+                                echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
+                                @endphp
 
-                                <div class="d-flex justify-content-between align-items-center">
 
-                                    <?php
-                                    if (isset($product->promotion_name) && ($date <= $product->end_date)) {
+                                <div class="card-body" style="height: 200px">
+                                    <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
+                                    <p class="card-text">{{$product->short_description}}</p>
 
-                                        if ($date >= $product->start_date && $date <= $product->end_date) {
+                                    <div class="d-flex justify-content-between align-items-center">
 
-                                            echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
+                                        <?php
+                                        if (isset($product->promotion_name) && ($date <= $product->end_date)) {
+
+                                            if ($date >= $product->start_date && $date <= $product->end_date) {
+
+                                                echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
                                                     <small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small>";
 
-                                            $promoPrice = $product->price - ($product->price * ($product->discount / 100));
-                                            echo "<p class=\"font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
-                                        } else {
-                                            echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
+                                                $promoPrice = $product->price - ($product->price * ($product->discount / 100));
+                                                echo "<p class=\"font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</p>";
+                                            } else {
+                                                echo "<p class=\"font-weight-bold discount\">- $product->discount %</p>
                                                     <p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                                            }
+                                        } else {
+                                            echo "<p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
                                         }
-                                    } else {
-                                        echo "<p class=\"font-weight-bold price\">" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
-                                    }
-                                    ?>
+                                        ?>
 
+                                    </div>
                                 </div>
                             </div>
                     </div>
-                </div>
                 </div>
             </a>
             @endforeach

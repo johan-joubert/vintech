@@ -13,13 +13,13 @@ $promotions_navBar = $variables[2];
 @section('content')
 
 
-<div class="container mt-3">
+<div class="container mt-3 mb-5">
 
     <div class="row">
 
         @foreach ($orders as $order)
 
-        <div class="card col-md-4">
+        <div class="card col-md-4 mb-2">
 
             <h5 class="mb-4">Commande n°{{ $order->order_number }}</h5>
 
