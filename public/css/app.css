@@ -10903,6 +10903,10 @@ a.text-dark:focus {
   }
 }
 
+.carousel-inner {
+  height: 50vh !important;
+}
+
 .promo .product-infos {
   background-color: #fff;
   padding: 2px;
