@@ -1,6 +1,6 @@
 // ---------  promo -----------------------------
 .carousel-inner {
-    height: 40vh !important;
+    height: 55vh !important;
 }
 
 .promo .product-infos {
@@ -70,5 +70,11 @@ a {
     };
     .carousel-caption .promo-price{
         font-size: 15px !important;
+    };
+}
+
+@media screen and (max-width: 767.98px) {
+    .carousel-inner {
+        height: 40vh !important;
     };
 }
