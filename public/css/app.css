@@ -11054,7 +11054,8 @@ span {
 }
 
 .allProducts,
-.promotions {
+.promotions,
+.whiteLink {
   color: #fff !important;
   margin: 0;
   padding: 8px 40px;

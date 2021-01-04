@@ -11,7 +11,7 @@ $promotions_navBar = $variables[2];
 @endphp
 
 @section('content')
-@if( isset($currentPromo[0]) )
+@if(isset($currentPromo[0]))
 <div class="container promo">
 
     <div class="row text-center promo-name">
@@ -130,7 +130,7 @@ $promotions_navBar = $variables[2];
     <div class="container">
 
         <div class="row text-center">
-            <h1 class="mt-5 mb-5 font-weight-bold name-section">Produits les mieux notés</h1>
+            <h1 class="mt-5 font-weight-bold name-section">Produits les mieux notés</h1>
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -171,7 +171,6 @@ $promotions_navBar = $variables[2];
                                     @php
                                     echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
                                     @endphp
-
 
                             <div class="card-body">
                                 <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
