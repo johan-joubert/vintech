@@ -71,10 +71,10 @@ $promotions_navBar = $variables[2];
                 if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
 
                     echo "<h4 class=\"font-weight-bold discountPrice\">-" . $product->promotions[0]->pivot->discount . "%</h4>
-                        <h4 class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del>";
+                        <h4 class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></h4>";
 
                     $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
-                    echo "<span id=\"priceProduct\">" . number_format($promoPrice, 2, ',', ' ') . "€</span></h4>";
+                    echo "<h4><span id=\"priceProduct\">" . number_format($promoPrice, 2, ',', ' ') . "€</span></h4>";
                 } else {
 
                     echo "<h4 class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</h4>

@@ -43,23 +43,18 @@ $promotions_navBar = $variables[2];
                                 @endif
 
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
-                                @if(($product->promotion_name) && ($product->promotion_name!== null))
+                                @if($product->start_date <= date('Y-m-d') && $product->end_date >= date('Y-m-d'))
                                 <h2 class="mt-2 text-center font-weight-bold promo-name">{{$product->promotion_name}}</h2>
                                 <?php
                                 echo "<p class=\"text-center promo-name\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
                                 ?>
                                 @endif
 
+
                                 <div class="card-body" style="height: 160px">
 
                                     <h3 class="card-text font-weight-bold product-name">{{$product->name}}</h3>
 
-                                    @if(($product->promotion_name) && ($product->promotion_name!== null))
-                                    <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
-                                    <?php
-                                    echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
-                                    ?>
-                                    @endif
 
                                     @php
                                     echo $product->average_rates
@@ -73,7 +68,7 @@ $promotions_navBar = $variables[2];
 
                                         $date = date('Y-m-d');
 
-                                        if (isset($product->promotion_name)) {
+                                        if (isset($product->promotion_name) && $product->start_date <= date('Y-m-d') && $product->end_date >= date('Y-m-d')) {
 
                                             if ($date >= $product->start_date && $date <= $product->end_date) {
 
@@ -86,6 +81,7 @@ $promotions_navBar = $variables[2];
                                                 echo "<p class=\"font-weight-bold discount\">- " . $product->discount . "%</p>
                                                     <p class=\"font-weight-bold price\">" . number_format($product->price, 2, ',', ' ') . "€</p>";
                                             }
+
                                         } else {
                                             echo "<p class=\"font-weight-bold price\">" . number_format($product->price, 2, ',', ' ') . "€</p>";
                                         }

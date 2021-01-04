@@ -157,7 +157,7 @@ $promotions_navBar = $variables[2];
 
                             <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                            @if(($product->promotion_name) && ($product->promotion_name!== null))
+                            @if($product->start_date <= date('Y-m-d') && $product->end_date >= date('Y-m-d'))
                             <h2 class="mt-2 text-center font-weight-bold">{{$product->promotion_name}}</h2>
                             <?php
                             echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->end_date), 'd/m/y') . ".</p>";
