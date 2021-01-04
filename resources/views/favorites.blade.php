@@ -6,7 +6,6 @@ $variables = getVariables();
 $products_navBar = $variables[0];
 $ranges_navBar = $variables[1];
 $promotions_navBar = $variables[2];
-
 @endphp
 
 @section('content')
@@ -16,6 +15,7 @@ $promotions_navBar = $variables[2];
         <h1>Mes favoris</h1>
     </div>
 
+    @if(count($user->likes) > 0)
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         @foreach($user->likes as $product)
@@ -30,7 +30,7 @@ $promotions_navBar = $variables[2];
                         <button type="submit" id="btnFavorites">
                             <?php
 
-                                echo (auth()->user()->isLiked($product)) ? '<i class="far fa-heart text-red"></i> Retirer des favoris' : '<i class="fas fa-heart"></i> Ajouter aux favoris';
+                            echo (auth()->user()->isLiked($product)) ? '<i class="far fa-heart text-red"></i> Retirer des favoris' : '<i class="fas fa-heart"></i> Ajouter aux favoris';
                             ?>
                         </button>
 
@@ -82,6 +82,11 @@ $promotions_navBar = $variables[2];
         @endforeach
 
     </div>
+    @else
+    <div>
+        <h2 class="p-5 m-5 text-center">Pas de favoris</h2>
+    </div>
+    @endif
 
 </div>
 @section('footer')
