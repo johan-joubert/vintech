@@ -38,30 +38,55 @@ $promotions_navBar = $variables[2];
 
     <div class="row mt-3">
         <div class="col-md-12 d-flex">
+            @php
+            $total = 0;
+            $totalWeight = 0;
+            @endphp
 
             @foreach (session("cart") as $key => $item)
 
-            @php $total = 0 @endphp
             @php
             $total += $item['price'] * $item['quantity'];
+            $totalWeight += $item['weight'] * $item['quantity'];
             $image = $item['image'];
             @endphp
 
             <div class="card ml-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $item['name'] }}</h5>
-                    <img src="{{ asset("images/$image")}}" alt="{{ $item['image'] }}">
-                    <p class="text-right">Prix unitaire : {{ $item['price'] }} €</p>
+                <div class="card-body text-blue">
+                    <h5 class="card-title">
+                        <b>{{ $item['name'] }}</b>
+                    </h5>
+                    <img src="{{ asset("images/$image")}}" alt="{{ $item['image'] }}" width="250">
+                    <p class="text-right">Prix unitaire : {{ $item['price'] }} €<br>
+                        <span class="text-muted">Poids : {{ $item['weight'] * $item['quantity'] }} Kg</span></p>
                 </div>
                 <div class="card-footer text-right text-muted">
                     Quantité : {{ $item['quantity'] }}<br>
-                    <span class="text-dark">
+                    <span class="text-blue">
                         Prix total : {{ $item['price'] * $item['quantity'] }} €
                     </span>
                 </div>
             </div>
             @endforeach
 
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="card col-md-3 offset-md-1">
+            <h2>Frais de port</h2>
+
+                    @php 
+                    $shippingFees = $totalWeight * 0.2;
+                    @endphp
+
+            <p class="text-muted"><i>Calcul : 0.20 € x poids de la commande<br>
+                Gratuit à partir de 150 € d'achat</i></p>
+
+            <p>Poids total de la commande : {{ $totalWeight }} Kg<br>
+            <b>Frais de port : {{ shippingFees($total, $shippingFees) }} €</b></p>
         </div>
     </div>
 </div>

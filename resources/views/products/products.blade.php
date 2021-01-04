@@ -34,7 +34,7 @@ $promotions_navBar = $variables[2];
                         @endif
 
                         <div class="card-body">
-                            <h3 class="card-text product-name">{{$product->name}}</h3>
+                            <h3 class="card-text font-weight-bold product-name">{{$product->name}}</h3>
                             @php
                             echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
                             @endphp

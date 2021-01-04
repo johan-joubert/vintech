@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12 text-center">
-            <h4>Livraison souhaitée</h4>
+        <div class="col-12 mt-5 text-center">
+            <h2>Livraison souhaitée</h2>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <button type="submit" class="btn btn-secondary">
+                    <button type="submit" class="btn btn-blue">
                         Choisir
                     </button>
                 </div>
