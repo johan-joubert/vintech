@@ -67,7 +67,7 @@ section {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  font-size: 0.9rem !important;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
@@ -11108,6 +11108,11 @@ li {
   color: #222831 !important;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+i {
+  font-size: 2em;
+  color: #30475e;
 }
 
 #totalCart {
