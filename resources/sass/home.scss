@@ -1,8 +1,7 @@
 // ---------  promo -----------------------------
 .carousel-inner {
-    height: 50vh !important;
+    height: 40vh !important;
 }
-
 
 .promo .product-infos {
     background-color: #fff;
@@ -16,7 +15,7 @@
 }
 
 .promo-name {
-    color:  #f05454;
+    color: #f05454;
 }
 
 .product-name {
@@ -39,7 +38,6 @@
     font-size: 20px;
 }
 
-
 .green {
     color: green;
     font-size: 1em !important;
@@ -50,16 +48,27 @@
     color: orange;
     font-size: 1em !important;
     padding: 5px;
-
 }
 .red {
     color: red;
     font-size: 1em !important;
     padding: 5px;
-
 }
 
-a{
+a {
     text-decoration: none !important;
     color: black !important;
+}
+
+
+@media screen and (max-width: 575.98px) {
+    .carousel-caption {
+        font-size: 15px !important;
+    };
+    .carousel-caption .discount {
+        font-size: 15px !important;
+    };
+    .carousel-caption .promo-price{
+        font-size: 15px !important;
+    };
 }
