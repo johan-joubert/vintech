@@ -62,7 +62,7 @@ $promotions_navBar = $variables[2];
                     <p class="text-right">Prix unitaire : {{ $item['price'] }} €<br>
                         <span class="text-muted">Poids : {{ $item['weight'] * $item['quantity'] }} Kg</span></p>
                 </div>
-                <div class="card-footer text-right text-muted">
+                <div class="card-footer text-right text-muted mb-0">
                     Quantité : {{ $item['quantity'] }}<br>
                     <span class="text-blue">
                         Prix total : {{ $item['price'] * $item['quantity'] }} €
