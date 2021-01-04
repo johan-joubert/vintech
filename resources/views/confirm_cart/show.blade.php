@@ -52,6 +52,8 @@ $promotions_navBar = $variables[2];
             @endphp
 
             <div class="card ml-3" style="width: 18rem;">
+            <a href="{{ route('product.show', $item['id']) }}">
+
                 <div class="card-body text-blue">
                     <h5 class="card-title">
                         <b>{{ $item['name'] }}</b>
@@ -66,11 +68,14 @@ $promotions_navBar = $variables[2];
                         Prix total : {{ $item['price'] * $item['quantity'] }} €
                     </span>
                 </div>
+                </a>
+
             </div>
             @endforeach
 
         </div>
     </div>
+
 </div>
 
 <div class="container mt-5">
