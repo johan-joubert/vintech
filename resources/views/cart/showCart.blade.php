@@ -43,7 +43,7 @@ $promotions_navBar = $variables[2];
 					<td>
 						<strong><a href="{{ route('product.show', $key) }}" title="Afficher le produit">{{ $item['name'] }}</a></strong>
 					</td>
-					<td>{{ promoPrice($item['id']) }} €</td>
+					<td>{{ number_format(promoPrice($item['id']), 2, ',', ' ') }} €</td>
 					<td>
 						<!-- Le formulaire de mise à jour de la quantité -->
 						<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block">
@@ -54,7 +54,7 @@ $promotions_navBar = $variables[2];
 					</td>
 					<td>
 						<!-- Le total du produit = prix * quantité -->
-						{{ promoPrice($item['id']) * $item['quantity'] }} €
+						{{ number_format((promoPrice($item['id']) * $item['quantity']), 2, ',', ' ') }} €
 					</td>
 					<td>
 						<!-- Le Lien pour retirer un produit du panier -->
@@ -66,7 +66,7 @@ $promotions_navBar = $variables[2];
 					<td colspan="4">Total général</td>
 					<td colspan="2">
 						<!-- On affiche total général -->
-						<strong>{{ $total }} €</strong>
+						<strong>{{ number_format($total, 2, ',', ' ') }} €</strong>
 					</td>
 				</tr>
 			</tbody>
