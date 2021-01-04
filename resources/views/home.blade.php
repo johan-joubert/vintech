@@ -11,7 +11,7 @@ $promotions_navBar = $variables[2];
 @endphp
 
 @section('content')
-@if(isset($currentPromo[0]))
+@if( isset($currentPromo[0]) )
 <div class="container promo">
 
     <div class="row text-center promo-name">
