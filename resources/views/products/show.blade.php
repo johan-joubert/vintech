@@ -17,11 +17,35 @@ $promotions_navBar = $variables[2];
     <div class="row">
 
         <div class="col-md-4">
-            <img alt="image du produit" src="{{ asset("images/$product->image") }}" width="500">
+            <img alt="image du produit" src="{{ asset("images/$product->image") }}" width="400" class="shadow">
         </div>
 
         <div class="col-md-5">
-            <h1 class="card-text">{{$product->name}}</h1>
+
+            <div class="row">
+                <div class="col-12 d-flex">
+                    <h1 class="card-text mr-4">{{$product->name}}</h1>
+
+                    <form method="POST" action="{{route('favorites.store')}}">
+                        @csrf
+                        <input type="hidden" value="{{ $product->id }}" name="productId">
+                        <button type="submit" id="btnFavorites" class="text-red">
+                            <?php
+
+                            use App\Models\User;
+
+                            if (auth()->user()) {
+                                $user = User::find(auth()->user()->id);
+                                echo (auth()->user()->isLiked($product)) ? '<i class="fas fa-heart fa-3x"></i>' : '<i class="far fa-heart fa-3x"></i>';
+                            }
+                            ?>
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
             @php
             echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
             @endphp
@@ -29,7 +53,7 @@ $promotions_navBar = $variables[2];
             <p class="card-text">{{$product->description}}</p>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2 offset-md-1">
 
             @if(isset($product->promotions[0]) && ($product->promotions[0] !== null))
             <h2 class="mt-2 text-center font-weight-bold">{{$product->promotions[0]->name}}</h2>
@@ -37,23 +61,6 @@ $promotions_navBar = $variables[2];
             echo "<p class=\"text-center\">Du " . date_format(new DateTime($product->promotions[0]->start_date), 'd/m/y') . " au " . date_format(new DateTime($product->promotions[0]->end_date), 'd/m/y') . ".</p>";
             ?>
             @endif
-
-            <form method="POST" action="{{route('favorites.store')}}">
-                @csrf
-                <input type="hidden" value="{{ $product->id }}" name="productId">
-                <button type="submit" id="btnFavorites">
-                    <?php
-
-                    use App\Models\User;
-
-                    if (auth()->user()) {
-                        $user = User::find(auth()->user()->id);
-                        echo (auth()->user()->isLiked($product)) ? '<i class="far fa-heart"></i> Retirer des favoris' : '<i class="fas fa-heart"></i> Ajouter aux favoris';
-                    }
-                    ?>
-                </button>
-
-            </form>
 
             <?php
 
@@ -63,18 +70,18 @@ $promotions_navBar = $variables[2];
 
                 if ($date >= $product->promotions[0]->start_date && $date <= $product->promotions[0]->end_date) {
 
-                    echo "<p class=\"font-weight-bold discountPrice\">-" . $product->promotions[0]->pivot->discount . "%</p>
-                        <p class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del>";
+                    echo "<h4 class=\"font-weight-bold discountPrice\">-" . $product->promotions[0]->pivot->discount . "%</h4>
+                        <h4 class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del>";
 
                     $promoPrice = $product->price - ($product->price * ($product->promotions[0]->pivot->discount / 100));
-                    echo "<span id=\"priceProduct\">".number_format($promoPrice, 2, ',', ' ') ."€</span></p>";
+                    echo "<span id=\"priceProduct\">" . number_format($promoPrice, 2, ',', ' ') . "€</span></h4>";
                 } else {
 
-                    echo "<p class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</p>
-                        <p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                    echo "<h4 class=\"font-weight-bold\">-" . $product->promotions[0]->pivot->discount . "%</h4>
+                        <h4>" .  number_format($product->price, 2, ',', ' ')  . "€</h4>";
                 }
             } else {
-                echo "<p>" .  number_format($product->price, 2, ',', ' ')  . "€</p>";
+                echo "<h4>" .  number_format($product->price, 2, ',', ' ')  . "€</h4>";
             }
             ?>
 
@@ -106,9 +113,12 @@ $promotions_navBar = $variables[2];
 </div>
 
 <div class="container mt-5">
-    <div class="row ">
-        <div class="col-md-6">
-            <h4>Ajouter un avis</h4>
+    <div class="row">
+
+        <div class="col-md-5 mt-5">
+            <h4 class="mb-4">
+                Ajouter un avis
+            </h4>
             <form action="{{route('show.store')}}" method="post">
                 @csrf
                 <div class="row">
@@ -124,18 +134,22 @@ $promotions_navBar = $variables[2];
                     <textarea type="text" row="2" name="comment" class="form-control" id="comment"></textarea>
                 </div>
                 <input type="hidden" value="{{$product->id}}" name="productId">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-red">Submit</button>
             </form>
 
         </div>
-        <div class="col-md-6">
-            <h4>Avis clients</h4>
+
+        <div class="col-md-5 offset-md-1 mt-5">
+            <h4 class="mb-4">
+                Avis clients
+            </h4>
             @foreach($product->reviews as $review)
 
             <div class="row">
-                <div class="col-md-8">
-                    <div class="col-md-6">
-                        <p><strong>{{ $review->user->first_name }}</strong> - {{ $review->created_at->diffForHumans() }}</p>
+                <div class="col-md-12">
+                    <div class="col-md-6 d-flex">
+                        <h4 class="mr-2"><strong>{{ $review->user->first_name }}</strong></h4>
+                        <p class="text-muted">{{ $review->created_at->diffForHumans() }}</p>
                     </div>
                 </div>
 

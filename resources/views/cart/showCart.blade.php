@@ -43,7 +43,7 @@ $promotions_navBar = $variables[2];
 					<td>
 						<strong><a href="{{ route('product.show', $key) }}" title="Afficher le produit">{{ $item['name'] }}</a></strong>
 					</td>
-					<td>{{ promoPrice($item['id']) }} €</td>
+					<td>{{ number_format(promoPrice($item['id']), 2, ',', ' ') }} €</td>
 					<td>
 						<!-- Le formulaire de mise à jour de la quantité -->
 						<form method="POST" action="{{ route('cart.add', $key) }}" class="form-inline d-inline-block">
@@ -54,7 +54,7 @@ $promotions_navBar = $variables[2];
 					</td>
 					<td>
 						<!-- Le total du produit = prix * quantité -->
-						{{ promoPrice($item['id']) * $item['quantity'] }} €
+						{{ number_format((promoPrice($item['id']) * $item['quantity']), 2, ',', ' ') }} €
 					</td>
 					<td>
 						<!-- Le Lien pour retirer un produit du panier -->
@@ -66,7 +66,7 @@ $promotions_navBar = $variables[2];
 					<td colspan="4">Total général</td>
 					<td colspan="2">
 						<!-- On affiche total général -->
-						<strong>{{ $total }} €</strong>
+						<strong>{{ number_format($total, 2, ',', ' ') }} €</strong>
 					</td>
 				</tr>
 			</tbody>
@@ -74,31 +74,36 @@ $promotions_navBar = $variables[2];
 		</table>
 	</div>
 
-	<!-- Lien pour vider le panier -->
-	<a class="btn btn-secondary" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier">Vider le
-		panier</a>
+	<div class="row">
+		<div class="col-md-12 mb-5">
+
+			<!-- Lien pour vider le panier -->
+			<a class="btn btn-secondary" href="{{ route('cart.empty') }}" title="Retirer tous les produits du panier">Vider le
+				panier</a>
 
 
-	<!-- connexion si non authentifié / validation -->
-	@php $user = auth()->user() @endphp
+			<!-- connexion si non authentifié / validation -->
+			@php $user = auth()->user() @endphp
 
-	@if(isset($user->id))
+			@if(isset($user->id))
 
-	@unless($total == 0)
-	<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
-	@endif
+			@unless($total == 0)
+			<a class="btn btn-danger" href="{{ route('confirm_cart.show', auth()->user()->id) }}">Passer la commande</a>
+			@endif
 
-	@else
-	<a class="btn btn-danger" href="{{ route('login') }}">Se connecter</a>
+			@else
+			<a class="btn btn-danger" href="{{ route('login') }}">Se connecter</a>
 
-	@endif
+			@endif
 
 
 
-	@else
-	<div class="alert ">Aucun produit au panier</div>
-	@endif
+			@else
+			<div class="alert ">Aucun produit au panier</div>
+			@endif
 
+		</div>
+	</div>
 
 </div>
 

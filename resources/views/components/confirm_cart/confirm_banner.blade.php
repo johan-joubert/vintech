@@ -18,7 +18,7 @@
                     <span class="text-muted">
                         TVA (20%): @php echo $tvaCost @endphp €<br>
 
-                        Frais de port : {{ shippingFees($total, $shippingFees) }}<br>
+                        Frais de port : {{ shippingFees($total, $shippingFees) }} €<br>
 
                         @if(isset($shippingCost))
     

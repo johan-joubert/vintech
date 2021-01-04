@@ -13,7 +13,7 @@ $promotions_navBar = $variables[2];
 @section('content')
 
 
-<div class="container">
+<div class="container mb-5">
 
     <div class="row">
 

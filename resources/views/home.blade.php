@@ -11,7 +11,7 @@ $promotions_navBar = $variables[2];
 @endphp
 
 @section('content')
-@if( isset($currentPromo[0]) )
+@if(isset($currentPromo[0]))
 <div class="container promo">
 
     <div class="row text-center promo-name">
@@ -60,6 +60,14 @@ $promotions_navBar = $variables[2];
                             echo "<div class=\"col font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</div>";
                             ?>
                         </div>
+
+                        <?php
+                        echo "<div class=\"col font-weight-bold discount\">-" . $product->pivot->discount . " %</div>
+                            <div class=\"col\"><small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small></div>";
+
+                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
+                        echo "<div class=\"col font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</div>";
+                        ?>
 
                     </div>
 
@@ -130,7 +138,8 @@ $promotions_navBar = $variables[2];
                                 echo "<p><small>Moyenne évaluations " . $product->average_rates . "/5</small></p>";
                                 @endphp
 
-                                <div class="card-body">
+
+                                <div class="card-body" style="height: 200px">
                                     <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
                                     <p class="card-text">{{$product->short_description}}</p>
 

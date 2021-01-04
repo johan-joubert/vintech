@@ -50,7 +50,7 @@ $promotions_navBar = $variables[2];
                                 ?>
                                 @endif
 
-                                <div class="card-body">
+                                <div class="card-body" style="height: 160px">
 
                                     <h3 class="card-text font-weight-bold product-name">{{$product->name}}</h3>
 

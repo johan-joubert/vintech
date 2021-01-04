@@ -45,7 +45,7 @@ function shippingFees ($total, $shippingFees) {
     if ($total >= 150) {
         $oldShippingFees = $shippingFees;
         $shippingFees = 0;
-        echo '<del>' . $oldShippingFees . ' €</del> -> ' . $shippingFees . ' €';
+        echo '<del>' . $oldShippingFees . ' €</del> -> ' . $shippingFees;
     } else {
         echo $shippingFees;
     }

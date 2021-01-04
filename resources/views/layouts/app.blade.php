@@ -140,7 +140,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('history') }}">Qui sommes nous?</a>
+                            <a class="whiteLink" href="{{ route('history') }}">Qui sommes nous?</a>
                         </li>
 
                         @admin

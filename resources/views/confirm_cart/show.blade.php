@@ -52,6 +52,8 @@ $promotions_navBar = $variables[2];
             @endphp
 
             <div class="card ml-3" style="width: 18rem;">
+            <a href="{{ route('product.show', $item['id']) }}">
+
                 <div class="card-body text-blue">
                     <h5 class="card-title">
                         <b>{{ $item['name'] }}</b>
@@ -60,17 +62,20 @@ $promotions_navBar = $variables[2];
                     <p class="text-right">Prix unitaire : {{ $item['price'] }} €<br>
                         <span class="text-muted">Poids : {{ $item['weight'] * $item['quantity'] }} Kg</span></p>
                 </div>
-                <div class="card-footer text-right text-muted">
+                <div class="card-footer text-right text-muted mb-0">
                     Quantité : {{ $item['quantity'] }}<br>
                     <span class="text-blue">
                         Prix total : {{ $item['price'] * $item['quantity'] }} €
                     </span>
                 </div>
+                </a>
+
             </div>
             @endforeach
 
         </div>
     </div>
+
 </div>
 
 <div class="container mt-5">
@@ -82,8 +87,8 @@ $promotions_navBar = $variables[2];
                     $shippingFees = $totalWeight * 0.2;
                     @endphp
 
-            <p class="text-muted"><i>Calcul : 0.20 € x poids de la commande<br>
-                Gratuit à partir de 150 € d'achat</i></p>
+            <p class="text-muted font-italic">Calcul : 0.20 €/Kg<br>
+                Gratuit à partir de 150 € d'achat</p>
 
             <p>Poids total de la commande : {{ $totalWeight }} Kg<br>
             <b>Frais de port : {{ shippingFees($total, $shippingFees) }} €</b></p>
