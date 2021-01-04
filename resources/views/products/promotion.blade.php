@@ -51,7 +51,7 @@ $promotions_navBar = $variables[2];
 
                                 <img alt="image du produit" src="{{ asset("images/$product->image") }}">
 
-                                <div class="card-body">
+                                <div class="card-body" style="height: 200px">
                                     <p class="card-text font-weight-bold product-name">{{$product->name}}</p>
                                     @php
                                     echo "Moyenne évaluation " .$product->average_rates;

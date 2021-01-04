@@ -11046,6 +11046,10 @@ span {
   margin-top: -15px;
 }
 
+main.py-4 {
+  padding-bottom: 0 !important;
+}
+
 .navbar {
   background-color: #222831 !important;
   margin: 0;
