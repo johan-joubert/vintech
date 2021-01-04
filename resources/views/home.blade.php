@@ -32,7 +32,7 @@ $promotions_navBar = $variables[2];
             <li data-bs-target="#carouselExampleDark" data-bs-slide-to="4"></li>
         </ol>
 
-        <div class="carousel-inner">
+        <div class="carousel-inner d-flex align-content-between flex-wrap">
 
             @foreach($currentPromo[0]->products as $product)
             <div @php $loop=$loop->iteration;
@@ -45,10 +45,10 @@ $promotions_navBar = $variables[2];
                 data-bs-interval="10000">
 
                 <a href="{{ route('product.show', $product->id) }}">
-
-                    <img class="d-block m-auto w-25" alt="image du produit" src="{{ asset("images/$product->image") }}">
-
-                    <div class="carousel-caption d-none d-md-block product-infos">
+                    <div class="">
+                        <img class="d-block m-auto w-25 mb-5 pb-5" alt="image du produit" src="{{ asset("images/$product->image") }}">
+                    </div>
+                    <div class="carousel-caption product-infos">
                         <h2 class="font-weight-bold card-text product-name">{{$product->name}}</h2>
 
                         <div class="row">
@@ -61,21 +61,13 @@ $promotions_navBar = $variables[2];
                             ?>
                         </div>
 
-                        <?php
-                        echo "<div class=\"col font-weight-bold discount\">-" . $product->pivot->discount . " %</div>
-                            <div class=\"col\"><small class=\"text-muted\"><del>" .  number_format($product->price, 2, ',', ' ')  . "€</del></small></div>";
-
-                        $promoPrice = $product->price - ($product->price * ($product->pivot->discount / 100));
-                        echo "<div class=\"col font-weight-bold promo-price\">" .  number_format($promoPrice, 2, ',', ' ')  . "€</div>";
-                        ?>
-
                     </div>
 
-                </a>  
+                </a>
 
             </div>
             @endforeach
-            
+
         </div>
 
         <a class="carousel-control-prev" href="#carouselExampleDark" role="button" data-bs-slide="prev">
