@@ -86,7 +86,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Product', 'favorites');
     }
 
-    public function like(Product $product)
+    public function like(Product $product)    
     {
         return $this->likes()->attach($product->id);
     }

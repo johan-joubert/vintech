@@ -132,7 +132,7 @@ $promotions_navBar = $variables[2];
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                <div id="passwordHelpBlock" class="form-text text-muted"><small><i>Doit contenir au moins : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial</i></small></div>
+                                <div id="passwordHelpBlock" class="form-text text-muted"><small><em>Doit contenir au moins : 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial</em></small></div>
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
